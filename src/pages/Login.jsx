@@ -11,7 +11,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Selamat datang, ${email || "user"}!`);
-    navigate("/"); // Redirect ke halaman Home
+    navigate("/"); 
   };
 
   return (

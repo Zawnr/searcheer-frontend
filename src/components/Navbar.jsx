@@ -1,44 +1,69 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 export default function Navbar() {
-  const { pathname } = useLocation();
   return (
-    <nav className="w-full bg-[#050f4b] flex items-center px-8 py-3 rounded-tr-xl rounded-tl-xl shadow-sm">
-      {/* Logo dan Brand */}
-      <div className="flex items-center gap-2">
-        <img src={logo} alt="logo" className="h-8 w-8" draggable="false" />
-        <span className="text-white text-xl font-semibold">Searcheer</span>
+    <nav className="bg-[#0D1953] px-6 md:px-14 py-3 flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        <img src={logo} alt="Searcheer Logo" className="h-9 w-9" />
+        <span className="text-white text-lg font-bold">Searcheer</span>
       </div>
-      {/* Menu Tengah */}
-      <ul className="flex-1 flex items-center justify-center gap-10 ml-8">
+      <ul className="flex-1 flex justify-center gap-8 items-center">
         <li>
-          <Link to="/" className={`text-white font-medium border-b-2 transition pb-1 ${pathname === "/" ? "border-white" : "border-transparent"} hover:border-white`}>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `text-white/90 hover:text-white font-medium ${
+                isActive ? "font-bold underline underline-offset-4" : ""
+              }`
+            }
+          >
             Home
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <a href="#" className="text-[#8192c7] hover:text-white transition">Jobs</a>
+          <NavLink
+            to="/jobs"
+            className="text-white/80 hover:text-white font-medium"
+          >
+            Jobs
+          </NavLink>
         </li>
         <li>
-          <a href="#" className="text-[#8192c7] hover:text-white transition">About Us</a>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `text-white/90 hover:text-white font-medium ${
+                isActive ? "font-bold underline underline-offset-4" : ""
+              }`
+            }
+          >
+            About Us
+          </NavLink>
         </li>
         <li>
-          <a href="#" className="text-[#8192c7] hover:text-white transition">Our Team</a>
+          <NavLink
+            to="/team"
+            className="text-white/80 hover:text-white font-medium"
+          >
+            Our Team
+          </NavLink>
         </li>
       </ul>
-      {/* Auth Button */}
-      <div className="flex items-center gap-3">
-        <Link to="/login" className="text-white px-4 py-1 rounded hover:underline transition">
+      <div className="flex gap-2">
+        <NavLink
+          to="/login"
+          className="px-4 py-1 rounded-lg text-white bg-transparent hover:bg-white/10 font-medium"
+        >
           Login
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/register"
-          className="bg-[#4873f7] text-white px-6 py-1.5 rounded-lg font-semibold hover:bg-[#3559be] transition"
+          className="px-5 py-1 rounded-lg text-white font-medium bg-[#2f52cf] hover:bg-[#4e79f0] transition"
         >
           Register
-        </Link>
+        </NavLink>
       </div>
     </nav>
   );

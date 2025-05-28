@@ -1,25 +1,43 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import Login from "./Login";
-import Register from "./Register";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import AboutUs from "./pages/AboutUs";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import bgBlur from "./assets/bg-blur.png";
 import abstract from "./assets/abstract.png";
 import abstract2 from "./assets/abstract2.png";
 
-export default function App() {
+function AppContent() {
+  const location = useLocation();
+
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/register";
+
   return (
     <div
+      className="min-h-screen flex flex-col"
       style={{
         backgroundImage: `url(${bgBlur})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        minHeight: "100vh",
       }}
     >
-      <Router>
+
+      {!isAuthPage && <Navbar />}
+
+      <div className="flex-1 flex flex-col">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutUs />} />
+
           <Route
             path="/login"
             element={
@@ -40,6 +58,7 @@ export default function App() {
               </div>
             }
           />
+
           <Route
             path="/register"
             element={
@@ -52,7 +71,7 @@ export default function App() {
                 <div className="hidden md:flex flex-1 items-center justify-center bg-transparent relative">
                   <img
                     src={abstract2}
-                    alt="abstract"
+                    alt="abstract2"
                     className="max-w-[340px] object-contain opacity-90"
                     draggable="false"
                   />
@@ -61,7 +80,17 @@ export default function App() {
             }
           />
         </Routes>
-      </Router>
+      </div>
+
+      {!isAuthPage && <Footer />}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
