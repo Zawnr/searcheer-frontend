@@ -333,3 +333,21 @@ header {
   transition: opacity 0.5s;
   opacity: 1;
 }
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 999;
+  background: #222;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  display: none;
+  opacity: 0.97;
+  font-size: 1rem;
+  transition: opacity 0.3s;
+}
+.notification.success { background: #2ecc40; }
+.notification.error { background: #ff4136; }

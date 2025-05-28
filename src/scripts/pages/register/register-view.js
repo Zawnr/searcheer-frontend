@@ -1,3 +1,4 @@
+import { setupTogglePassword } from '../../utils/togglePassword.js';
 export default class RegisterView {
   render() {
     return `
@@ -30,6 +31,6 @@ export default class RegisterView {
   }
 
   async afterRender() {
-   
+    setupTogglePassword();
   }
 }

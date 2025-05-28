@@ -1,11 +1,10 @@
-// src/scripts/pages/login/login-presenter.js
 import LoginModel from './login-model.js';
-import LoginView  from './login-view.js';
-
+import LoginView from './login-view.js';
+import { showNotification } from '../../../components/notification.js';
 export default class LoginPresenter {
   constructor() {
     this.model = new LoginModel();
-    this.view  = new LoginView();
+    this.view = new LoginView();
   }
 
   async render() {
@@ -13,25 +12,22 @@ export default class LoginPresenter {
   }
 
   async afterRender() {
+    await this.view.afterRender();
+
     const form = document.getElementById('loginForm');
-    if (!form) return;
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const result = await this.model.login({ email, password });
+        showNotification(result.message, result.success ? 'success' : 'error');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email    = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
-
-
-      if (!email || !password) {
-        alert('Semua field harus diisi!');
-        return;
-      }
-
-      const result = await this.model.login({ email, password });
-      alert(result.message);
-      if (result.success) {
-        window.location.hash = '/';
-      }
-    });
+        if (result.success) {
+          // Navigasi ke halaman home
+          window.location.hash = '/';
+        }
+      });
+    }
   }
 }

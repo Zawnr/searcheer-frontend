@@ -1,4 +1,4 @@
-// src/scripts/pages/login/login-view.js
+import { setupTogglePassword } from '../../utils/togglePassword.js';
 export default class LoginView {
   render() {
     return `
@@ -42,5 +42,8 @@ export default class LoginView {
         </div>
       </section>
     `;
+  }
+async afterRender() {
+    setupTogglePassword();
   }
 }
