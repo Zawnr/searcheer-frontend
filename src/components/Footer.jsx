@@ -1,5 +1,5 @@
-import React from "react";
-import logo from "../assets/logo.png";
+import React from 'react';
+import logo from '../assets/logo.png';
 
 export default function Footer() {
   return (
@@ -11,7 +11,9 @@ export default function Footer() {
             <span className="font-bold text-lg">Searcheer</span>
           </div>
           <p className="text-sm">
-            Empowering students and fresh graduates with AI-driven CV analysis and job matching. Bridge the gap between your skills and industry expectations with our intelligent platform.
+            Empowering students and fresh graduates with AI-driven CV analysis
+            and job matching. Bridge the gap between your skills and industry
+            expectations with our intelligent platform.
           </p>
         </div>
         <div className="flex-1 min-w-[120px]">

@@ -1,6 +1,6 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import logo from "../assets/logo.png";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 export default function Navbar() {
   return (
@@ -15,7 +15,7 @@ export default function Navbar() {
             to="/"
             className={({ isActive }) =>
               `text-white/90 hover:text-white font-medium ${
-                isActive ? "font-bold underline underline-offset-4" : ""
+                isActive ? 'font-bold underline underline-offset-4' : ''
               }`
             }
           >
@@ -35,7 +35,7 @@ export default function Navbar() {
             to="/about"
             className={({ isActive }) =>
               `text-white/90 hover:text-white font-medium ${
-                isActive ? "font-bold underline underline-offset-4" : ""
+                isActive ? 'font-bold underline underline-offset-4' : ''
               }`
             }
           >

@@ -1,42 +1,47 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
-} from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import AboutUs from "./pages/AboutUs";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import bgBlur from "./assets/bg-blur.png";
-import abstract from "./assets/abstract.png";
-import abstract2 from "./assets/abstract2.png";
+} from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import AboutUs from './pages/AboutUs';
+import OurTeam from './pages/OurTeam';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import bgBlur from './assets/bg-blur.png';
+import abstract from './assets/abstract.png';
+import abstract2 from './assets/abstract2.png';
 
 function AppContent() {
   const location = useLocation();
 
   const isAuthPage =
-    location.pathname === "/login" || location.pathname === "/register";
+    location.pathname === '/login' || location.pathname === '/register';
 
   return (
     <div
       className="min-h-screen flex flex-col"
-      style={{
-        backgroundImage: `url(${bgBlur})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      style={
+        isAuthPage
+          ? {
+              backgroundImage: `url(${bgBlur})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }
+          : {}
+      }
     >
-
       {!isAuthPage && <Navbar />}
 
       <div className="flex-1 flex flex-col">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/team" element={<OurTeam />} />
 
           <Route
             path="/login"

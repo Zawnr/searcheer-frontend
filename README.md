@@ -18,23 +18,28 @@ Proyek ini adalah setup dasar untuk aplikasi web yang menggunakan webpack untuk 
 ### Installation
 
 1. Starter project [di sini]().
-2.  Pasang seluruh dependencies dengan perintah berikut.
-   ```shell
-   npm install
-   ```
+2. Pasang seluruh dependencies dengan perintah berikut.
+
+```shell
+npm install
+```
 
 ## Scripts
 
 - Build for Production:
+
   ```shell
   npm run build
   ```
+
   Script ini menjalankan webpack dalam mode production menggunakan konfigurasi `webpack.prod.js` dan menghasilkan sejumlah file build ke direktori `dist`.
 
 - Start Development Server:
+
   ```shell
   npm run start-dev
   ```
+
   Script ini menjalankan server pengembangan webpack dengan fitur live reload dan mode development sesuai konfigurasi di`webpack.dev.js`.
 
 - Serve:
@@ -54,7 +59,7 @@ searcheer-frontend/
 │   ├── public/             # Public files
 │   ├── scripts/            # Source JavaScript files
 │   │   ├── data/           # Untuk model dan sumber data
-│   │   │    └── api.js     # Class untuk mengakses API 
+│   │   │    └── api.js     # Class untuk mengakses API
 │   │   ├── routes/         # Pengaturan routing
 │   │   ├── utils/          # Helper dan utilitas
 │   │   └── index.js        # Main JavaScript entry file
