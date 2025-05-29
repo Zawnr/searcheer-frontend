@@ -56,7 +56,7 @@ function AppContent() {
               <Route
                 path="/login"
                 element={
-                  <div className="flex w-full max-w-full min-h-[auto] rounded-3xl shadow-xl overflow-hidden bg-transparent mt-4 mb-4 mx-auto items-center px-4 sm:px-6 md:px-8">
+                  <div className="flex w-full max-w-full min-h-screen rounded-3xl shadow-xl overflow-hidden bg-transparent mt-4 mb-4 mx-auto items-center px-4 sm:px-6 md:px-8">
                     <div className="flex-1 flex items-center justify-center">
                       <div className="w-full max-w-full sm:max-w-md rounded-3xl bg-[#4D5B73]/90 shadow-xl px-6 sm:px-12 py-6 sm:py-10">
                         <Login />
@@ -77,7 +77,7 @@ function AppContent() {
               <Route
                 path="/register"
                 element={
-                  <div className="flex w-full max-w-full min-h-[auto] rounded-3xl shadow-xl overflow-hidden bg-transparent mt-4 mb-4 mx-auto items-center px-4 sm:px-6 md:px-8">
+                  <div className="flex w-full max-w-full min-h-screen rounded-3xl shadow-xl overflow-hidden bg-transparent mt-4 mb-4 mx-auto items-center px-4 sm:px-6 md:px-8">
                     <div className="flex-1 flex items-center justify-center">
                       <div className="w-full max-w-full sm:max-w-md rounded-3xl bg-[#4D5B73]/90 shadow-xl px-6 sm:px-12 py-6 sm:py-10">
                         <Register />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import RegisterNotification from '../components/RegisterNotification';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -8,16 +9,25 @@ export default function Register() {
   const [confirm, setConfirm] = useState('');
   const [showPass, setShowPass] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [notification, setNotification] = useState({ message: '', type: '' });
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirm) {
-      alert('Password and confirmation do not match!');
+      setNotification({
+        message: 'Password and confirmation do not match!',
+        type: 'error',
+      });
       return;
     }
-    alert(`Akun berhasil dibuat!\nEmail: ${email}\nUsername: ${username}`);
-    navigate('/login'); // Redirect ke halaman Login setelah register sukses
+    setNotification({
+      message: `Akun berhasil dibuat!\nEmail: ${email}\nUsername: ${username}`,
+      type: 'success',
+    });
+    setTimeout(() => {
+      navigate('/login');
+    }, 1500);
   };
 
   return (
@@ -32,6 +42,10 @@ export default function Register() {
         Find your dream job and take a new step toward a brighter future with
         Searcheers.
       </p>
+      <RegisterNotification
+        message={notification.message}
+        type={notification.type}
+      />
       <form className="space-y-5" onSubmit={handleSubmit} autoComplete="off">
         {/* Email */}
         <input

@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import LoginNotification from '../components/LoginNotification';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const [notification, setNotification] = useState({ message: '', type: '' });
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Selamat datang, ${email || 'user'}!`);
-    navigate('/');
+    setNotification({
+      message: `Selamat datang, ${email || 'user'}!`,
+      type: 'success',
+    });
+    setTimeout(() => {
+      navigate('/');
+    }, 1500);
   };
 
   return (
@@ -26,6 +33,10 @@ export default function Login() {
         Discover the best job opportunities and continue your journey with
         Searcheers.
       </p>
+      <LoginNotification
+        message={notification.message}
+        type={notification.type}
+      />
       <form className="space-y-5" onSubmit={handleSubmit} autoComplete="off">
         {/* Email */}
         <div className="relative">
