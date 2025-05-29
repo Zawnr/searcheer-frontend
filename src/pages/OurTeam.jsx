@@ -25,9 +25,9 @@ const teamMembers = [
       'There are many variations of passages of Lorem Ipsum available',
     bgColor: '#F2B5A0',
     socialLinks: {
-      github: '#',
-      instagram: '#',
-      email: 'nama@email.com',
+      github: 'https://github.com/deryltazreva',
+      instagram: 'https://www.instagram.com/deryltazrevaa/',
+      email: 'deryltazreva@gmail.com',
     },
   },
   {
@@ -39,9 +39,9 @@ const teamMembers = [
       'There are many variations of passages of Lorem Ipsum available',
     bgColor: '#E9C89F',
     socialLinks: {
-      github: '#',
-      instagram: '#',
-      email: 'nama@email.com',
+      github: 'https://github.com/RaishaIsma',
+      instagram: 'https://www.instagram.com/raishaiaa',
+      email: 'raishaismaaulia@gmail.com',
     },
   },
   {
@@ -54,8 +54,8 @@ const teamMembers = [
     bgColor: '#D9B9B3',
     socialLinks: {
       github: 'https://github.com/reikisyah',
-      instagram: '#',
-      email: 'nama@email.com',
+      instagram: 'https://www.instagram.com/reiq.s',
+      email: 'reiky.mirzha321@gmail.com',
     },
   },
   {
@@ -67,9 +67,9 @@ const teamMembers = [
       'There are many variations of passages of Lorem Ipsum available',
     bgColor: '#8C7AE6',
     socialLinks: {
-      github: '#',
-      instagram: '#',
-      email: 'nama@email.com',
+      github: 'https://github.com/Ririe13',
+      instagram: 'https://www.instagram.com/ririe_rx',
+      email: 'putriwldr329@gmail.com',
     },
   },
   {
@@ -81,9 +81,9 @@ const teamMembers = [
       'There are many variations of passages of Lorem Ipsum available',
     bgColor: '#A3E6B1',
     socialLinks: {
-      github: '#',
-      instagram: '#',
-      email: 'nama@email.com',
+      github: 'https://github.com/Zawnr/',
+      instagram: 'https://www.instagram.com/zawawi_nur/',
+      email: 'rochmat27nurza@gmail.com',
     },
   },
 ];
@@ -92,56 +92,56 @@ export default function OurTeam() {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-0 pt-12 pb-2">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-2 mt-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-2">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-2 mt-4">
           Meet the Searcheer Team
         </h1>
-        <p className="text-center text-sm text-gray-600 mb-12">
+        <p className="text-center text-sm sm:text-base text-gray-600 mb-12">
           Searcheer is developed by a dedicated team of six students from two
           prestigious institutions
         </p>
       </div>
 
       {/* Team Members Grid */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-14 items-start">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-14 items-start">
         {teamMembers.map((member, idx) => (
           <TeamMemberCard key={member.name + idx} {...member} />
         ))}
       </div>
 
       {/* Team Description */}
-      <div className="max-w-5xl mx-auto px-4 text-center text-gray-700 mb-14 space-y-3">
-        <p>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 text-center text-gray-700 mb-14 space-y-3">
+        <p className="text-sm sm:text-base">
           Our team is a group of passionate students driven by creativity,
           innovation, and a commitment to excellence. We bring together diverse
           skills and experiences to build solutions that make a real difference.
         </p>
-        <p>
+        <p className="text-sm sm:text-base">
           United by shared values and a bold vision, we work together to push
           boundaries, embrace new ideas, and turn challenges into opportunities.
         </p>
       </div>
 
       {/* Call to Action Section */}
-      <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-20">
         {/* Left: Text and Contact Info */}
         <div className="flex flex-col justify-center">
-          <h2 className="text-3xl font-extrabold mb-4">
+          <h2 className="text-2xl sm:text-3xl font-extrabold mb-4">
             You Will Grow, You Will Succeed. We Promise That
           </h2>
-          <p className="mb-6 text-gray-700">
+          <p className="mb-6 text-gray-700 text-sm sm:text-base">
             Ready to transform your job search experience? Join thousands of
             students and fresh graduates who are already using Searcheer to find
             their dream careers. Because when you search better, your career
             sounds louder.
           </p>
           {/* Kontak info */}
-          <div className="grid grid-cols-2 gap-x-14 gap-y-8 text-gray-700">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-6 text-gray-700">
             {/* Call */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-3 sm:gap-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-7 h-7 text-blue-500 mt-1"
+                className="w-6 h-6 sm:w-7 sm:h-7 text-blue-500 mt-1"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -154,18 +154,20 @@ export default function OurTeam() {
                 />
               </svg>
               <div>
-                <div className="font-bold text-xl mb-1 text-black">
+                <div className="font-bold text-lg sm:text-xl mb-1 text-black">
                   Call for inquiry
                 </div>
-                <div className="text-lg text-black">+257 388-6895</div>
+                <div className="text-base sm:text-lg text-black">
+                  +62 832-330-432
+                </div>
               </div>
             </div>
 
             {/* Email */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-3 sm:gap-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-7 h-7 text-blue-500 mt-1"
+                className="w-6 h-6 sm:w-7 sm:h-7 text-blue-500 mt-1"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2}
@@ -183,19 +185,19 @@ export default function OurTeam() {
                 />
               </svg>
               <div>
-                <div className="font-bold text-xl mb-1 text-black">
+                <div className="font-bold text-lg sm:text-xl mb-1 text-black">
                   Send us email
                 </div>
-                <div className="text-lg text-black">
+                <div className="text-base sm:text-lg text-black">
                   kramulous@sbcglobal.net
                 </div>
               </div>
             </div>
             {/* Jam */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-3 sm:gap-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-7 h-7 text-blue-500 mt-1"
+                className="w-6 h-6 sm:w-7 sm:h-7 text-blue-500 mt-1"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2}
@@ -215,17 +217,19 @@ export default function OurTeam() {
                 />
               </svg>
               <div>
-                <div className="font-bold text-xl mb-1 text-black">
+                <div className="font-bold text-lg sm:text-xl mb-1 text-black">
                   Opening hours
                 </div>
-                <div className="text-lg text-black">Mon - Fri: 10AM - 10PM</div>
+                <div className="text-base sm:text-lg text-black">
+                  Mon - Fri: 10AM - 10PM
+                </div>
               </div>
             </div>
             {/* Office */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-3 sm:gap-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-7 h-7 text-blue-500 mt-1"
+                className="w-6 h-6 sm:w-7 sm:h-7 text-blue-500 mt-1"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2}
@@ -239,8 +243,10 @@ export default function OurTeam() {
                 <circle cx={12} cy={9} r={2.5} />
               </svg>
               <div>
-                <div className="font-bold text-xl mb-1 text-black">Office</div>
-                <div className="text-lg text-black">
+                <div className="font-bold text-lg sm:text-xl mb-1 text-black">
+                  Office
+                </div>
+                <div className="text-base sm:text-lg text-black">
                   19 North Road Piscataway, NY 08854
                 </div>
               </div>
@@ -248,15 +254,19 @@ export default function OurTeam() {
           </div>
         </div>
         {/* Right: Contact Form */}
-        <div className="bg-yellow-400 rounded-2xl p-8 shadow flex flex-col justify-center max-w-md w-full mx-auto">
-          <h3 className="font-bold text-white text-2xl mb-1">Contact Info</h3>
-          <div className="text-white mb-6">Need additional resources?</div>
+        <div className="bg-yellow-400 rounded-2xl p-6 sm:p-8 shadow flex flex-col justify-center items-center max-w-md w-full mx-auto">
+          <h3 className="font-bold text-white text-xl sm:text-2xl mb-1">
+            Contact Info
+          </h3>
+          <div className="text-white mb-6 text-sm sm:text-base">
+            Need additional resources?
+          </div>
           <form className="space-y-5 text-left">
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
                 <label
                   htmlFor="firstName"
-                  className="text-white font-semibold mb-1 block"
+                  className="text-white font-semibold mb-1 block text-sm sm:text-base"
                 >
                   First Name
                 </label>
@@ -264,13 +274,13 @@ export default function OurTeam() {
                   id="firstName"
                   type="text"
                   placeholder="Your name"
-                  className="rounded-md px-3 py-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="rounded-md px-3 py-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
                 />
               </div>
               <div className="flex-1">
                 <label
                   htmlFor="lastName"
-                  className="text-white font-semibold mb-1 block"
+                  className="text-white font-semibold mb-1 block text-sm sm:text-base"
                 >
                   Last Name
                 </label>
@@ -278,14 +288,14 @@ export default function OurTeam() {
                   id="lastName"
                   type="text"
                   placeholder="Your last name"
-                  className="rounded-md px-3 py-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="rounded-md px-3 py-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
                 />
               </div>
             </div>
             <div>
               <label
                 htmlFor="email"
-                className="text-white font-semibold mb-1 block"
+                className="text-white font-semibold mb-1 block text-sm sm:text-base"
               >
                 Email Address
               </label>
@@ -293,13 +303,13 @@ export default function OurTeam() {
                 id="email"
                 type="email"
                 placeholder="Your E-mail address"
-                className="rounded-md px-3 py-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="rounded-md px-3 py-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               />
             </div>
             <div>
               <label
                 htmlFor="message"
-                className="text-white font-semibold mb-1 block"
+                className="text-white font-semibold mb-1 block text-sm sm:text-base"
               >
                 Message
               </label>
@@ -307,12 +317,12 @@ export default function OurTeam() {
                 id="message"
                 placeholder="Your message..."
                 rows={4}
-                className="rounded-md px-3 py-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="rounded-md px-3 py-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white rounded-md py-3 font-semibold text-base hover:bg-blue-700 transition"
+              className="w-full bg-blue-600 text-white rounded-md py-3 font-semibold text-sm sm:text-base hover:bg-blue-700 transition"
             >
               Send Message
             </button>
