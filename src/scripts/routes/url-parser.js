@@ -1,28 +1,25 @@
 function extractPathnameSegments(path) {
-  const splitUrl = path.split('/');
-
+  const splitUrl = path.split('/').filter(Boolean); // filter(Boolean) hapus string kosong
   return {
-    resource: splitUrl[1] || null,
-    id: splitUrl[2] || null,
+    resource: splitUrl[0] || null,
+    id: splitUrl[1] || null,
   };
 }
 
 function constructRouteFromSegments(pathSegments) {
   let pathname = '';
-
   if (pathSegments.resource) {
     pathname = pathname.concat(`/${pathSegments.resource}`);
   }
-
   if (pathSegments.id) {
     pathname = pathname.concat('/:id');
   }
-
   return pathname || '/';
 }
 
 export function getActivePathname() {
-  return location.hash.replace('#', '') || '/';
+  let path = window.location.hash.replace('#', '');
+  return path || '/';
 }
 
 export function getActiveRoute() {
