@@ -17,7 +17,7 @@ Proyek ini adalah setup dasar untuk aplikasi web yang menggunakan webpack untuk 
 
 ### Installation
 
-1. Starter project [di sini]().
+1. Starter project [di sini](https://github.com/Zawnr/searcheer-frontend.git).
 2.  Pasang seluruh dependencies dengan perintah berikut.
    ```shell
    npm install
