@@ -1,4 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Style kustom ditambahkan di sini jika diperlukan */
 * {
   margin: 0;
   padding: 0;
