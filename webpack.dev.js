@@ -4,25 +4,38 @@ const { merge } = require('webpack-merge');
 
 module.exports = merge(common, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.css$/, 
         use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader'
+          'style-loader', 
+          {
+            loader: 'css-loader', 
+            options: {
+              sourceMap: true, 
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true, 
+            },
+          },
         ],
       },
     ],
   },
-  devServer: {
-    static: path.resolve(__dirname, 'dist'),
+
+  devServer: 
+  {
+    static: { 
+      directory: path.resolve(__dirname, 'dist'),
+    },
     port: 9000,
     historyApiFallback: true,
     hot: true,
-    open: true, 
     client: {
       overlay: {
         errors: true,
@@ -30,4 +43,6 @@ module.exports = merge(common, {
       },
     },
   },
+  
+  stats: 'errors-warnings',
 });
