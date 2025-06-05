@@ -5,12 +5,13 @@ const path = require('path');
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
-  devtool: 'eval-cheap-module-source-map',
+
   module: {
     rules: [
       {
-        test: /\.css$/, 
+        test: /\.css$/,
         use: [
+          'style-loader', 
           {
             loader: 'css-loader',
             options: {
@@ -28,19 +29,9 @@ module.exports = merge(common, {
       },
     ],
   },
+
   devServer: {
     static: {
-              sourceMap: true, 
-            },
-          },
-        ],
-      },
-    ],
-  },
-
-  devServer: 
-  {
-    static: { 
       directory: path.resolve(__dirname, 'dist'),
     },
     port: 9000,
@@ -53,5 +44,6 @@ module.exports = merge(common, {
       },
     },
   },
+
   stats: 'errors-warnings',
 });
