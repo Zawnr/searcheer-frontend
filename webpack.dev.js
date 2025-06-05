@@ -4,21 +4,13 @@ const path = require('path');
 
 module.exports = merge(common, {
   mode: 'development',
-<<<<<<< HEAD
-  devtool: 'inline-source-map',
-=======
   devtool: 'eval-cheap-module-source-map',
->>>>>>> 3c70df8
+  devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.css$/, 
         use: [
-          'style-loader',
-<<<<<<< HEAD
-          'css-loader',
-          'postcss-loader'
-=======
           {
             loader: 'css-loader',
             options: {
@@ -32,22 +24,28 @@ module.exports = merge(common, {
               sourceMap: true,
             },
           },
->>>>>>> 3c70df8
         ],
       },
     ],
   },
   devServer: {
     static: {
+              sourceMap: true, 
+            },
+          },
+        ],
+      },
+    ],
+  },
+
+  devServer: 
+  {
+    static: { 
       directory: path.resolve(__dirname, 'dist'),
     },
     port: 9000,
     historyApiFallback: true,
     hot: true,
-<<<<<<< HEAD
-    open: true, 
-=======
->>>>>>> 3c70df8
     client: {
       overlay: {
         errors: true,

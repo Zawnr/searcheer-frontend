@@ -5,6 +5,8 @@
   "scripts": {
     "start-dev": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
+    "serve": "http-server dist",
+    "clean": "rm -rf dist node_modules/.cache"
   },
   "keywords": [],
   "author": "",
@@ -26,15 +28,11 @@
     "webpack-dev-server": "^5.2.1",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^13.0.0",
-<<<<<<< HEAD
     "css-loader": "^7.1.2",
-=======
->>>>>>> 3c70df8
     "css-minimizer-webpack-plugin": "^7.0.2",
     "html-webpack-plugin": "^5.6.3",
     "http-server": "^14.1.1",
     "mini-css-extract-plugin": "^2.9.2",
-<<<<<<< HEAD
     "postcss": "^8.5.4",
     "postcss-loader": "^8.1.1",
     "prettier": "3.5.3",
@@ -42,16 +40,15 @@
     "tailwindcss": "^3.4.17",
     "terser-webpack-plugin": "^5.3.14",
     "webpack": "^5.99.9",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1",
-    "webpack-merge": "^6.0.1",
-=======
+
     "webpack-merge": "^6.0.1"
->>>>>>> 3c70df8
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.1"
+    "react-router-dom": "^7.6.2"
   }
 }

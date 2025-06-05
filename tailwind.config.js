@@ -1,16 +1,17 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: [
     "./src/index.html",
-    "./src/scripts/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-<<<<<<< HEAD
-    extend: {},
-  },
-  plugins: [],
-}
-=======
+    extend: {
+      fontFamily: {
+        sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+      },
+    },
     extend: {
       fontFamily: {
         sans: ['Figtree'],
@@ -20,4 +21,3 @@ module.exports = {
   plugins: [],
 };
 
->>>>>>> 3c70df8

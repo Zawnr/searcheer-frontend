@@ -5,6 +5,7 @@ const common = require('./webpack.common.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 
 module.exports = merge(common, {
   mode: 'production',
@@ -39,6 +40,7 @@ module.exports = merge(common, {
           {
             loader: 'babel-loader',
           },
+          'postcss-loader'
         ],
       },
       */
@@ -48,8 +50,8 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: 'styles/[name].[contenthash].css',
       chunkFilename: 'styles/[id].[contenthash].css',
-
     }),
+    new BundleAnalyzerPlugin(),
   ],
   optimization: {
     minimize: true,
@@ -65,9 +67,15 @@ module.exports = merge(common, {
     ],
     splitChunks: {
       chunks: 'all',
+      minSize: 20000, 
+      minRemainingSize: 0,
+      minChunks: 1, 
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
     },
     runtimeChunk: 'single',
   },
+
   performance: {
     hints: 'warning',
     maxAssetSize: 250000,
