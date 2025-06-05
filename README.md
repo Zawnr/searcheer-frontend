@@ -58,9 +58,9 @@ searcheer-frontend/
 │   │   ├── routes/         # Pengaturan routing
 │   │   ├── utils/          # Helper dan utilitas
 │   │   └── index.js        # Main JavaScript entry file
-│   ├── styles/             # Source CSS files
-│   │   └── styles.css      # Main CSS file
-│   └── index.html/         # Main HTML file
+│   └── styles/             # Source CSS files
+│       └── styles.css      # Main CSS file
+│   
 ├── package.json            # Project metadata and dependencies
 ├── package-lock.json       # Project metadata and dependencies
 ├── README.md               # Project documentation

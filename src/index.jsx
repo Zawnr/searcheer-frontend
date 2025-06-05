@@ -18,3 +18,4 @@ if (rootElement) {
 } else {
   console.error('Root element with ID "root" NOT FOUND in HTML.');
 }
+

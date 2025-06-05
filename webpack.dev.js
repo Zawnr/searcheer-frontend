@@ -1,25 +1,35 @@
-const path = require('path');
-const common = require('./webpack.common.js');
 const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
+const path = require('path');
 
 module.exports = merge(common, {
   mode: 'development',
+  devtool: 'eval-cheap-module-source-map',
   devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [
       {
         test: /\.css$/, 
         use: [
-          'style-loader', 
           {
-            loader: 'css-loader', 
+            loader: 'css-loader',
             options: {
-              sourceMap: true, 
+              sourceMap: true,
+              importLoaders: 1,
             },
           },
           {
             loader: 'postcss-loader',
             options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
+  devServer: {
+    static: {
               sourceMap: true, 
             },
           },
@@ -39,10 +49,9 @@ module.exports = merge(common, {
     client: {
       overlay: {
         errors: true,
-        warnings: true,
+        warnings: false,
       },
     },
   },
-  
   stats: 'errors-warnings',
 });

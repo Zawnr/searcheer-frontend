@@ -1,10 +1,10 @@
 {
   "name": "searcheer-frontend",
   "version": "1.0.0",
-  "description": "",
+  "description": "React with Tailwind and Webpack",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
     "start-dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
     "serve": "http-server dist",
     "clean": "rm -rf dist node_modules/.cache"
   },
@@ -17,6 +17,15 @@
     "@babel/preset-react": "^7.27.1",
     "autoprefixer": "^10.4.21",
     "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "postcss": "^8.5.4",
+    "postcss-loader": "^8.1.1",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^3.4.17",
+    "terser-webpack-plugin": "^5.3.14",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^7.1.2",
@@ -34,6 +43,7 @@
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1",
+
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {

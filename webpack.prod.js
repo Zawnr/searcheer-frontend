@@ -1,5 +1,7 @@
-const common = require('./webpack.common.js');
 const { merge } = require('webpack-merge');
+
+const common = require('./webpack.common.js');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -15,16 +17,35 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',     
+            loader: 'css-loader',
             options: {
-              importLoaders: 1, 
-            }
+              importLoaders: 1,
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+      
+      /*
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
           },
           'postcss-loader'
         ],
       },
+      */
     ],
-  },
+  }, 
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'styles/[name].[contenthash].css',
@@ -35,16 +56,16 @@ module.exports = merge(common, {
   optimization: {
     minimize: true,
     minimizer: [
-      new TerserPlugin({ // Pengaturan Terser bisa lebih detail
+      new TerserPlugin({
         terserOptions: {
           compress: {
-            drop_console: true, // Hapus console.log di produksi
+            drop_console: true,
           },
         },
       }),
-      new CssMinimizerPlugin(), 
+      new CssMinimizerPlugin(),
     ],
-    splitChunks: { 
+    splitChunks: {
       chunks: 'all',
       minSize: 20000, 
       minRemainingSize: 0,
@@ -54,9 +75,11 @@ module.exports = merge(common, {
     },
     runtimeChunk: 'single',
   },
-  performance: { 
-    hints: 'warning', 
-    maxAssetSize: 250000, 
-    maxEntrypointSize: 250000, 
+
+  performance: {
+    hints: 'warning',
+    maxAssetSize: 250000,
+    maxEntrypointSize: 250000,
   },
 });
+

@@ -12,6 +12,12 @@ module.exports = {
         sans: ['Figtree', ...defaultTheme.fontFamily.sans],
       },
     },
+    extend: {
+      fontFamily: {
+        sans: ['Figtree'],
+      },
+    },
   },
   plugins: [],
-}
+};
+

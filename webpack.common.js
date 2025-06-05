@@ -7,10 +7,14 @@ module.exports = {
     app: path.resolve(__dirname, 'src/index.jsx'),
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    publicPath: '/', 
-    clean: true, 
+    path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'assets/[hash][ext][query]',
+    clean: true,
+    publicPath: '/',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
         rules: [
@@ -31,25 +35,39 @@ module.exports = {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
-        generator: { 
-          filename: 'assets/fonts/[name].[hash][ext][query]'
-        }
+
       },
-    ],
-  },
-  
+
+      {
+        test: /\.(png|jpe?g|gif|svg|ico)$/i,
+        type: 'asset/resource',          
+        generator: { 
+          filename: 'assets/images/[name].[hash][ext][query]',
+        },
+      },
+
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: { 
+          filename: 'assets/fonts/[name].[hash][ext][query]',
+        },
+      },
+  ],
+},
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src/index.html'),
+      template: './public/index.html',
     }),
     new CopyWebpackPlugin({ 
       patterns: [
         {
-          from: path.resolve(__dirname, 'src/public/'),
-          to: path.resolve(__dirname, 'dist/public/'), 
+          from: path.resolve(__dirname, 'src/assets'),
+          to: path.resolve(__dirname, 'dist/static-assets'),
           globOptions: {
-            ignore: ['**/index.html'], 
+            ignore: ['**/index.html'],
           },
+          
         },
       ],
     }),
