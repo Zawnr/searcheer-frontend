@@ -1,7 +1,21 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';
+import './styles/tailwind.css'; 
 
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
+console.log('Attempting to mount React app...');
+
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  console.log('Root element found:', rootElement);
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+  console.log('React app rendered.');
+} else {
+  console.error('Root element with ID "root" NOT FOUND in HTML.');
+}
+
