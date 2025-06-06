@@ -1,34 +1,51 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import RegisterNotification from '../components/RegisterNotification';
 
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
   const [showPass, setShowPass] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [notification, setNotification] = useState({ message: '', type: '' });
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirm) {
-      alert("Password and confirmation do not match!");
+      setNotification({
+        message: 'Password and confirmation do not match!',
+        type: 'error',
+      });
       return;
     }
-    alert(`Akun berhasil dibuat!\nEmail: ${email}\nUsername: ${username}`);
-    navigate("/login"); // Redirect ke halaman Login setelah register sukses
+    setNotification({
+      message: `Akun berhasil dibuat!\nEmail: ${email}\nUsername: ${username}`,
+      type: 'success',
+    });
+    setTimeout(() => {
+      navigate('/login');
+    }, 1500);
   };
 
   return (
     <>
-      <h2 className="text-3xl font-bold mb-1 text-white leading-tight">Grow your career with us</h2>
+      <h2 className="text-3xl font-bold mb-1 text-white leading-tight">
+        Grow your career with us
+      </h2>
       <h3 className="text-lg font-semibold mb-3 text-white/80">
         Discover endless job opportunities
       </h3>
       <p className="mb-8 text-white/80 text-base">
-        Find your dream job and take a new step toward a brighter future with Searcheers.
+        Find your dream job and take a new step toward a brighter future with
+        Searcheers.
       </p>
+      <RegisterNotification
+        message={notification.message}
+        type={notification.type}
+      />
       <form className="space-y-5" onSubmit={handleSubmit} autoComplete="off">
         {/* Email */}
         <input
@@ -53,7 +70,7 @@ export default function Register() {
           {/* Password */}
           <div className="relative flex-1">
             <input
-              type={showPass ? "text" : "password"}
+              type={showPass ? 'text' : 'password'}
               placeholder="Create password"
               className="w-full px-4 py-3 bg-[#39455a] text-white border border-[#9CA3AF] rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base pr-12"
               value={password}
@@ -68,13 +85,13 @@ export default function Register() {
               tabIndex={-1}
               aria-label="Show password"
             >
-              {showPass ? "🙈" : "👁️"}
+              {showPass ? '🙈' : '👁️'}
             </button>
           </div>
           {/* Confirm password */}
           <div className="relative flex-1">
             <input
-              type={showConfirm ? "text" : "password"}
+              type={showConfirm ? 'text' : 'password'}
               placeholder="Confirm password"
               className="w-full px-4 py-3 bg-[#39455a] text-white border border-[#9CA3AF] rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base pr-12"
               value={confirm}
@@ -89,7 +106,7 @@ export default function Register() {
               tabIndex={-1}
               aria-label="Show password"
             >
-              {showConfirm ? "🙈" : "👁️"}
+              {showConfirm ? '🙈' : '👁️'}
             </button>
           </div>
         </div>
@@ -104,7 +121,7 @@ export default function Register() {
         </button>
       </form>
       <p className="mt-8 text-center text-white/70 text-sm">
-        Already have an account?{" "}
+        Already have an account?{' '}
         <Link to="/login" className="text-yellow-400 font-medium">
           Sign in
         </Link>
