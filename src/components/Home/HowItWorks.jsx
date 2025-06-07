@@ -1,8 +1,8 @@
 import React from 'react';
-import ManIcon from '../../assets/IconHSW/Man.png';
-import CloudIcon from '../../assets/IconHSW/Cloud.png';
-import MagnifierIcon from '../../assets/IconHSW/Magnifier.png';
-import ChecklistIcon from '../../assets/IconHSW/Checklist.png';
+import ManIcon from '../../assets/Icons/IconHSW/Man.png';
+import CloudIcon from '../../assets/Icons/IconHSW/Cloud.png';
+import MagnifierIcon from '../../assets/Icons/IconHSW/Magnifier.png';
+import ChecklistIcon from '../../assets/Icons/IconHSW/Checklist.png';
 
 const steps = [
   {

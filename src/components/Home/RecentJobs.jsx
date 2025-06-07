@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BookmarkPlusIcon from './BookmarkPlusIcon';
-import logo1 from '../../assets/IconRSA/1.png';
-import logo2 from '../../assets/IconRSA/2.png';
-import logo3 from '../../assets/IconRSA/3.png';
-import logo4 from '../../assets/IconRSA/4.png';
+import logo1 from '../../assets/Icons/IconRSA/1.png';
+import logo2 from '../../assets/Icons/IconRSA/2.png';
+import logo3 from '../../assets/Icons/IconRSA/3.png';
+import logo4 from '../../assets/Icons/IconRSA/4.png';
 import { LuBriefcase, LuClock, LuWallet, LuMapPin } from 'react-icons/lu';
 
 const jobs = [
