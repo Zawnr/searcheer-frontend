@@ -1,7 +1,7 @@
 import React from 'react';
-import CardFeature from '../components/CardFeature';
-import FaqAccordion from '../components/FaqAccordion';
-import bgBlurTeam from '../assets/bg-blur-team.png';
+import CardFeature from '../components/About/CardFeature';
+import FaqAccordion from '../components/About/FaqAccordion';
+import bgBlurTeam from '../assets/images/Bg/bg-blur-team.png';
 
 // DATA: FAQ
 const faqs = [
@@ -80,7 +80,7 @@ export default function AboutUs() {
   return (
     <div className="bg-white min-h-screen">
       {/* Section: Hero + Title */}
-      <div className="max-w-6xl mx-auto px-4 pt-12 pb-2">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-2">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-14 mt-4">
           About Us
         </h1>

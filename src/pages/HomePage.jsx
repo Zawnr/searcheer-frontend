@@ -1,14 +1,20 @@
 import React from 'react';
-import ExampleComponent from '../components/ExampleComponent';
+import HeroSection from '../components/Home/HeroSection';
+import HowItWorks from '../components/Home/HowItWorks';
+import RecentJobs from '../components/Home/RecentJobs';
+import BrowseCategory from '../components/Home/BrowseCategory';
+import GoodLifeCV from '../components/Home/GoodLifeCV';
+import Testimonials from '../components/Home/Testimonials';
 
-function HomePage() {
+export default function HomePage() {
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-2">Home Page</h2>
-      <p className="text-gray-700">This is the home page content.</p>
-      <ExampleComponent message="This is an example component on the Home Page." />
+    <div className="w-full max-w-full mx-auto overflow-x-hidden bg-white">
+      <HeroSection />
+      <HowItWorks />
+      <RecentJobs />
+      <BrowseCategory />
+      <GoodLifeCV />
+      <Testimonials />
     </div>
   );
 }
-
-export default HomePage;

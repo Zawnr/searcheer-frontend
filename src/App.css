@@ -5,7 +5,9 @@
 .page-enter-active {
   opacity: 1;
   filter: blur(0);
-  transition: opacity 300ms ease-in-out, filter 300ms ease-in-out;
+  transition:
+    opacity 300ms ease-in-out,
+    filter 300ms ease-in-out;
 }
 .page-exit {
   opacity: 1;
@@ -14,5 +16,7 @@
 .page-exit-active {
   opacity: 0;
   filter: blur(10px);
-  transition: opacity 300ms ease-in-out, filter 300ms ease-in-out;
+  transition:
+    opacity 300ms ease-in-out,
+    filter 300ms ease-in-out;
 }

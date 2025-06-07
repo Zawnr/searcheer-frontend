@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import LoginNotification from '../components/LoginNotification';
+import LoginNotification from '../components/Notification/LoginNotification';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
+  const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const [showPass, setShowPass] = useState(false);
@@ -12,8 +12,9 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setNotification({
-      message: `Selamat datang, ${email || 'user'}!`,
+      message: `Selamat datang, ${credential || 'user'}!`,
       type: 'success',
     });
     setTimeout(() => {
@@ -38,15 +39,16 @@ export default function Login() {
         type={notification.type}
       />
       <form className="space-y-5" onSubmit={handleSubmit} autoComplete="off">
-        {/* Email */}
+        {/* Username or Email */}
         <div className="relative">
           <input
-            type="email"
+            type="text"
             placeholder="Enter your email address or username"
             className="w-full px-4 py-3 bg-[#39455a] text-white border border-[#9CA3AF] rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={credential}
+            onChange={(e) => setCredential(e.target.value)}
             required
+            autoComplete="username"
           />
         </div>
         {/* Password */}
@@ -58,6 +60,7 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="current-password"
           />
           <button
             type="button"

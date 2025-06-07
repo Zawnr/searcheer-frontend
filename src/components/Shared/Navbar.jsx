@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import logo from '../../assets/images/Logo/logo.png';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,14 +40,18 @@ export default function Navbar() {
           <NavLink
             to="/jobs"
             onClick={() => setIsOpen(false)}
-            className="block px-4 py-3 md:px-6 md:py-2 text-white/80 hover:text-white font-medium"
+            className={({ isActive }) =>
+              `block px-4 py-3 md:px-6 md:py-2 text-white/80 hover:text-white font-medium ${
+                isActive ? 'font-bold underline underline-offset-4' : ''
+              }`
+            }
           >
             Jobs
           </NavLink>
         </li>
         <li>
           <NavLink
-            to="/about"
+            to="/about-us"
             onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
               `block px-4 py-3 md:px-6 md:py-2 text-white/90 hover:text-white font-medium ${
@@ -60,9 +64,13 @@ export default function Navbar() {
         </li>
         <li>
           <NavLink
-            to="/team"
+            to="/our-team"
             onClick={() => setIsOpen(false)}
-            className="block px-4 py-3 md:px-6 md:py-2 text-white/80 hover:text-white font-medium"
+            className={({ isActive }) =>
+              `block px-4 py-3 md:px-6 md:py-2 text-white/80 hover:text-white font-medium ${
+                isActive ? 'font-bold underline underline-offset-4' : ''
+              }`
+            }
           >
             Our Team
           </NavLink>

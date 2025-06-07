@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import RegisterNotification from '../components/RegisterNotification';
+import RegisterNotification from '../components/Notification/RegisterNotification';
 
 export default function Register() {
   const [email, setEmail] = useState('');

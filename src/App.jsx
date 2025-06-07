@@ -6,16 +6,21 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Home from './pages/Home';
+import Home from './pages/HomePage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AboutUs from './pages/AboutUs';
 import OurTeam from './pages/OurTeam';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import bgBlur from './assets/bg-blur.png';
-import abstract from './assets/abstract.png';
-import abstract2 from './assets/abstract2.png';
+import Jobs from './pages/Jobs';
+import JobDetails from './pages/JobDetails';
+import Navbar from './components/Shared/Navbar';
+import Footer from './components/Shared/Footer';
+import AnalyzingView from './components/Home/AnalyzingView';
+import AnalysisResult from './components/Home/AnalysisResult';
+import ScrollToTop from './components/Shared/ScrollToTop';
+import bgBlur from './assets/images/Bg/bg-blur.png';
+import abstract from './assets/images/Bg/abstract.png';
+import abstract2 from './assets/images/Bg/abstract2.png';
 import './App.css';
 
 function AppContent() {
@@ -49,8 +54,12 @@ function AppContent() {
           >
             <Routes location={location}>
               <Route path="/" element={<Home />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/team" element={<OurTeam />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/our-team" element={<OurTeam />} />
+              <Route path="/jobs" element={<Jobs />} />
+              <Route path="/jobs/:id" element={<JobDetails />} />
+              <Route path="/analyzing" element={<AnalyzingView />} />
+              <Route path="/analysis-result" element={<AnalysisResult />} />
 
               <Route
                 path="/login"
@@ -106,6 +115,7 @@ function AppContent() {
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <AppContent />
     </Router>
   );

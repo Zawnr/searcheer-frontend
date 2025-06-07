@@ -9,16 +9,7 @@ export default function TeamMemberCard({
   socialLinks,
 }) {
   return (
-    <div
-      className="rounded-xl shadow border border-gray-100 bg-white overflow-hidden flex flex-col items-center"
-      style={{
-        width: 320,
-        minWidth: 320,
-        maxWidth: 320,
-        height: 390,
-      }}
-    >
-      {/* Bagian atas: background color dan foto */}
+    <div className="rounded-xl shadow border border-gray-100 bg-white overflow-hidden flex flex-col items-center w-full max-w-xs mx-auto">
       <div
         className="relative w-full flex justify-center"
         style={{ backgroundColor: bgColor, height: 135 }}
@@ -27,7 +18,7 @@ export default function TeamMemberCard({
           <img
             src={photo}
             alt={name}
-            className="h-[160px] w-[160px] object-cover rounded-full border-4 border-white shadow"
+            className="h-[120px] w-[120px] sm:h-[140px] sm:w-[140px] md:h-[160px] md:w-[160px] object-cover rounded-full border-4 border-white shadow"
             draggable="false"
             style={{ background: '#fff' }}
           />
