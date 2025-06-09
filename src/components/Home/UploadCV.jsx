@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 export default function UploadCV({
   selectedFile,
   setSelectedFile,
   error,
   setError,
+  showValidation,
 }) {
-  const fileInputRef = React.useRef(null);
+  const fileInputRef = useRef(null);
   const maxFileSize = 10 * 1024 * 1024; // 10MB
 
   const handleFileChange = (event) => {
@@ -23,35 +24,35 @@ export default function UploadCV({
   const validateAndSetFile = (file) => {
     if (!file) return;
     if (file.type !== 'application/pdf') {
-      setError('Only PDF files are allowed.');
+      setError && setError('Only PDF files are allowed.');
       setSelectedFile(null);
       return;
     }
     if (file.size > maxFileSize) {
-      setError('File size exceeds 10MB.');
+      setError && setError('File size exceeds 10MB.');
       setSelectedFile(null);
       return;
     }
-    setError('');
+    setError && setError('');
     setSelectedFile(file);
   };
 
-  const handleDragOver = (event) => {
-    event.preventDefault();
-  };
+  const handleDragOver = (event) => event.preventDefault();
 
-  const openFileDialog = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
+  const openFileDialog = () =>
+    fileInputRef.current && fileInputRef.current.click();
+
+  // Show warning only if after submit (showValidation)
+  const warning =
+    showValidation && !selectedFile
+      ? 'Please upload your CV (PDF, max 10MB, ATS-friendly & English).'
+      : error;
 
   return (
-    <div className="bg-white rounded-lg p-8 text-black flex flex-col items-center justify-center shadow-lg w-full max-w-md min-h-[320px]">
+    <div className="bg-white rounded-xl p-8 text-black flex flex-col items-center justify-center shadow-lg w-full max-w-[430px] min-h-[340px]">
       <h3 className="text-lg font-semibold mb-2 text-center">Upload Your CV</h3>
-      <p className="text-center text-gray-500 mb-4 leading-relaxed text-sm max-w-[320px]">
-        Upload your CV in ATS-Friendly & using English Language to analyze it
-        against job requirements
+      <p className="text-center text-gray-500 mb-4 leading-relaxed text-sm max-w-[340px]">
+        CV must contain all main sections (Contact, Experience, Skills, etc)
       </p>
       <input
         type="file"
@@ -61,7 +62,7 @@ export default function UploadCV({
         className="hidden"
       />
       <div
-        className="border-8 border-dashed border-gray-400 rounded-2xl w-full h-44 flex flex-col items-center justify-center space-y-1 max-w-[320px] transition-colors hover:border-blue-400 cursor-pointer"
+        className="border-8 border-dashed border-gray-400 rounded-2xl w-full h-44 flex flex-col items-center justify-center space-y-1 max-w-[340px] transition-colors hover:border-blue-400 cursor-pointer"
         onClick={openFileDialog}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -79,7 +80,9 @@ export default function UploadCV({
             Selected file: {selectedFile.name}
           </p>
         )}
-        {error && <p className="text-red-600 text-xs mt-1">{error}</p>}
+        {showValidation && warning && (
+          <p className="text-red-600 text-xs mt-1">{warning}</p>
+        )}
       </div>
     </div>
   );

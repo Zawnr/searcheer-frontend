@@ -3,6 +3,12 @@ import TeamMemberCard from '../components/OurTeam/TeamMemberCard';
 import ContactInfo from '../components/OurTeam/ContactInfo';
 import FotoCindy from '../assets/images/Team/Cindy.jpg';
 import FotoDeryl from '../assets/images/Team/Deryl.jpg';
+import {
+  MdOutlineEmail,
+  MdOutlinePhone,
+  MdOutlineAccessTime,
+  MdOutlineLocationOn,
+} from 'react-icons/md';
 
 const teamMembers = [
   {
@@ -139,83 +145,38 @@ export default function OurTeam() {
           {/* Kontak info */}
           <div className="grid grid-cols-2 gap-x-8 gap-y-6 text-gray-700">
             {/* Call */}
-            <div className="flex items-start gap-3 sm:gap-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 sm:w-7 sm:h-7 text-blue-500 mt-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 5.75a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-.75A.75.75 0 006 10v2c0 3.771 3.229 7 7 7h2a.75.75 0 00.75-.75V17a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2A15.75 15.75 0 013 5.75z"
-                />
-              </svg>
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0">
+                <MdOutlinePhone size={30} className="text-blue-500" />
+              </span>
               <div>
                 <div className="font-bold text-lg sm:text-xl mb-1 text-black">
                   Call for inquiry
                 </div>
                 <div className="text-base sm:text-lg text-black">
-                  +62 832-330-432
+                  +62 81230658657
                 </div>
               </div>
             </div>
             {/* Email */}
-            <div className="flex items-start gap-3 sm:gap-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 sm:w-7 sm:h-7 text-blue-500 mt-1"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21.75 7.75v8.5a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 16.25v-8.5A2.25 2.25 0 014.5 5.75h15a2.25 2.25 0 012.25 2.25z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 7.75l8.25 5.5 8.25-5.5"
-                />
-              </svg>
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0">
+                <MdOutlineEmail size={30} className="text-blue-500" />
+              </span>
               <div>
                 <div className="font-bold text-lg sm:text-xl mb-1 text-black">
                   Send us email
                 </div>
                 <div className="text-base sm:text-lg text-black">
-                  kramulous@sbcglobal.net
+                  reiky.mirzha321@gmail.com
                 </div>
               </div>
             </div>
             {/* Jam */}
-            <div className="flex items-start gap-3 sm:gap-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 sm:w-7 sm:h-7 text-blue-500 mt-1"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  cx={12}
-                  cy={12}
-                  r={9}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6v6l4 2"
-                />
-              </svg>
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0">
+                <MdOutlineAccessTime size={30} className="text-blue-500" />
+              </span>
               <div>
                 <div className="font-bold text-lg sm:text-xl mb-1 text-black">
                   Opening hours
@@ -226,22 +187,10 @@ export default function OurTeam() {
               </div>
             </div>
             {/* Office */}
-            <div className="flex items-start gap-3 sm:gap-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 sm:w-7 sm:h-7 text-blue-500 mt-1"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-                />
-                <circle cx={12} cy={9} r={2.5} />
-              </svg>
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0">
+                <MdOutlineLocationOn size={30} className="text-blue-500" />
+              </span>
               <div>
                 <div className="font-bold text-lg sm:text-xl mb-1 text-black">
                   Office

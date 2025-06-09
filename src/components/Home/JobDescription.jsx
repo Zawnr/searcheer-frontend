@@ -1,27 +1,48 @@
 import React from 'react';
 
 export default function JobDescription({
+  jobTitle,
+  setJobTitle,
   jobDescription,
   setJobDescription,
-  error,
+  errorTitle,
+  errorDesc,
+  showValidation,
 }) {
   return (
-    <div className="bg-white rounded-lg p-8 text-black flex flex-col items-center justify-center shadow-lg w-full max-w-md min-h-[320px]">
-      <h3 className="text-lg font-semibold mb-2 text-center">
+    <div className="bg-white rounded-xl shadow-lg w-full max-w-[430px] px-8 py-8 flex flex-col gap-2">
+      <label className="font-semibold text-lg text-[#232d3b] mb-2">
+        Job Title
+      </label>
+      <input
+        type="text"
+        value={jobTitle}
+        onChange={(e) => setJobTitle(e.target.value)}
+        placeholder="e.g. Backend Developer"
+        className={`w-full px-4 py-2 mb-2 border ${
+          showValidation && errorTitle ? 'border-red-400' : 'border-gray-300'
+        } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 text-base`}
+        autoComplete="off"
+      />
+      {showValidation && errorTitle && (
+        <div className="text-xs text-red-500 mb-1">{errorTitle}</div>
+      )}
+
+      <label className="font-semibold text-lg text-[#232d3b] mb-2 mt-2">
         Job Description
-      </h3>
-      <p className="text-center text-gray-500 mb-4 leading-relaxed text-sm max-w-[320px]">
-        Enter the job description to match against your CV
-      </p>
+      </label>
       <textarea
-        id="jobDescription"
-        rows={6}
-        placeholder="Copy and paste the job description from the job posting.."
-        className={`w-full p-2 border rounded resize-none min-h-[120px] ${error ? 'border-red-600' : 'border-gray-300'}`}
         value={jobDescription}
         onChange={(e) => setJobDescription(e.target.value)}
+        placeholder="Paste the job description here..."
+        className={`w-full px-4 py-3 border ${
+          showValidation && errorDesc ? 'border-red-400' : 'border-gray-300'
+        } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 min-h-[110px] text-base resize-y`}
+        autoComplete="off"
       />
-      {error && <p className="text-red-600 text-xs mt-1">{error}</p>}
+      {showValidation && errorDesc && (
+        <div className="text-xs text-red-500">{errorDesc}</div>
+      )}
     </div>
   );
 }

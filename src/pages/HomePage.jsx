@@ -1,5 +1,5 @@
 import React from 'react';
-import HeroSection from '../components/Home/HeroSection';
+import HeroSection from '../components/Home/HeroSection/HeroSection';
 import HowItWorks from '../components/Home/HowItWorks';
 import RecentJobs from '../components/Home/RecentJobs';
 import BrowseCategory from '../components/Home/BrowseCategory';

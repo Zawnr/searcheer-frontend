@@ -60,8 +60,8 @@ export default function BrowseCategory() {
         Browse by Category
       </h2>
       <p className="text-center text-lg text-black mb-14 max-w-3xl mx-auto">
-        At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a
-        massa elementum id scel...
+        Explore job opportunities across various industries and find positions
+        that match your skills and career goals.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 max-w-6xl mx-auto">
         {categories.map((cat, idx) => (

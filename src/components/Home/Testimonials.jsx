@@ -4,26 +4,26 @@ import logoNada from '../../assets/images/Logo/LogoNada.png';
 const testimonials = [
   {
     stars: 5,
-    title: 'Amazing services',
-    text: 'Metus faucibus sed turpis lectus feugiat tincidunt. Rhoncus sed tristique in dolor. Mus etiam et vestibulum venenatis',
+    title: 'Perfect CV Analysis',
+    text: 'The CV analysis tool provided detailed insights that helped me improve my resume significantly. Within a week of making the suggested changes, I started getting more interview calls.',
     name: 'Marco Kihn',
-    role: 'Happy Client',
+    role: 'Software Engineer',
     photo: 'https://randomuser.me/api/portraits/men/32.jpg',
   },
   {
     stars: 5,
-    title: 'Everything simple',
-    text: 'Mus etiam et vestibulum venenatis viverra ut. Elit morbi bibendum ullamcorper augue faucibus',
+    title: 'Streamlined Job Search',
+    text: 'The platform made my job search incredibly efficient. The CV feedback was spot-on, and the job matching feature helped me find relevant positions quickly.',
     name: 'Kristin Hester',
-    role: 'Happy Client',
+    role: 'Marketing Manager',
     photo: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   {
     stars: 5,
-    title: 'Awesome, thank you!',
-    text: 'Rhoncus sed tristique in dolor. Mus etiam et vestibulum venenatis viverra ut. Elit morbi bibendum ullamcorper augue faucibus. Nulla et tempor montes',
+    title: 'Game-Changing Tool',
+    text: 'This service transformed my job search experience. The CV analysis highlighted areas I needed to improve, and the suggestions were practical and effective. Highly recommend!',
     name: 'Zion Cisneros',
-    role: 'Happy Client',
+    role: 'Business Analyst',
     photo: 'https://randomuser.me/api/portraits/men/65.jpg',
   },
 ];
@@ -52,8 +52,9 @@ export default function Testimonials() {
         Testimonials from Our Customers
       </h2>
       <p className="text-center text-lg mb-14 max-w-3xl mx-auto text-black">
-        At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a
-        massa elementum id...
+        Discover what our users say about their success stories. From CV
+        improvements to landing dream jobs, see how our platform has helped
+        professionals advance their careers.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
         {testimonials.map((t, i) => (

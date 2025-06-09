@@ -23,6 +23,10 @@ import abstract from './assets/images/Bg/abstract.png';
 import abstract2 from './assets/images/Bg/abstract2.png';
 import './App.css';
 
+// --- Tambahkan ini ---
+import Profile from './pages/Profile';
+// ---------------------
+
 function AppContent() {
   const location = useLocation();
 
@@ -60,6 +64,11 @@ function AppContent() {
               <Route path="/jobs/:id" element={<JobDetails />} />
               <Route path="/analyzing" element={<AnalyzingView />} />
               <Route path="/analysis-result" element={<AnalysisResult />} />
+              <Route path="/analysis-result/:id" element={<AnalysisResult />} />
+
+              {/* --- Tambahkan route Profile di sini --- */}
+              <Route path="/profile" element={<Profile />} />
+              {/* -------------------------------------- */}
 
               <Route
                 path="/login"

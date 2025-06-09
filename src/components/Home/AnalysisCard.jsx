@@ -1,21 +1,38 @@
 import React from 'react';
 
-export default function AnalysisCard() {
-  const overallMatchScore = 72;
-  const matchedSkills = [
-    'Python Programming',
-    'Data Analysis',
-    'Machine Learning Basics',
-    'SQL Database',
-    'Team Collaboration',
-    'Problem Solving',
-  ];
-  const skillsToImprove = [
-    'Deep Learning Frameworks (TensorFlow/PyTorch)',
-    'Natural Language Processing',
-    'Cloud Computing (AWS/Azure)',
-    'Data Visualization (Tableau/Power BI)',
-  ];
+export default function AnalysisCard({ result }) {
+  // Data dummy fallback jika tidak ada props (biar bisa test mandiri juga)
+  const dummy = {
+    compatibility_analysis: {
+      overall_score: 25,
+      tips: [
+        'Analysis performed with limited capabilities. Consider uploading a more detailed CV.',
+      ],
+      matched_skills: [],
+      missing_skills: [],
+    },
+    cv_analysis: {
+      ats_score: 74.5,
+      language_detected: 'en',
+    },
+    job_analysis: {
+      title: 'Software Engineer',
+    },
+  };
+  // Pakai data result jika ada, else fallback ke dummy
+  const data = result?.result_data || dummy;
+  const { compatibility_analysis, cv_analysis, job_analysis } = data;
+
+  const overallMatchScore = compatibility_analysis?.overall_score ?? 0;
+  const matchedSkills = compatibility_analysis?.matched_skills ?? [];
+  const missingSkills = compatibility_analysis?.missing_skills ?? [];
+  const tips = compatibility_analysis?.tips ?? [];
+
+  // Color logic for progress
+  let scoreColor = 'bg-blue-600';
+  if (overallMatchScore < 40) scoreColor = 'bg-red-500';
+  else if (overallMatchScore < 70) scoreColor = 'bg-yellow-500';
+  else scoreColor = 'bg-green-600';
 
   return (
     <div className="max-w-3xl w-full mx-auto bg-white rounded-xl shadow-lg p-8 border-l-8 border-yellow-400 relative z-10 mt-6 mb-10">
@@ -33,13 +50,23 @@ export default function AnalysisCard() {
       </div>
       <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
         <div
-          className="bg-blue-600 h-2 rounded-full transition-all duration-500 ease-in-out"
+          className={`${scoreColor} h-2 rounded-full transition-all duration-500 ease-in-out`}
           style={{ width: `${overallMatchScore}%` }}
         />
       </div>
       <p className="text-gray-700 text-sm mb-6">
-        Your CV has a good match with this job description. With some
-        improvements, you can increase your chances.
+        {tips.length > 0 ? (
+          tips.map((tip, i) => (
+            <span key={i} className="block mb-1">
+              {tip}
+            </span>
+          ))
+        ) : (
+          <>
+            Your CV has a good match with this job description. With some
+            improvements, you can increase your chances.
+          </>
+        )}
       </p>
 
       <h3 className="font-semibold text-gray-900 mb-4">Skill Analysis</h3>
@@ -61,11 +88,15 @@ export default function AnalysisCard() {
             </svg>
             Matched Skills
           </h4>
-          <ul className="list-disc list-inside text-green-700 text-sm">
-            {matchedSkills.map((skill) => (
-              <li key={skill}>{skill}</li>
-            ))}
-          </ul>
+          {matchedSkills.length > 0 ? (
+            <ul className="list-disc list-inside text-green-700 text-sm">
+              {matchedSkills.map((skill, i) => (
+                <li key={i}>{Array.isArray(skill) ? skill[0] : skill}</li>
+              ))}
+            </ul>
+          ) : (
+            <span className="text-gray-400">No matched skills detected.</span>
+          )}
         </div>
         <div className="bg-yellow-50 border border-yellow-200 rounded p-4 min-h-[140px]">
           <h4 className="font-semibold mb-2 text-yellow-700 flex items-center gap-2">
@@ -84,11 +115,15 @@ export default function AnalysisCard() {
             </svg>
             Skills to Improve
           </h4>
-          <ul className="list-disc list-inside text-yellow-700 text-sm">
-            {skillsToImprove.map((skill) => (
-              <li key={skill}>{skill}</li>
-            ))}
-          </ul>
+          {missingSkills.length > 0 ? (
+            <ul className="list-disc list-inside text-yellow-700 text-sm">
+              {missingSkills.map((skill, i) => (
+                <li key={i}>{Array.isArray(skill) ? skill[0] : skill}</li>
+              ))}
+            </ul>
+          ) : (
+            <span className="text-gray-400">No skill gaps detected.</span>
+          )}
         </div>
       </div>
 
@@ -96,6 +131,28 @@ export default function AnalysisCard() {
         <button className="text-blue-600 hover:underline font-semibold">
           View all recommendations
         </button>
+      </div>
+      {/* Ringkasan hasil di bawah */}
+      <div className="mt-8">
+        <h4 className="font-semibold mb-2 text-gray-800">Summary</h4>
+        <div className="text-sm text-gray-600">
+          <div>
+            CV ATS Score:{' '}
+            <span className="font-semibold">
+              {cv_analysis?.ats_score ?? '-'}
+            </span>
+          </div>
+          <div>
+            CV Language:{' '}
+            <span className="font-semibold">
+              {cv_analysis?.language_detected ?? '-'}
+            </span>
+          </div>
+          <div>
+            Job Title:{' '}
+            <span className="font-semibold">{job_analysis?.title ?? '-'}</span>
+          </div>
+        </div>
       </div>
     </div>
   );

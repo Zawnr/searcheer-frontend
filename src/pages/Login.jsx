@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginNotification from '../components/Notification/LoginNotification';
+import { login } from '../utils/api';
 
 export default function Login() {
   const [credential, setCredential] = useState('');
@@ -8,18 +9,43 @@ export default function Login() {
   const [remember, setRemember] = useState(false);
   const [showPass, setShowPass] = useState(false);
   const [notification, setNotification] = useState({ message: '', type: '' });
+  const [fieldError, setFieldError] = useState({});
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  function validateForm() {
+    const errors = {};
+    if (!credential) errors.credential = 'Email wajib diisi.';
+    else if (!/\S+@\S+\.\S+/.test(credential))
+      errors.credential = 'Format email tidak valid.';
 
-    setNotification({
-      message: `Selamat datang, ${credential || 'user'}!`,
-      type: 'success',
-    });
-    setTimeout(() => {
-      navigate('/');
-    }, 1500);
+    if (!password) errors.password = 'Password wajib diisi.';
+    else if (password.length < 6)
+      errors.password = 'Password minimal 6 karakter.';
+    return errors;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setNotification({ message: '', type: '' });
+    const errors = validateForm();
+    setFieldError(errors);
+    if (Object.keys(errors).length > 0) return;
+    try {
+      const result = await login(credential, password);
+      localStorage.setItem('token', result.token);
+      setNotification({
+        message: `Selamat datang, ${result.user?.username || credential || 'user'}!`,
+        type: 'success',
+      });
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
+    } catch (err) {
+      setNotification({
+        message: err.message || 'Login gagal!',
+        type: 'error',
+      });
+    }
   };
 
   return (
@@ -39,27 +65,32 @@ export default function Login() {
         type={notification.type}
       />
       <form className="space-y-5" onSubmit={handleSubmit} autoComplete="off">
-        {/* Username or Email */}
         <div className="relative">
           <input
             type="text"
-            placeholder="Enter your email address or username"
-            className="w-full px-4 py-3 bg-[#39455a] text-white border border-[#9CA3AF] rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base"
+            placeholder="Enter your email address"
+            className={`w-full px-4 py-3 bg-[#39455a] text-white border ${
+              fieldError.credential ? 'border-red-400' : 'border-[#9CA3AF]'
+            } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base`}
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
-            required
             autoComplete="username"
           />
+          {fieldError.credential && (
+            <div className="text-xs text-red-400 mt-1">
+              {fieldError.credential}
+            </div>
+          )}
         </div>
-        {/* Password */}
         <div className="relative">
           <input
             type={showPass ? 'text' : 'password'}
             placeholder="Enter your password"
-            className="w-full px-4 py-3 bg-[#39455a] text-white border border-[#9CA3AF] rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base pr-12"
+            className={`w-full px-4 py-3 bg-[#39455a] text-white border ${
+              fieldError.password ? 'border-red-400' : 'border-[#9CA3AF]'
+            } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base pr-12`}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
             autoComplete="current-password"
           />
           <button
@@ -71,8 +102,12 @@ export default function Login() {
           >
             {showPass ? '🙈' : '👁️'}
           </button>
+          {fieldError.password && (
+            <div className="text-xs text-red-400 mt-1">
+              {fieldError.password}
+            </div>
+          )}
         </div>
-        {/* Remember me */}
         <div className="flex items-center gap-2">
           <input
             id="remember"
@@ -88,7 +123,6 @@ export default function Login() {
             Remember me
           </label>
         </div>
-        {/* Button */}
         <button
           type="submit"
           className="w-full bg-yellow-400 hover:bg-yellow-500 text-[#232d3b] font-semibold py-3 rounded-xl text-lg transition shadow-md"

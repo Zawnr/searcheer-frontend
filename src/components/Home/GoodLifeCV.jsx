@@ -5,19 +5,19 @@ const stats = [
     number: '12k+',
     title: 'Clients worldwide',
     description:
-      'At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a massa elementum...',
+      'Students and professionals from around the globe trust our AI-powered CV analysis to enhance their career prospects.',
   },
   {
     number: '20k+',
     title: 'Active resume',
     description:
-      'At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a massa elementum...',
+      'CVs analyzed and improved through our intelligent matching system, helping job seekers stand out in competitive markets.',
   },
   {
     number: '18k+',
     title: 'Companies',
     description:
-      'At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a massa elementum...',
+      'Partner companies and job listings available on our platform, offering diverse opportunities across multiple industries.',
   },
 ];
 

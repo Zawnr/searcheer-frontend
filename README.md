@@ -1,6 +1,6 @@
-# App Starter Project with Webpack
+# Searcheer Frontend
 
-Proyek ini adalah setup dasar untuk aplikasi web yang menggunakan webpack untuk proses bundling, Babel untuk transpile JavaScript, serta mendukung proses build dan serving aplikasi.
+Ini adalah proyek frontend untuk aplikasi pencarian dan analisis pekerjaan **Searcheer**, dikembangkan menggunakan React, Webpack, Babel, dan Tailwind CSS.
 
 ## Table of Contents
 
@@ -8,68 +8,89 @@ Proyek ini adalah setup dasar untuk aplikasi web yang menggunakan webpack untuk 
 - [Scripts](#scripts)
 - [Project Structure](#project-structure)
 
+---
+
 ## Getting Started
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (disarankan versi 12 atau lebih tinggi)
+- [Node.js](https://nodejs.org/) (disarankan versi 16 atau lebih tinggi)
 - [npm](https://www.npmjs.com/) (Node package manager)
 
 ### Installation
 
-1. Starter project [di sini](https://github.com/Zawnr/searcheer-frontend.git).
-2. Pasang seluruh dependencies dengan perintah berikut.
+1. **Clone repository:**
+    ```shell
+    git clone https://github.com/Zawnr/searcheer-frontend.git
+    cd searcheer-frontend
+    ```
 
-```shell
-npm install
-```
+2. **Install dependencies:**
+    ```shell
+    npm install
+    ```
+
+---
 
 ## Scripts
 
-- Build for Production:
+- **Build for Production**
+    ```shell
+    npm run build
+    ```
+    Menjalankan Webpack dalam mode production dan menghasilkan file build ke direktori `dist`.
 
-  ```shell
-  npm run build
-  ```
+- **Start Development Server**
+    ```shell
+    npm run start-dev
+    ```
+    Menjalankan server pengembangan Webpack dengan live reload sesuai konfigurasi di `webpack.dev.js`.
 
-  Script ini menjalankan webpack dalam mode production menggunakan konfigurasi `webpack.prod.js` dan menghasilkan sejumlah file build ke direktori `dist`.
+- **Serve Production Build**
+    ```shell
+    npm run serve
+    ```
+    Menyajikan konten dari direktori `dist` menggunakan [`http-server`](https://www.npmjs.com/package/http-server).
 
-- Start Development Server:
-
-  ```shell
-  npm run start-dev
-  ```
-
-  Script ini menjalankan server pengembangan webpack dengan fitur live reload dan mode development sesuai konfigurasi di`webpack.dev.js`.
-
-- Serve:
-  ```shell
-  npm run serve
-  ```
-  Script ini menggunakan [`http-server`](https://www.npmjs.com/package/http-server) untuk menyajikan konten dari direktori `dist`.
+---
 
 ## Project Structure
 
-Proyek starter ini dirancang agar kode tetap modular dan terorganisir.
+Struktur folder sudah modular dan sesuai best practice React modern:
 
 ```text
 searcheer-frontend/
-├── dist/                   # Compiled files for production
-├── src/                    # Source project files
-│   ├── public/             # Public files
-│   ├── scripts/            # Source JavaScript files
-│   │   ├── data/           # Untuk model dan sumber data
-│   │   │    └── api.js     # Class untuk mengakses API
-│   │   ├── routes/         # Pengaturan routing
-│   │   ├── utils/          # Helper dan utilitas
-│   │   └── index.js        # Main JavaScript entry file
-│   └── styles/             # Source CSS files
-│       └── styles.css      # Main CSS file
+├── dist/                   # Hasil build/produksi (output Webpack)
+├── public/                 # Public files (HTML utama, favicon, dsb)
+├── src/                    # Semua source code aplikasi
+│   ├── assets/             # Asset statis (logo, gambar, icon, dll)
+│   ├── components/         # Component React (modular, reusable)
+│   │   ├── About/
+│   │   ├── Home/
+│   │   ├── JobDetails/
+│   │   ├── Jobs/
+│   │   ├── Notification/
+│   │   ├── OurTeam/
+│   │   └── Shared/
+│   ├── pages/              # Halaman utama aplikasi (routing)
+│   │   ├── AboutUs.jsx
+│   │   ├── HomePage.jsx
+│   │   ├── JobDetails.jsx
+│   │   ├── Jobs.jsx
+│   │   ├── Login.jsx
+│   │   ├── OurTeam.jsx
+│   │   └── Register.jsx
+│   ├── utils/              # Utility/helper function (API, dsb)
+│   │   └── api.js
+│   ├── App.jsx             # Root React component
+│   ├── App.css             # Style utama
+│   ├── index.jsx           # Entry point React
+│   └── index.css           # Style global
 │
-├── package.json            # Project metadata and dependencies
-├── package-lock.json       # Project metadata and dependencies
-├── README.md               # Project documentation
-├── webpack.common.js       # Webpack common configuration
-├── webpack.dev.js          # Webpack development configuration
-└── webpack.prod.js         # Webpack production configuration
-```
+├── package.json            # NPM project metadata
+├── package-lock.json       # Dependency lock file
+├── README.md               # Dokumentasi proyek ini
+├── tailwind.config.js      # Tailwind CSS config
+├── webpack.common.js       # Webpack konfigurasi (shared)
+├── webpack.dev.js          # Webpack dev config
+└── webpack.prod.js         # Webpack prod config

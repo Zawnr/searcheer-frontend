@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import RegisterNotification from '../components/Notification/RegisterNotification';
+import { register } from '../utils/api';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -10,24 +11,51 @@ export default function Register() {
   const [showPass, setShowPass] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [notification, setNotification] = useState({ message: '', type: '' });
+  const [fieldError, setFieldError] = useState({});
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  function validateForm() {
+    const errors = {};
+    if (!email) errors.email = 'Email wajib diisi.';
+    else if (!/\S+@\S+\.\S+/.test(email))
+      errors.email = 'Format email tidak valid.';
+
+    if (!username) errors.username = 'Username wajib diisi.';
+    else if (username.length < 3)
+      errors.username = 'Username minimal 3 karakter.';
+
+    if (!password) errors.password = 'Password wajib diisi.';
+    else if (password.length < 8)
+      errors.password = 'Password minimal 8 karakter.';
+
+    if (!confirm) errors.confirm = 'Konfirmasi password wajib diisi.';
+    else if (password !== confirm)
+      errors.confirm = 'Password dan konfirmasi harus sama.';
+
+    return errors;
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirm) {
+    setNotification({ message: '', type: '' });
+    const errors = validateForm();
+    setFieldError(errors);
+    if (Object.keys(errors).length > 0) return;
+    try {
+      await register({ email, username, password });
       setNotification({
-        message: 'Password and confirmation do not match!',
+        message: `Akun berhasil dibuat!\nEmail: ${email}\nUsername: ${username}`,
+        type: 'success',
+      });
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
+    } catch (err) {
+      setNotification({
+        message: err.message || 'Registrasi gagal!',
         type: 'error',
       });
-      return;
     }
-    setNotification({
-      message: `Akun berhasil dibuat!\nEmail: ${email}\nUsername: ${username}`,
-      type: 'success',
-    });
-    setTimeout(() => {
-      navigate('/login');
-    }, 1500);
   };
 
   return (
@@ -48,23 +76,37 @@ export default function Register() {
       />
       <form className="space-y-5" onSubmit={handleSubmit} autoComplete="off">
         {/* Email */}
-        <input
-          type="email"
-          placeholder="Enter your email address"
-          className="w-full px-4 py-3 bg-[#39455a] text-white border border-[#9CA3AF] rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <div>
+          <input
+            type="email"
+            placeholder="Enter your email address"
+            className={`w-full px-4 py-3 bg-[#39455a] text-white border ${
+              fieldError.email ? 'border-red-400' : 'border-[#9CA3AF]'
+            } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base`}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {fieldError.email && (
+            <div className="text-xs text-red-400 mt-1">{fieldError.email}</div>
+          )}
+        </div>
         {/* Username */}
-        <input
-          type="text"
-          placeholder="Create your username"
-          className="w-full px-4 py-3 bg-[#39455a] text-white border border-[#9CA3AF] rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="Create your username"
+            className={`w-full px-4 py-3 bg-[#39455a] text-white border ${
+              fieldError.username ? 'border-red-400' : 'border-[#9CA3AF]'
+            } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base`}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          {fieldError.username && (
+            <div className="text-xs text-red-400 mt-1">
+              {fieldError.username}
+            </div>
+          )}
+        </div>
         {/* Passwords */}
         <div className="flex gap-4">
           {/* Password */}
@@ -72,11 +114,11 @@ export default function Register() {
             <input
               type={showPass ? 'text' : 'password'}
               placeholder="Create password"
-              className="w-full px-4 py-3 bg-[#39455a] text-white border border-[#9CA3AF] rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base pr-12"
+              className={`w-full px-4 py-3 bg-[#39455a] text-white border ${
+                fieldError.password ? 'border-red-400' : 'border-[#9CA3AF]'
+              } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base pr-12`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={8}
             />
             <button
               type="button"
@@ -87,17 +129,22 @@ export default function Register() {
             >
               {showPass ? '🙈' : '👁️'}
             </button>
+            {fieldError.password && (
+              <div className="text-xs text-red-400 mt-1">
+                {fieldError.password}
+              </div>
+            )}
           </div>
           {/* Confirm password */}
           <div className="relative flex-1">
             <input
               type={showConfirm ? 'text' : 'password'}
               placeholder="Confirm password"
-              className="w-full px-4 py-3 bg-[#39455a] text-white border border-[#9CA3AF] rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base pr-12"
+              className={`w-full px-4 py-3 bg-[#39455a] text-white border ${
+                fieldError.confirm ? 'border-red-400' : 'border-[#9CA3AF]'
+              } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-[#a0aec0] text-base pr-12`}
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
-              required
-              minLength={8}
             />
             <button
               type="button"
@@ -108,6 +155,11 @@ export default function Register() {
             >
               {showConfirm ? '🙈' : '👁️'}
             </button>
+            {fieldError.confirm && (
+              <div className="text-xs text-red-400 mt-1">
+                {fieldError.confirm}
+              </div>
+            )}
           </div>
         </div>
         <p className="text-xs text-white/70 pl-1">

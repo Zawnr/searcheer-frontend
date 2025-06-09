@@ -169,8 +169,8 @@ export default function AboutUs() {
       <div className="max-w-6xl mx-auto px-4 mt-12">
         <h2 className="text-3xl font-bold text-center mb-2">How it works</h2>
         <p className="text-center text-sm text-gray-600 mb-8">
-          At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit
-          a massa elementum id scelerisque rhoncus...
+          Follow these simple steps to get started with Searcheer and improve
+          your job search experience
         </p>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           {features.map((item) => (
@@ -215,9 +215,9 @@ export default function AboutUs() {
           </div>
           <div className="w-full bg-black/80 text-white grid grid-cols-1 md:grid-cols-3 gap-0 text-sm relative z-10">
             {[
-              'Elit gravida lorem amet porta risus vitae at',
-              'Volutpat dui lacus mattis urna platea...',
-              'Elementum faucibus netus gravida lacus lorem',
+              'AI-powered CV analysis for better job matching',
+              'Personalized feedback to improve your CV',
+              'Smart job recommendations based on your profile',
             ].map((text, idx) => (
               <div
                 key={idx}
