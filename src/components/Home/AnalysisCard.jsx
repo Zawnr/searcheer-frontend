@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function AnalysisCard({ result }) {
-  // Data dummy fallback jika tidak ada props (biar bisa test mandiri juga)
   const dummy = {
     compatibility_analysis: {
       overall_score: 25,
@@ -19,7 +18,6 @@ export default function AnalysisCard({ result }) {
       title: 'Software Engineer',
     },
   };
-  // Pakai data result jika ada, else fallback ke dummy
   const data = result?.result_data || dummy;
   const { compatibility_analysis, cv_analysis, job_analysis } = data;
 
@@ -28,7 +26,6 @@ export default function AnalysisCard({ result }) {
   const missingSkills = compatibility_analysis?.missing_skills ?? [];
   const tips = compatibility_analysis?.tips ?? [];
 
-  // Color logic for progress
   let scoreColor = 'bg-blue-600';
   if (overallMatchScore < 40) scoreColor = 'bg-red-500';
   else if (overallMatchScore < 70) scoreColor = 'bg-yellow-500';
@@ -132,7 +129,6 @@ export default function AnalysisCard({ result }) {
           View all recommendations
         </button>
       </div>
-      {/* Ringkasan hasil di bawah */}
       <div className="mt-8">
         <h4 className="font-semibold mb-2 text-gray-800">Summary</h4>
         <div className="text-sm text-gray-600">

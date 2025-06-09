@@ -30,7 +30,6 @@ export default function ContactInfo() {
       to_email: 'reiky.mirzha321@gmail.com',
     };
 
-    // Replace 'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', 'YOUR_PUBLIC_KEY' with your EmailJS credentials
     EmailJS.send(
       'service_e84bxyo',
       'template_zesuqi9',

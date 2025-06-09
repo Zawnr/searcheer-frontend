@@ -1,4 +1,3 @@
-// src/components/Home/AlertPopup.jsx
 import React from 'react';
 
 export default function AlertPopup({
@@ -11,10 +10,9 @@ export default function AlertPopup({
 }) {
   if (!visible) return null;
 
-  // Warna Header berdasarkan type
   const colorMap = {
-    ats: 'bg-[#F56C6C]', // merah ATS
-    indo: 'bg-[#1FC2FF]', // biru warning bahasa
+    ats: 'bg-[#F56C6C]',
+    indo: 'bg-[#1FC2FF]',
     info: 'bg-yellow-400',
     error: 'bg-red-600',
   };
@@ -26,7 +24,6 @@ export default function AlertPopup({
         className="rounded-[30px] shadow-2xl w-full max-w-md mx-auto relative"
         style={{ minWidth: 340 }}
       >
-        {/* HEADER */}
         <div
           className={`${headerBg} rounded-t-[30px] px-8 py-5 flex items-center justify-between`}
         >
@@ -41,7 +38,6 @@ export default function AlertPopup({
             ×
           </button>
         </div>
-        {/* BODY */}
         <div className="bg-[#313e5b] rounded-b-[30px] px-7 py-8 flex flex-col items-center gap-4">
           <div className="text-gray-100 text-base font-medium text-left w-full mb-5">
             {description}
