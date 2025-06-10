@@ -257,8 +257,8 @@ export function useCVValidation() {
     if (!jobTitle.trim()) {
       setJobTitleError('Job title is required.');
       valid = false;
-    } else if (jobTitle.trim().length < 3) {
-      setJobTitleError('Job title must be at least 3 characters & English.');
+    } else if (jobTitle.trim().length < 5) {
+      setJobTitleError('Job title must be at least 5 characters & English.');
       valid = false;
     } else if (containsIndonesian(jobTitle)) {
       foundIndo = true;
