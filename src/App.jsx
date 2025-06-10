@@ -22,10 +22,7 @@ import bgBlur from './assets/images/Bg/bg-blur.png';
 import abstract from './assets/images/Bg/abstract.png';
 import abstract2 from './assets/images/Bg/abstract2.png';
 import './App.css';
-
-// --- Tambahkan ini ---
 import Profile from './pages/Profile';
-// ---------------------
 
 function AppContent() {
   const location = useLocation();
