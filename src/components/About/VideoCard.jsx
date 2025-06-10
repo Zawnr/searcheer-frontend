@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bgBlurTeam from '../../assets/images/Bg/bg-blur-team.png';
 
 export default function VideoCard() {
+  const [showVideo, setShowVideo] = useState(false);
+
+  const handlePlayClick = () => {
+    setShowVideo(true);
+  };
+
+  const handleCloseClick = () => {
+    setShowVideo(false);
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 mt-8">
       <div
@@ -19,7 +29,10 @@ export default function VideoCard() {
         {/* Overlay konten (relative z-10) */}
         <div className="w-full h-[330px] md:h-[330px] flex items-center justify-center relative z-10">
           {/* Play button */}
-          <button className="rounded-full bg-white/80 w-16 h-16 flex items-center justify-center shadow-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl">
+          <button
+            className="rounded-full bg-white/80 w-16 h-16 flex items-center justify-center shadow-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl"
+            onClick={handlePlayClick}
+          >
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
@@ -36,6 +49,26 @@ export default function VideoCard() {
             </h3>
           </div>
         </div>
+        {/* Video Overlay */}
+        {showVideo && (
+          <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-20">
+            <button
+              className="absolute top-4 right-4 text-white text-2xl"
+              onClick={handleCloseClick}
+            >
+              X
+            </button>
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/g0lXTbbGETI?autoplay=1"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        )}
         <div className="w-full bg-black/80 text-white grid grid-cols-1 md:grid-cols-3 gap-0 text-sm relative z-10">
           {[
             'AI-powered CV analysis for better job matching',
@@ -54,9 +87,7 @@ export default function VideoCard() {
                 <a
                   href="#"
                   className="block text-teal-200 text-xs mt-1 underline"
-                >
-                  Learn more
-                </a>
+                ></a>
               </div>
             </div>
           ))}
