@@ -17,6 +17,7 @@ export default function HeroSection() {
   const [jobDescError, setJobDescError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showValidation, setShowValidation] = useState(false);
+
   const [showAtsPopup, setShowAtsPopup] = useState(false);
   const [showIndoPopup, setShowIndoPopup] = useState(false);
   const [atsMessage, setAtsMessage] = useState('');
@@ -25,11 +26,12 @@ export default function HeroSection() {
   const { validate } = useCVValidation();
 
   const handleAnalyzeClick = async () => {
+    setShowValidation(true);
+    setAtsMessage('');
     setShowAtsPopup(false);
     setShowIndoPopup(false);
-    setAtsMessage('');
-    setShowValidation(true);
 
+    // Validasi form manual dulu
     const { valid, foundIndo, foundCvError } = validate({
       selectedFile,
       jobTitle,
@@ -39,24 +41,32 @@ export default function HeroSection() {
       setJobDescError,
     });
 
+    // Kalau detect Indo, buka popup Indo
     if (foundIndo) setShowIndoPopup(true);
+
+    // Error file CV (kosong/bukan PDF)
     if (foundCvError) {
-      setAtsMessage(
-        'Please upload a valid CV file (PDF, English, ATS-friendly).'
-      );
-      setShowAtsPopup(true);
+      setShowAtsPopup(false);
+      setAtsMessage('');
+      return;
     }
 
-    if (!valid) return;
+    if (!valid) {
+      setShowAtsPopup(false);
+      setAtsMessage('');
+      return;
+    }
 
     setLoading(true);
     setCvError('');
     setJobTitleError('');
     setJobDescError('');
+
     try {
       const token = localStorage.getItem('token');
       const uploadRes = await uploadCV(selectedFile, token);
 
+      // ATS warning dari upload response
       if (
         uploadRes &&
         uploadRes.ats_score !== undefined &&
@@ -103,28 +113,82 @@ export default function HeroSection() {
         errMsg = err.response.data.errors[0] || errMsg;
       }
 
-      if (
-        (!errMsg.toLowerCase().includes('title') &&
-          !errMsg.toLowerCase().includes('description')) ||
-        errMsg.toLowerCase().includes('cv')
-      ) {
-        setAtsMessage(
-          errMsg.replace(
-            'Sorry, Your CV is not ATS-friendly..',
-            'Sorry, our CV analysis service is temporarily unavailable. Please try again later!'
-          )
-        );
-        setShowAtsPopup(true);
+      const msgLower = errMsg.toLowerCase();
+
+      // Kata kunci error yang TIDAK boleh trigger popup ATS
+      const isFileNotFound =
+        msgLower.includes('file tidak ditemukan') ||
+        msgLower.includes('please upload') ||
+        msgLower.includes('belum upload') ||
+        msgLower.includes('file not found') ||
+        msgLower.includes('harus diupload') ||
+        msgLower.includes('required') ||
+        msgLower.includes('pdf format') ||
+        msgLower.includes('max 10mb');
+
+      // Pattern error untuk bahasa Indonesia dari ML
+      const isIndoCV =
+        msgLower.includes('cv detected as id') ||
+        msgLower.includes('cv terdeteksi bahasa indonesia') ||
+        msgLower.includes('bahasa indonesia') ||
+        msgLower.includes('why english is important');
+
+      let triggeredIndo = false;
+      let triggeredAts = false;
+
+      if (isFileNotFound) {
+        setCvError(errMsg);
+        triggeredAts = false;
+      } else if (isIndoCV) {
+        // Jika CV dideteksi Bahasa Indonesia
+        setShowIndoPopup(true);
+        triggeredIndo = true;
+      } else {
+        // Error pada job title/desc
+        if (msgLower.includes('title')) {
+          setJobTitleError(errMsg);
+          if (
+            msgLower.includes('english') ||
+            msgLower.includes('bahasa') ||
+            msgLower.includes('indo')
+          ) {
+            triggeredIndo = true;
+          }
+        }
+        if (msgLower.includes('description')) {
+          setJobDescError(errMsg);
+          if (
+            msgLower.includes('english') ||
+            msgLower.includes('bahasa') ||
+            msgLower.includes('indo')
+          ) {
+            triggeredIndo = true;
+          }
+        }
+
+        // ATS popup error
+        if (
+          !msgLower.includes('title') &&
+          !msgLower.includes('description') &&
+          !isFileNotFound &&
+          !isIndoCV
+        ) {
+          setAtsMessage(
+            errMsg.replace(
+              'Sorry, Your CV is not ATS-friendly..',
+              'Sorry, our CV analysis service is temporarily unavailable. Please try again later!'
+            )
+          );
+          triggeredAts = true;
+        }
       }
 
-      if (errMsg.toLowerCase().includes('title')) {
-        setJobTitleError(errMsg);
-      } else if (errMsg.toLowerCase().includes('description')) {
-        setJobDescError(errMsg);
-      } else if (errMsg.toLowerCase().includes('cv')) {
-        setCvError(errMsg);
-      } else {
-        setCvError(errMsg);
+      setShowAtsPopup(triggeredAts);
+      setShowIndoPopup(triggeredIndo || showIndoPopup);
+
+      if (!triggeredAts && !triggeredIndo) {
+        setShowAtsPopup(false);
+        setShowIndoPopup(false);
       }
     } finally {
       setLoading(false);
@@ -141,6 +205,7 @@ export default function HeroSection() {
         backgroundRepeat: 'no-repeat',
       }}
     >
+      {/* ATS Error */}
       <AlertPopup
         visible={showAtsPopup}
         type="ats"
@@ -159,11 +224,12 @@ export default function HeroSection() {
         onClose={() => setShowAtsPopup(false)}
       />
 
+      {/* Language Warning */}
       <AlertPopup
         visible={showIndoPopup}
         type="indo"
         title="Language Warning"
-        description="We detected that your Job Title or Description is not in English. For optimal results, please use English."
+        description="We detected that your Job Title, Description, or CV is not in English. For optimal results, please use English."
         suggestions={[
           'Most ATS systems are optimized for English language',
           'Keyword matching will be more accurate',
