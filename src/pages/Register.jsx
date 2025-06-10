@@ -25,8 +25,8 @@ export default function Register() {
       errors.username = 'Username minimal 3 karakter.';
 
     if (!password) errors.password = 'Password wajib diisi.';
-    else if (password.length < 8)
-      errors.password = 'Password minimal 8 karakter.';
+    else if (password.length < 6)
+      errors.password = 'Password minimal 6 karakter.';
 
     if (!confirm) errors.confirm = 'Konfirmasi password wajib diisi.';
     else if (password !== confirm)
@@ -163,7 +163,7 @@ export default function Register() {
           </div>
         </div>
         <p className="text-xs text-white/70 pl-1">
-          Use 8 or more characters with a mix of letters, numbers & symbols
+          Use 6 or more characters with a mix of letters, numbers & symbols
         </p>
         <button
           type="submit"
