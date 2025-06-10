@@ -121,25 +121,34 @@ export default function AboutUs() {
           <b className="block mb-1">Our Solution</b>
           <p className="mb-1">
             Searcheer revolutionizes the job search process through cutting-edge
-            Natural Language Processing (NLP) and machine learning technology.
-            Our platform analyzes your CV against job descriptions, providing:
+            NLP and machine learning technologies. Our platform analyzes your CV
+            against job descriptions, providing:
           </p>
           <ul className="list-disc pl-5 mb-6">
             <li>
-              <b>Intelligent CV Analysis</b> – Deep evaluation of your skills
-              and qualifications using BERT and Sentence Transformers
+              <b>Intelligent CV Analysis</b> - Deep evaluation of your skills
+              and qualifications using Bidirectional LSTM neural networks and
+              TF-IDF vectorization to understand context and extract meaningful
+              insights from your professional profile.
             </li>
             <li>
-              <b>Personalized Feedback</b> – Detailed insights on skill gaps and
-              areas for improvement
+              <b>Personalized Feedback</b> - Detailed insights on skill gaps and
+              areas of improvement through multi-dimensional scoring algorithms
+              that evaluate experience matching, education compatibility, and
+              industry relevance with weighted importance.
             </li>
             <li>
-              <b>Smart Job Matching</b> – AI-powered recommendations for
-              positions that truly fit your profile
+              <b>Smart Job Matching</b> - AI-powered recommendations for
+              positions that truly fit your profile using hybrid machine
+              learning models that combine text similarity analysis, skill
+              pattern matching, and content-based filtering algorithms.
             </li>
             <li>
-              <b>Success Prediction</b> – Data-driven assessment of your
-              application success likelihood
+              <b>Success Prediction</b> - Data-driven assessment of your
+              application success likelihood through ensemble scoring methods
+              that analyze compatibility across five key dimensions: text
+              similarity, skill alignment, experience level, educational
+              background, and&nbsp;industry&nbsp;fit.
             </li>
           </ul>
           <b className="block mb-1">Our Vision</b>
