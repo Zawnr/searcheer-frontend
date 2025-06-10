@@ -110,7 +110,7 @@ export default function OurTeam() {
       </div>
 
       {/* Team Members Grid */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-14 items-start">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8 mb-14 items-start">
         {teamMembers.map((member, idx) => (
           <TeamMemberCard key={member.name + idx} {...member} />
         ))}
@@ -143,7 +143,7 @@ export default function OurTeam() {
             sounds louder.
           </p>
           {/* Kontak info */}
-          <div className="grid grid-cols-2 gap-x-8 gap-y-6 text-gray-700">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-gray-700">
             {/* Call */}
             <div className="flex items-start gap-4">
               <span className="flex-shrink-0">
