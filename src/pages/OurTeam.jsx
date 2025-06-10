@@ -14,9 +14,8 @@ const teamMembers = [
   {
     photo: FotoCindy,
     name: 'Insania Cindy Puan F',
-    role: 'Software Engineer',
-    description:
-      'There are many variations of passages of Lorem Ipsum available',
+    role: 'Universitas Brawijaya',
+    description: 'Machine Learning Engineer',
     bgColor: '#A9D6E5',
     socialLinks: {
       github: 'https://github.com/insanniaa',
@@ -27,9 +26,8 @@ const teamMembers = [
   {
     photo: FotoDeryl,
     name: 'Muhammad Deryl Tazreva',
-    role: 'Software Engineer',
-    description:
-      'There are many variations of passages of Lorem Ipsum available',
+    role: 'Universitas Brawijaya',
+    description: 'Machine Learning Engineer',
     bgColor: '#F2B5A0',
     socialLinks: {
       github: 'https://github.com/deryltazreva',
@@ -41,9 +39,8 @@ const teamMembers = [
     photo:
       'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
     name: 'Raisha Isma Aulia',
-    role: 'Software Engineer',
-    description:
-      'There are many variations of passages of Lorem Ipsum available',
+    role: 'Universitas Brawijaya',
+    description: 'Machine Learning Engineer',
     bgColor: '#E9C89F',
     socialLinks: {
       github: 'https://github.com/RaishaIsma',
@@ -55,9 +52,8 @@ const teamMembers = [
     photo:
       'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
     name: 'Reiki Syahmaulana Mirzha',
-    role: 'Software Engineer',
-    description:
-      'There are many variations of passages of Lorem Ipsum available',
+    role: 'Politeknik Negeri Banyuwangi',
+    description: 'Front-End Developer',
     bgColor: '#D9B9B3',
     socialLinks: {
       github: 'https://github.com/reikisyah',
@@ -69,9 +65,8 @@ const teamMembers = [
     photo:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
     name: 'Nur Ramadhani Putri W',
-    role: 'Software Engineer',
-    description:
-      'There are many variations of passages of Lorem Ipsum available',
+    role: 'Politeknik Negeri Banyuwangi',
+    description: 'Front-End Developer',
     bgColor: '#8C7AE6',
     socialLinks: {
       github: 'https://github.com/Ririe13',
@@ -83,9 +78,8 @@ const teamMembers = [
     photo:
       'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
     name: 'Nur Rochmat Zawawi',
-    role: 'Software Engineer',
-    description:
-      'There are many variations of passages of Lorem Ipsum available',
+    role: 'Universitas Brawijaya',
+    description: 'Back-End Developer',
     bgColor: '#A3E6B1',
     socialLinks: {
       github: 'https://github.com/Zawnr/',
@@ -94,7 +88,6 @@ const teamMembers = [
     },
   },
 ];
-
 export default function OurTeam() {
   return (
     <div className="bg-white min-h-screen">
