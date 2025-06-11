@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://54.179.2.86';
 
 // LOGIN
 export async function login(credential, password) {
