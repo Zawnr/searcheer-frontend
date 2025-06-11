@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "description": "React Login Register with Tailwind and Webpack",
+  "description": "Frontend aplikasi Searcheer untuk analisis CV, pencarian kerja, dan fitur AI modern berbasis React, Tailwind, dan Webpack",
   "scripts": {
     "start-dev": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
