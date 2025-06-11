@@ -41,8 +41,12 @@ export default function HeroSection() {
       setJobDescError,
     });
 
-    // Kalau detect Indo, buka popup Indo
-    if (foundIndo) setShowIndoPopup(true);
+    // Kalau detect Indo, buka popup Indo DAN JANGAN LANJUT ANALISIS
+    if (foundIndo) {
+      setShowIndoPopup(true);
+      setLoading(false);
+      return;
+    }
 
     // Error file CV (kosong/bukan PDF)
     if (foundCvError) {
@@ -140,9 +144,21 @@ export default function HeroSection() {
         setCvError(errMsg);
         triggeredAts = false;
       } else if (isIndoCV) {
-        // Jika CV dideteksi Bahasa Indonesia
         setShowIndoPopup(true);
         triggeredIndo = true;
+        setAtsMessage('');
+        setShowAtsPopup(false);
+        return; // pastikan proses error handling stop di sini
+      } else if (
+        msgLower.includes(
+          'analisis gagal karena input tidak valid dari layanan ml'
+        )
+      ) {
+        // Jika error ML generic (input tidak valid), treat as Indo warning
+        setShowIndoPopup(true);
+        setAtsMessage('');
+        setShowAtsPopup(false);
+        return;
       } else {
         // Error pada job title/desc
         if (msgLower.includes('title')) {
@@ -184,8 +200,9 @@ export default function HeroSection() {
       }
 
       setShowAtsPopup(triggeredAts);
-      setShowIndoPopup(triggeredIndo || showIndoPopup);
-
+      setShowIndoPopup(triggeredIndo);
+      // Hilangkan popup ATS jika popup Indo aktif
+      if (triggeredIndo) setShowAtsPopup(false);
       if (!triggeredAts && !triggeredIndo) {
         setShowAtsPopup(false);
         setShowIndoPopup(false);

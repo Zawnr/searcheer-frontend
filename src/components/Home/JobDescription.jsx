@@ -18,7 +18,7 @@ export default function JobDescription({
         type="text"
         value={jobTitle}
         onChange={(e) => setJobTitle(e.target.value)}
-        placeholder="e.g. Backend Developer"
+        placeholder="Example : Back-End Developer"
         className={`w-full px-4 py-2 mb-2 border ${
           showValidation && errorTitle ? 'border-red-400' : 'border-gray-300'
         } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 text-base`}
@@ -34,7 +34,8 @@ export default function JobDescription({
       <textarea
         value={jobDescription}
         onChange={(e) => setJobDescription(e.target.value)}
-        placeholder="Paste the job description here..."
+        placeholder="Copy and paste the job description and qualification from the job
+posting..."
         className={`w-full px-4 py-3 border ${
           showValidation && errorDesc ? 'border-red-400' : 'border-gray-300'
         } rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 min-h-[110px] text-base resize-y`}

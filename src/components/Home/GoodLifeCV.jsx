@@ -47,14 +47,12 @@ export default function GoodLifePage() {
             with what companies are really looking for.
           </p>
           <div className="flex flex-row items-center gap-7">
-            <button className="bg-[#F4C762] text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-[#eab82a] transition">
-              Lets Analyze
-            </button>
             <a
               href="#"
-              className="text-[#F4C762] underline hover:text-[#eab82a] font-semibold text-lg"
+              button
+              className="bg-[#eab82a] text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-[rgb(234,184,42)] transition"
             >
-              Learn more
+              Lets Analyze
             </a>
           </div>
         </div>

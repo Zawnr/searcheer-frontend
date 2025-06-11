@@ -26,6 +26,15 @@ export default function AnalysisCard({ result }) {
   const missingSkills = compatibility_analysis?.missing_skills ?? [];
   const tips = compatibility_analysis?.tips ?? [];
 
+  const isFallback =
+    compatibility_analysis?.analysis_metadata?.fallback_mode === true ||
+    (tips &&
+      tips.some(
+        (tip) =>
+          typeof tip === 'string' &&
+          tip.toLowerCase().includes('limited capabilities')
+      ));
+
   let scoreColor = 'bg-blue-600';
   if (overallMatchScore < 40) scoreColor = 'bg-red-500';
   else if (overallMatchScore < 70) scoreColor = 'bg-yellow-500';
@@ -33,6 +42,27 @@ export default function AnalysisCard({ result }) {
 
   return (
     <div className="max-w-3xl w-full mx-auto bg-white rounded-xl shadow-lg p-8 border-l-8 border-yellow-400 relative z-10 mt-6 mb-10">
+      {isFallback && (
+        <div className="mb-4 flex items-center justify-center">
+          <span className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold border border-yellow-300">
+            <svg
+              className="w-5 h-5 text-yellow-500"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13 16h-1v-4h-1m1-4h.01"
+              />
+            </svg>
+            Analysis performed with limited data. Please upload a more detailed
+            CV for better results.
+          </span>
+        </div>
+      )}
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
         Here's Your Career Match Report
       </h1>
