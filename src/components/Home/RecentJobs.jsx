@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import BookmarkPlusIcon from './BookmarkPlusIcon';
 import icon1 from '../../assets/Icons/IconRSA/1.png';
 import icon2 from '../../assets/Icons/IconRSA/2.png';
@@ -56,7 +57,15 @@ export default function RecentJobs() {
   return (
     <section className="w-full max-w-5xl mx-auto py-10 px-4">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-4xl font-bold">Recent Jobs Available</h2>
+        <motion.h2
+          className="text-4xl font-bold"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+        >
+          Recent Jobs Available
+        </motion.h2>
         <a
           href="/jobs"
           className="text-black font-semibold underline hover:text-blue-600 text-base"
@@ -64,6 +73,7 @@ export default function RecentJobs() {
           View all
         </a>
       </div>
+      {/* Animated job cards */}
       {loading ? (
         <div className="py-16 text-center text-lg text-gray-500">
           Loading jobs...
@@ -86,9 +96,13 @@ export default function RecentJobs() {
             const time = 'Just now';
 
             return (
-              <div
+              <motion.div
                 key={id}
                 className="bg-white rounded-2xl border border-gray-100 px-7 py-6 flex flex-col shadow-sm hover:shadow-lg relative"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.1 + idx * 0.15 }}
               >
                 <button
                   className="absolute top-6 right-7 outline-none"
@@ -167,7 +181,7 @@ export default function RecentJobs() {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

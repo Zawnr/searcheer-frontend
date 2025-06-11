@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fi';
 import JobOverviewCard from '../components/JobDetails/JobOverviewCard';
 import { getJobDetail } from '../utils/api';
+import { motion } from 'framer-motion';
 
 export default function JobDetails() {
   const { id } = useParams(); // pastikan route-nya /jobs/:id
@@ -54,39 +55,74 @@ export default function JobDetails() {
   return (
     <div className="min-h-screen w-full bg-[#f8fafd]">
       {/* Header */}
-      <div className="bg-[#0D1953]">
+      <motion.div
+        className="bg-[#0D1953]"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-12 py-10">
-          <h1 className="text-4xl font-bold text-center text-white mb-1">
+          <motion.h1
+            className="text-4xl font-bold text-center text-white mb-1"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: 'easeOut' }}
+          >
             Job Details
-          </h1>
+          </motion.h1>
         </div>
-      </div>
+      </motion.div>
       {/* MAIN CONTENT */}
       <div className="flex justify-center">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-10 py-10">
           {/* Breadcrumbs */}
-          <div className="text-xs text-gray-400 mb-7">
+          <motion.div
+            className="text-xs text-gray-400 mb-7"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             <Link to="/jobs" className="hover:underline cursor-pointer">
               Jobs
             </Link>
             <span className="mx-2">{'>'}</span>
             <span>{job.title}</span>
-          </div>
+          </motion.div>
           <div className="flex flex-col lg:flex-row gap-12">
             {/* LEFT */}
-            <main className="flex-1 min-w-0">
-              <div className="flex flex-wrap items-center gap-3 mb-1">
+            <motion.main
+              className="flex-1 min-w-0"
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
+            >
+              <motion.div
+                className="flex flex-wrap items-center gap-3 mb-1"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+              >
                 <h2 className="font-bold text-2xl">{job.title}</h2>
                 {job.remote && (
                   <span className="px-3 py-1 rounded-xl bg-[#e7f2ff] text-[#1766d9] text-xs font-semibold ml-2">
                     Remote
                   </span>
                 )}
-              </div>
-              <div className="text-sm text-gray-500 mb-4">
+              </motion.div>
+              <motion.div
+                className="text-sm text-gray-500 mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.35 }}
+              >
                 {job.company || job.company_profile || '-'}
-              </div>
-              <div className="flex flex-wrap gap-5 items-center mb-7 text-[#21213b] text-sm">
+              </motion.div>
+              <motion.div
+                className="flex flex-wrap gap-5 items-center mb-7 text-[#21213b] text-sm"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+              >
                 <span className="flex items-center gap-1">
                   <FiTag className="w-4 h-4 text-[#FFCD38]" />{' '}
                   {job.category || job.function}
@@ -102,17 +138,27 @@ export default function JobDetails() {
                 <span className="flex items-center gap-1">
                   <FiMapPin className="w-4 h-4 text-[#FFCD38]" /> {job.location}
                 </span>
-              </div>
+              </motion.div>
               {/* Description */}
-              <section className="mb-8">
+              <motion.section
+                className="mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.45 }}
+              >
                 <h3 className="font-semibold text-lg mb-2">Job Description</h3>
                 <p className="text-gray-700 text-sm whitespace-pre-line">
                   {job.description}
                 </p>
-              </section>
+              </motion.section>
               {/* Requirements */}
               {Array.isArray(job.requirements) && (
-                <section className="mb-8">
+                <motion.section
+                  className="mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.5 }}
+                >
                   <h3 className="font-semibold text-lg mb-2">Requirements</h3>
                   <ul className="flex flex-col gap-2 pl-1">
                     {job.requirements.map((item, idx) => (
@@ -125,11 +171,16 @@ export default function JobDetails() {
                       </li>
                     ))}
                   </ul>
-                </section>
+                </motion.section>
               )}
               {/* Benefits */}
               {Array.isArray(job.benefits) && (
-                <section className="mb-8">
+                <motion.section
+                  className="mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.55 }}
+                >
                   <h3 className="font-semibold text-lg mb-2">Benefits</h3>
                   <ul className="flex flex-col gap-2 pl-1">
                     {job.benefits.map((item, idx) => (
@@ -142,22 +193,31 @@ export default function JobDetails() {
                       </li>
                     ))}
                   </ul>
-                </section>
+                </motion.section>
               )}
               {/* About */}
               {job.about && (
-                <section>
+                <motion.section
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.6 }}
+                >
                   <h3 className="font-semibold text-lg mb-2">About</h3>
                   <div className="rounded-xl bg-[#fff7e2] p-5 text-sm text-gray-800 whitespace-pre-line">
                     {job.about}
                   </div>
-                </section>
+                </motion.section>
               )}
-            </main>
+            </motion.main>
             {/* SIDEBAR */}
-            <aside className="w-full lg:w-[290px] flex-shrink-0">
+            <motion.aside
+              className="w-full lg:w-[290px] flex-shrink-0"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
+            >
               <JobOverviewCard job={overviewData} />
-            </aside>
+            </motion.aside>
           </div>
         </div>
       </div>

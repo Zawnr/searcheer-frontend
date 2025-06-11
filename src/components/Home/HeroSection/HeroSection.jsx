@@ -7,6 +7,8 @@ import bgBlurGelap from '../../../assets/images/Bg/bg-blur-gelap.png';
 import AlertPopup from '../AlertPopup';
 import StatSection from './StatSection';
 import { useCVValidation } from './useCVValidation';
+import { motion } from 'framer-motion';
+import { triggerConfetti } from './confettiUtil';
 
 export default function HeroSection() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -104,6 +106,8 @@ export default function HeroSection() {
       if (!resultId)
         throw new Error('Failed to get analysis result id from server.');
 
+      // Confetti burst on success
+      triggerConfetti();
       localStorage.setItem('lastResultId', resultId);
       navigate('/analyzing');
     } catch (err) {
@@ -257,10 +261,16 @@ export default function HeroSection() {
         onClose={() => setShowIndoPopup(false)}
       />
 
-      {/* Heading */}
-      <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mt-8 mb-4 tracking-tight leading-tight">
+      {/* Heading with text reveal animation */}
+      <motion.h1
+        className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mt-8 mb-4 tracking-tight leading-tight relative z-10"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, ease: 'easeOut' }}
+      >
         Match Your CV with Your Dream Job!
-      </h1>
+      </motion.h1>
+
       <p className="text-gray-200 text-base sm:text-lg text-center max-w-2xl mx-auto mb-6 md:mb-8">
         Upload your CV and paste the job description you’re aiming for.
         Searcheer will analyze them using AI, show your match score, suggest
@@ -290,11 +300,24 @@ export default function HeroSection() {
       <div className="flex justify-center w-full mb-7">
         <button
           onClick={handleAnalyzeClick}
-          className="bg-[#3F67F9] hover:bg-blue-700 transition text-white font-semibold px-7 py-2 rounded-xl text-base"
-          style={{ minWidth: '0', width: 'auto' }}
+          className="bg-[#3F67F9] hover:bg-blue-700 transition text-white font-semibold px-7 py-2 rounded-xl text-base relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 animate-pulse"
+          style={{ minWidth: '0', width: 'auto', boxShadow: '0 0 0 0 #3F67F9' }}
           disabled={loading}
         >
-          {loading ? 'Analyzing...' : 'Analyze CV'}
+          <span className="relative z-10">
+            {loading ? 'Analyzing...' : 'Analyze CV'}
+          </span>
+          {/* Glow effect */}
+          <span
+            className="absolute inset-0 rounded-xl pointer-events-none"
+            style={{
+              boxShadow: loading
+                ? '0 0 24px 8px #3F67F9'
+                : '0 0 12px 2px #3F67F9',
+              opacity: loading ? 0.7 : 0.4,
+              transition: 'box-shadow 0.3s, opacity 0.3s',
+            }}
+          />
         </button>
       </div>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import CardFeature from '../components/About/CardFeature';
 import FaqAccordion from '../components/About/FaqAccordion';
 import bgBlurTeam from '../assets/images/Bg/bg-blur-team.png';
@@ -82,20 +83,49 @@ export default function AboutUs() {
     <div className="bg-white min-h-screen">
       {/* Section: Hero + Title */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-2">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-14 mt-4">
+        <motion.h1
+          className="text-4xl md:text-5xl font-bold text-center mb-14 mt-4"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+        >
           About Us
-        </h1>
+        </motion.h1>
         <div className="flex flex-col md:flex-row gap-6 md:gap-10">
           {/* Kiri: Judul besar */}
-          <div className="flex-1 flex flex-col justify-start">
-            <h2 className="text-3xl md:text-[2.2rem] font-bold mb-6 leading-tight">
+          <motion.div
+            className="flex-1 flex flex-col justify-start"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 1, delay: 0.1, ease: 'easeOut' }}
+          >
+            <motion.h2
+              className="text-3xl md:text-[2.2rem] font-bold mb-6 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               Search Better, Career Louder! <br />
               Your AI-powered CV analysis platform for smarter job matching.
-            </h2>
-          </div>
+            </motion.h2>
+          </motion.div>
           {/* Kanan: Box Who We Are + Problem */}
-          <div className="flex-1 flex">
-            <div className="bg-gray-100 rounded-xl shadow px-6 py-5 w-full text-[0.96rem] leading-snug">
+          <motion.div
+            className="flex-1 flex"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+          >
+            <motion.div
+              className="bg-gray-100 rounded-xl shadow px-6 py-5 w-full text-[0.96rem] leading-snug"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
               <b>Who We Are</b>
               <p className="mt-1">
                 At Searcheer, we understand the challenges that students and
@@ -114,11 +144,17 @@ export default function AboutUs() {
                 their qualifications, leading to prolonged job searches and
                 missed opportunities.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
         {/* Bawah dua kolom */}
-        <div className="mt-12">
+        <motion.div
+          className="mt-12"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
+        >
           <b className="block mb-1">Our Solution</b>
           <p className="mb-1">
             Searcheer revolutionizes the job search process through cutting-edge
@@ -159,11 +195,22 @@ export default function AboutUs() {
             insights and personalized guidance. Through Searcheer, we're making
             career preparation more inclusive, objective, and effective.
           </p>
-        </div>
+        </motion.div>
       </div>
 
       {/* Section Gambar Blur di bawah Our Vision */}
-      <div className="w-full flex justify-center items-center mt-10">
+      <motion.div
+        className="w-full flex justify-center items-center mt-10"
+        initial={{ opacity: 0, scale: 0.96 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{
+          duration: 1,
+          delay: 0.2,
+          type: 'spring',
+          stiffness: 100,
+        }}
+      >
         <div className="w-full max-w-6xl h-[330px] rounded-2xl shadow-md overflow-hidden bg-gray-200 flex items-center justify-center relative">
           <img
             src={bgBlurTeam}
@@ -173,23 +220,53 @@ export default function AboutUs() {
             draggable="false"
           />
         </div>
-      </div>
+      </motion.div>
 
       {/* Section: How it works */}
-      <div className="max-w-6xl mx-auto px-4 mt-12">
-        <h2 className="text-3xl font-bold text-center mb-2">How it works</h2>
-        <p className="text-center text-sm text-gray-600 mb-8">
+      <motion.div
+        className="max-w-6xl mx-auto px-4 mt-12"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
+      >
+        <motion.h2
+          className="text-3xl font-bold text-center mb-2"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          How it works
+        </motion.h2>
+        <motion.p
+          className="text-center text-sm text-gray-600 mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+        >
           Follow these simple steps to get started with Searcheer and improve
           your job search experience
-        </p>
+        </motion.p>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          {features.map((item) => (
-            <CardFeature key={item.title} {...item} />
+          {features.map((item, idx) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.1 + idx * 0.12 }}
+              whileHover={{
+                scale: 1.04,
+                boxShadow: '0 8px 32px 0 rgba(63,103,249,0.10)',
+              }}
+            >
+              <CardFeature {...item} />
+            </motion.div>
           ))}
         </div>
-      </div>
-
-     <VideoCard />
+      </motion.div>
 
       {/* Section: FAQ */}
       <div className="max-w-4xl mx-auto px-4 my-14">
@@ -201,7 +278,7 @@ export default function AboutUs() {
         </p>
         <FaqAccordion faqs={faqs} />
         <div className="mt-6 text-center text-xs text-gray-500">
-          Have more questions? Contact our support team for additional
+          Having more questions? Contact our support team for additional
           resources.
         </div>
       </div>

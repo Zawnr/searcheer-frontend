@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import JobSidebar from '../components/Jobs/JobSidebar';
 import JobList from '../components/Jobs/JobList';
 import JobPagination from '../components/Jobs/JobPagination';
@@ -51,36 +52,68 @@ export default function Jobs() {
   return (
     <section className="min-h-screen bg-gray-50 py-10 px-2 md:px-4">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold mb-7 px-2">Jobs</h1>
+        <motion.h1
+          className="text-3xl md:text-4xl font-bold mb-7 px-2"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+        >
+          Jobs
+        </motion.h1>
         <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar */}
-          <div className="w-full md:w-[270px] shrink-0 mb-4 md:mb-0">
+          <motion.div
+            className="w-full md:w-[270px] shrink-0 mb-4 md:mb-0"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: 'easeOut' }}
+          >
             <JobSidebar filters={filters} setFilters={setFilters} />
-          </div>
+          </motion.div>
           {/* Main Content */}
-          <div className="flex-1 flex flex-col gap-4">
+          <motion.div
+            className="flex-1 flex flex-col gap-4"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: 'easeOut' }}
+          >
             {/* Sort & Hasil */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2 px-2">
+            <motion.div
+              className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2 px-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
               <span className="font-semibold text-gray-800 text-base mb-2 sm:mb-0">
                 {loading
                   ? 'Loading jobs...'
                   : `Showing ${jobs.length} of ${total} results`}
               </span>
               <JobSortSelect sort={sort} setSort={setSort} />
-            </div>
+            </motion.div>
             {/* List */}
-            <div className="bg-white rounded-2xl p-5 shadow min-h-[200px]">
+            <motion.div
+              className="bg-white rounded-2xl p-5 shadow min-h-[200px]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+            >
               <JobList jobs={jobs} loading={loading} error={error} />
-            </div>
+            </motion.div>
             {/* Pagination (frontend only) */}
-            <div className="flex justify-end mt-3">
+            <motion.div
+              className="flex justify-end mt-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+            >
               <JobPagination
                 page={page}
                 totalPages={Math.ceil(total / limit)}
                 onChange={setPage}
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

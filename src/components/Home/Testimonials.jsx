@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import logoNada from '../../assets/images/Logo/LogoNada.png';
 
 const testimonials = [
@@ -48,45 +49,125 @@ function StarRating({ count }) {
 export default function Testimonials() {
   return (
     <section className="bg-[#eaf5f4] py-20 px-4">
-      <h2 className="text-5xl font-bold text-center mb-3 text-black">
+      <motion.h2
+        className="text-5xl font-bold text-center mb-3 text-black"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
+      >
         Testimonials from Our Customers
-      </h2>
-      <p className="text-center text-lg mb-14 max-w-3xl mx-auto text-black">
+      </motion.h2>
+      <motion.p
+        className="text-center text-lg mb-14 max-w-3xl mx-auto text-black"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
+      >
         Discover what our users say about their success stories. From CV
         improvements to landing dream jobs, see how our platform has helped
         professionals advance their careers.
-      </p>
+      </motion.p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
         {testimonials.map((t, i) => (
-          <div
+          <motion.div
             key={i}
-            className="bg-white rounded-2xl shadow p-9 flex flex-col justify-between border border-gray-100 min-h-[340px]"
+            className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
+            whileHover={{
+              scale: 1.03,
+              boxShadow: '0 8px 32px 0 rgba(63,103,249,0.10)',
+            }}
           >
             <div>
-              <StarRating count={t.stars} />
-              <h3 className="font-bold text-2xl text-black mb-2">{t.title}</h3>
-              <p className="italic text-gray-700 mb-8">{t.text}</p>
+              <motion.div
+                initial={{ scale: 0.8, rotate: -6, opacity: 0 }}
+                whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.25 + i * 0.1,
+                  type: 'spring',
+                  stiffness: 120,
+                }}
+              >
+                <StarRating count={t.stars} />
+              </motion.div>
+              <motion.h3
+                className="font-bold text-2xl text-black mb-2"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
+              >
+                {t.title}
+              </motion.h3>
+              <motion.p
+                className="italic text-gray-700 mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.6, delay: 0.35 + i * 0.1 }}
+              >
+                {t.text}
+              </motion.p>
             </div>
             <div className="flex items-end mt-auto pt-2 relative">
-              <img
+              <motion.img
                 src={t.photo}
                 alt={t.name}
-                className="w-14 h-14 rounded-full object-cover mr-3"
+                className="w-14 h-14 rounded-full object-cover mr-3 shadow-lg"
+                initial={{ scale: 0.7, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.3 + i * 0.15,
+                  type: 'spring',
+                  stiffness: 120,
+                }}
               />
               <div className="flex-1 min-w-0">
-                <p className="font-bold text-black leading-tight">{t.name}</p>
-                <p className="text-gray-500 text-base leading-tight">
+                <motion.p
+                  className="font-bold text-black leading-tight"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
+                >
+                  {t.name}
+                </motion.p>
+                <motion.p
+                  className="text-gray-500 text-base leading-tight"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.6, delay: 0.45 + i * 0.1 }}
+                >
                   {t.role}
-                </p>
+                </motion.p>
               </div>
-              <img
+              <motion.img
                 src={logoNada}
                 alt="quote"
                 className="ml-auto w-10 h-10 object-contain -translate-y-5"
                 style={{ minWidth: 36, minHeight: 36 }}
+                initial={{ rotate: -30, opacity: 0 }}
+                whileInView={{ rotate: 0, opacity: 1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.5 + i * 0.1,
+                  type: 'spring',
+                  stiffness: 100,
+                }}
               />
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
