@@ -210,15 +210,13 @@ const indoWords = [
 ];
 
 export function useCVValidation() {
-  // Fungsi cek Bahasa Indonesia: minimal 2 kata Indo, case-insensitive
+  // Fungsi cek Bahasa Indonesia: minimal 1 kata Indo, case-insensitive
   const containsIndonesian = useCallback((text) => {
     if (!text) return false;
     const lower = text.toLowerCase();
-    let count = 0;
     for (const w of indoWords) {
       const pattern = new RegExp(`\\b${w}\\b`, 'gi');
-      if (pattern.test(lower)) count++;
-      if (count >= 2) return true;
+      if (pattern.test(lower)) return true;
     }
     return false;
   }, []);
