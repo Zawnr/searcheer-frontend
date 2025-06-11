@@ -1,0 +1,34 @@
+{
+  "short_name": "Searcheer",
+  "name": "Searcheer - Analisis CV & Pencarian Kerja",
+  "icons": [
+    {
+      "src": "logo2_192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo2_512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "screenshots": [
+    {
+      "src": "screenshot-desktop-1200x700.png",
+      "sizes": "1200x700",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshot-mobile-473x833.png",
+      "sizes": "473x833",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
