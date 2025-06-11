@@ -78,7 +78,7 @@ searcheer-frontend/
 │   ├── components/          # Komponen React (modular, reusable)
 │   │   ├── About/           # Komponen halaman About
 │   │   ├── Home/            # Komponen halaman Home
-│   │   │   ├── HeroSection/ # Section hero (HeroSection.jsx, StatSection.jsx, useCVValidation.js, dll)
+│   │   │   ├── HeroSection/ # Section hero (HeroSection.jsx, StatSection.jsx, dll)
 │   │   │   ├── AlertPopup.jsx
 │   │   │   ├── AnalysisCard.jsx
 │   │   │   ├── AnalysisResult.jsx
@@ -99,6 +99,8 @@ searcheer-frontend/
 │   │   ├── OurTeam/         # Komponen halaman tim
 │   │   ├── Profile/         # Komponen profil pengguna
 │   │   └── Shared/          # Komponen yang digunakan di berbagai halaman
+│   ├── hooks/               # Custom React hooks (misal: useCVValidation.js)
+│   │   └── useCVValidation.js
 │   ├── pages/               # Halaman utama aplikasi (routing)
 │   ├── utils/               # Utility/helper function (API, dsb)
 │   ├── App.jsx              # Root React component
