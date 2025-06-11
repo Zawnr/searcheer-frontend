@@ -61,8 +61,6 @@ Ini adalah proyek frontend untuk aplikasi pencarian dan analisis pekerjaan **Sea
 
 ## Project Structure
 
-Struktur folder sudah modular dan sesuai best practice React modern:
-
 ```text
 searcheer-frontend/
 ├── dist/                    # Hasil build/produksi (output Webpack)
