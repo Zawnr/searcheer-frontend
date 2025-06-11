@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import TeamMemberCard from '../components/OurTeam/TeamMemberCard';
 import ContactInfo from '../components/OurTeam/ContactInfo';
 import FotoCindy from '../assets/images/Team/Cindy.jpg';
@@ -89,8 +89,31 @@ const teamMembers = [
   },
 ];
 export default function OurTeam() {
+  const cardRefs = useRef([]);
+  const [visibleCards, setVisibleCards] = useState([]);
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute('data-idx'));
+            setVisibleCards((prev) =>
+              prev.includes(idx) ? prev : [...prev, idx]
+            );
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    cardRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen animate-fade-in">
       {/* Hero Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-2">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-2 mt-4">
@@ -104,28 +127,49 @@ export default function OurTeam() {
 
       {/* Team Members Grid */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8 mb-14 items-start">
-        {teamMembers.map((member, idx) => (
-          <TeamMemberCard key={member.name + idx} {...member} />
-        ))}
+        {teamMembers.map((member, idx) => {
+          const isVisible = visibleCards.includes(idx);
+          const slideClass = isVisible
+            ? idx % 2 === 0
+              ? 'animate-slide-in-left'
+              : 'animate-slide-in-right'
+            : 'opacity-0 translate-y-8';
+          return (
+            <div
+              key={member.name + idx}
+              ref={(el) => (cardRefs.current[idx] = el)}
+              data-idx={idx}
+              className={slideClass + ' transition-all duration-700'}
+            >
+              <TeamMemberCard {...member} />
+            </div>
+          );
+        })}
       </div>
 
       {/* Team Description */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 text-center text-gray-700 mb-14 space-y-3">
-        <p className="text-sm sm:text-base">
+        <p
+          className="text-sm sm:text-base animate-fade-in-up"
+          style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
+        >
           Our team is a group of passionate students driven by creativity,
           innovation, and a commitment to excellence. We bring together diverse
           skills and experiences to build solutions that make a real difference.
         </p>
-        <p className="text-sm sm:text-base">
+        <p
+          className="text-sm sm:text-base animate-fade-in-up"
+          style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+        >
           United by shared values and a bold vision, we work together to push
           boundaries, embrace new ideas, and turn challenges into opportunities.
         </p>
       </div>
-
-      {/* Call to Action Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-20">
-        {/* Left: Text and Contact Info */}
-        <div className="flex flex-col justify-center">
+        <div
+          className="flex flex-col justify-center animate-fade-in-up"
+          style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
+        >
           <h2 className="text-2xl sm:text-3xl font-extrabold mb-4">
             You Will Grow, You Will Succeed. We Promise That
           </h2>
@@ -135,10 +179,11 @@ export default function OurTeam() {
             their dream careers. Because when you search better, your career
             sounds louder.
           </p>
-          {/* Kontak info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-gray-700">
-            {/* Call */}
-            <div className="flex items-start gap-4">
+            <div
+              className="flex items-start gap-4 animate-fade-in-left"
+              style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
+            >
               <span className="flex-shrink-0">
                 <MdOutlinePhone size={30} className="text-blue-500" />
               </span>
@@ -151,8 +196,10 @@ export default function OurTeam() {
                 </div>
               </div>
             </div>
-            {/* Email */}
-            <div className="flex items-start gap-4">
+            <div
+              className="flex items-start gap-4 animate-fade-in-right"
+              style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
+            >
               <span className="flex-shrink-0">
                 <MdOutlineEmail size={30} className="text-blue-500" />
               </span>
@@ -165,8 +212,10 @@ export default function OurTeam() {
                 </div>
               </div>
             </div>
-            {/* Jam */}
-            <div className="flex items-start gap-4">
+            <div
+              className="flex items-start gap-4 animate-fade-in-left"
+              style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+            >
               <span className="flex-shrink-0">
                 <MdOutlineAccessTime size={30} className="text-blue-500" />
               </span>
@@ -179,8 +228,10 @@ export default function OurTeam() {
                 </div>
               </div>
             </div>
-            {/* Office */}
-            <div className="flex items-start gap-4">
+            <div
+              className="flex items-start gap-4 animate-fade-in-right"
+              style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
+            >
               <span className="flex-shrink-0">
                 <MdOutlineLocationOn size={30} className="text-blue-500" />
               </span>
@@ -195,9 +246,57 @@ export default function OurTeam() {
             </div>
           </div>
         </div>
-        {/* Right: Contact Form */}
-        <ContactInfo />
+        <div
+          className="animate-fade-in-up"
+          style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
+        >
+          <ContactInfo />
+        </div>
       </div>
+      <style>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 1s cubic-bezier(0.4,0,0.2,1);
+        }
+        @keyframes slide-in-left {
+          from { opacity: 0; transform: translateX(-60px) scale(0.96); }
+          to { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-slide-in-left {
+          animation: slide-in-left 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        @keyframes slide-in-right {
+          from { opacity: 0; transform: translateX(60px) scale(0.96); }
+          to { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-slide-in-right {
+          animation: slide-in-right 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+        @keyframes fade-in-up {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 1s cubic-bezier(0.4,0,0.2,1);
+        }
+        @keyframes fade-in-left {
+          from { opacity: 0; transform: translateX(-40px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        .animate-fade-in-left {
+          animation: fade-in-left 1s cubic-bezier(0.4,0,0.2,1);
+        }
+        @keyframes fade-in-right {
+          from { opacity: 0; transform: translateX(40px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        .animate-fade-in-right {
+          animation: fade-in-right 1s cubic-bezier(0.4,0,0.2,1);
+        }
+      `}</style>
     </div>
   );
 }
