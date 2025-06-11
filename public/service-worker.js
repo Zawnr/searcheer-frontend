@@ -29,10 +29,26 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Network falling back to cache (for API and dynamic requests)
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
+    fetch(event.request)
+      .then((response) => {
+        // Clone and store in cache
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseClone);
+        });
+        return response;
+      })
+      .catch(() => caches.match(event.request).then((res) => res || caches.match('/')))
   );
+});
+
+// Optional: Listen for message to skip waiting (for update)
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
