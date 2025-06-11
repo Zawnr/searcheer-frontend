@@ -87,8 +87,8 @@ export async function getJobs(params = {}) {
     )
     .join('&');
   const url = queryString
-    ? `http://localhost:3000/jobs?${queryString}`
-    : `http://localhost:3000/jobs`;
+    ? `${BASE_URL}/jobs?${queryString}`
+    : `${BASE_URL}/jobs`;
   const res = await fetch(url);
   if (!res.ok) throw new Error('Failed to fetch jobs');
   return await res.json();
