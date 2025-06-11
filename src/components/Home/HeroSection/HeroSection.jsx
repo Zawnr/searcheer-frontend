@@ -6,7 +6,7 @@ import { uploadCV, analyzeCV } from '../../../utils/api';
 import bgBlurGelap from '../../../assets/images/Bg/bg-blur-gelap.png';
 import AlertPopup from '../AlertPopup';
 import StatSection from './StatSection';
-import { useCVValidation } from './useCVValidation';
+import { useCVValidation } from '../../../hooks/useCVValidation';
 import { motion } from 'framer-motion';
 import { triggerConfetti } from './confettiUtil';
 
