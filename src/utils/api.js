@@ -1,4 +1,4 @@
-const BASE_URL = 'http://54.179.2.86';
+const BASE_URL = 'https://searcheer-api.duckdns.org';
 
 // LOGIN
 export async function login(credential, password) {
