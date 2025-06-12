@@ -6,7 +6,7 @@ import FotoDeryl from '../assets/images/Team/Deryl.jpg';
 import FotoReiki from '../assets/images/Team/Reiki.jpg';
 import FotoRaisha from '../assets/images/Team/Raisha.JPG';
 import FotoRirie from '../assets/images/Team/Ririe.jpg';
-import FotoZawawi from '../assets/images/Team/Zawawi.jpg';
+import FotoZawawi from '../assets/images/Team/Zawawi.png';
 import {
   MdOutlineEmail,
   MdOutlinePhone,
