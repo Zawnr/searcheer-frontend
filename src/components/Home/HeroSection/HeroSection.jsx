@@ -23,11 +23,17 @@ export default function HeroSection() {
   const [showAtsPopup, setShowAtsPopup] = useState(false);
   const [showIndoPopup, setShowIndoPopup] = useState(false);
   const [atsMessage, setAtsMessage] = useState('');
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   const navigate = useNavigate();
   const { validate } = useCVValidation();
 
   const handleAnalyzeClick = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setShowLoginPopup(true);
+      return;
+    }
     setShowValidation(true);
     setAtsMessage('');
     setShowAtsPopup(false);
@@ -235,6 +241,19 @@ export default function HeroSection() {
         backgroundRepeat: 'no-repeat',
       }}
     >
+      {/* Login Required Popup */}
+      <AlertPopup
+        visible={showLoginPopup}
+        type="login"
+        title="Login Required"
+        description="You must be logged in to analyze your CV. Please register or log in to continue."
+        suggestions={[
+          'Click the Register button at the top right to create an account.',
+          'Already have an account? Click Login.',
+        ]}
+        onClose={() => setShowLoginPopup(false)}
+      />
+
       {/* ATS Error */}
       <AlertPopup
         visible={showAtsPopup}
