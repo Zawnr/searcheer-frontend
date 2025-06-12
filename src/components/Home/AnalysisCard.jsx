@@ -1,4 +1,5 @@
 import React from 'react';
+import Recommendations from './Recommendations';
 
 export default function AnalysisCard({ result }) {
   const dummy = {
@@ -39,6 +40,8 @@ export default function AnalysisCard({ result }) {
   if (overallMatchScore < 40) scoreColor = 'bg-red-500';
   else if (overallMatchScore < 70) scoreColor = 'bg-yellow-500';
   else scoreColor = 'bg-green-600';
+
+  const [showRecommendations, setShowRecommendations] = React.useState(false);
 
   return (
     <div className="max-w-3xl w-full mx-auto bg-white rounded-xl shadow-lg p-8 border-l-8 border-yellow-400 relative z-10 mt-6 mb-10">
@@ -155,13 +158,19 @@ export default function AnalysisCard({ result }) {
       </div>
 
       <div className="mt-8 text-center">
-        <a
-          href={result?.id ? `/recommendations/${result.id}` : '#'}
+        <button
+          onClick={() => setShowRecommendations((prev) => !prev)}
           className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
         >
           View All Recomendation
-        </a>
+        </button>
       </div>
+      {showRecommendations && (
+        <div className="mt-10">
+          <Recommendations analysisId={result?.id} />
+        </div>
+      )}
+
       <div className="mt-8">
         <h4 className="font-semibold mb-2 text-gray-800 text-center">Summary</h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm text-center">

@@ -116,3 +116,15 @@ export async function getJobRecommendations(resultId, token) {
     throw new Error(data.message || 'Failed to fetch job recommendations');
   return data;
 }
+
+// GET ALL USER CVS (HISTORY)
+export async function getUserCVs(token) {
+  const response = await fetch(`${BASE_URL}/cvs`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || 'Failed to fetch user CVs');
+  return data;
+}

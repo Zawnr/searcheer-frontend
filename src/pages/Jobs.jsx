@@ -26,18 +26,38 @@ export default function Jobs() {
     setLoading(true);
     setError('');
 
-    // Hanya kirim filter yang diizinkan backend
-    const allowedFilterKeys = [
-      'employment_type',
-      'required_experience',
-      'location',
-      'function',
-    ];
-    const sanitizedFilters = Object.fromEntries(
-      Object.entries(filters).filter(([k]) => allowedFilterKeys.includes(k))
-    );
-    // Debug (opsional)
-    // console.log('filters sent to backend:', sanitizedFilters);
+    // Map frontend filters to backend params
+    const filterMap = {
+      q: 'q', // search query
+      location: 'location',
+      category: 'function', // category (array) -> function
+      type: 'employment_type', // type (array) -> employment_type
+      level: 'required_experience', // level (array) -> required_experience
+    };
+
+    // Build sanitized filters for backend
+    const sanitizedFilters = {};
+    Object.entries(filters).forEach(([key, value]) => {
+      const backendKey = filterMap[key];
+      if (!backendKey) return;
+      // Only send if value is not empty
+      if (Array.isArray(value) && value.length > 0) {
+  
+        sanitizedFilters[backendKey] = value[0];
+      } else if (
+        !Array.isArray(value) &&
+        value !== '' &&
+        value !== undefined &&
+        value !== null
+      ) {
+        sanitizedFilters[backendKey] = value;
+      }
+    });
+
+    // Only send 'q' if not empty
+    if ('q' in sanitizedFilters && sanitizedFilters['q'] === '') {
+      delete sanitizedFilters['q'];
+    }
 
     getJobs(sanitizedFilters)
       .then((res) => {

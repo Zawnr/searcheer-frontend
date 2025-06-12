@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getJobRecommendations } from '../utils/api';
+import { getJobRecommendations } from '../../utils/api';
 
-export default function RecommendationsPage() {
-  const { id } = useParams();
+export default function Recommendations({ analysisId }) {
   const [jobs, setJobs] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
+    if (!analysisId) return;
     async function fetchData() {
       setLoading(true);
       setError('');
       try {
-        // Ganti dengan cara ambil token yang sesuai di project kamu
         const token = localStorage.getItem('token');
-        const data = await getJobRecommendations(id, token);
+        const data = await getJobRecommendations(analysisId, token);
         setJobs(data);
       } catch (err) {
         setError(err.message || 'Gagal mengambil rekomendasi.');
@@ -23,12 +21,12 @@ export default function RecommendationsPage() {
       setLoading(false);
     }
     fetchData();
-  }, [id]);
+  }, [analysisId]);
 
   if (loading) return <div className="text-center py-10">Loading...</div>;
   if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
   if (!jobs || jobs.length === 0)
-    return <div className="text-center py-10 text-gray-500">Belum ada rekomendasi pekerjaan untuk hasil analisis ini.</div>;
+    return <div className="text-center py-10 text-gray-500">There are no job recommendations for this analysis result.</div>;
 
   return (
     <div className="max-w-3xl mx-auto py-10">

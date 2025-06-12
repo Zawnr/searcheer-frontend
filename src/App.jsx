@@ -23,7 +23,7 @@ import abstract from './assets/images/Bg/abstract.png';
 import abstract2 from './assets/images/Bg/abstract2.png';
 import './App.css';
 import Profile from './pages/Profile';
-import RecommendationsPage from './pages/RecommendationsPage';
+import HistoryPage from './pages/HistoryPage';
 
 function AppContent() {
   const location = useLocation();
@@ -64,7 +64,7 @@ function AppContent() {
               <Route path="/analysis-result" element={<AnalysisResult />} />
               <Route path="/analysis-result/:id" element={<AnalysisResult />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/recommendations/:id" element={<RecommendationsPage />} />
+              <Route path="/history" element={<HistoryPage />} />
 
 
               <Route
