@@ -4,20 +4,12 @@ import bgBlurTeam from '../../assets/images/Bg/bg-blur-team.png';
 export default function VideoCard() {
   const [showVideo, setShowVideo] = useState(false);
 
-  const handlePlayClick = () => {
-    setShowVideo(true);
-  };
-
-  const handleCloseClick = () => {
-    setShowVideo(false);
-  };
+  const handlePlayClick = () => setShowVideo(true);
+  const handleCloseClick = () => setShowVideo(false);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 mt-8">
-      <div
-        className="rounded-2xl overflow-hidden shadow-md relative"
-        style={{ background: 'none' }}
-      >
+    <div className="max-w-6xl mx-auto mt-8"> {/* TANPA px-4 */}
+      <div className="rounded-2xl overflow-hidden shadow-md relative">
         {/* Background image absolute */}
         <img
           src={bgBlurTeam}
@@ -26,8 +18,8 @@ export default function VideoCard() {
           style={{ opacity: 0.85, zIndex: 0 }}
           draggable="false"
         />
-        {/* Overlay konten (relative z-10) */}
-        <div className="w-full h-[330px] md:h-[330px] flex items-center justify-center relative z-10">
+        {/* Overlay konten */}
+        <div className="w-full h-[330px] flex items-center justify-center relative z-10 px-4"> {/* padding di sini */}
           {/* Play button */}
           <button
             className="rounded-full bg-white/80 w-16 h-16 flex items-center justify-center shadow-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl"
@@ -69,7 +61,8 @@ export default function VideoCard() {
             ></iframe>
           </div>
         )}
-        <div className="w-full bg-black/80 text-white grid grid-cols-1 md:grid-cols-3 gap-0 text-sm relative z-10">
+        {/* Footer benefit */}
+        <div className="w-full bg-black/80 text-white grid grid-cols-1 md:grid-cols-3 gap-0 text-sm relative z-10 px-4">
           {[
             'AI-powered CV analysis for better job matching',
             'Personalized feedback to improve your CV',
@@ -84,10 +77,6 @@ export default function VideoCard() {
               </span>
               <div>
                 <div>{text}</div>
-                <a
-                  href="#"
-                  className="block text-teal-200 text-xs mt-1 underline"
-                ></a>
               </div>
             </div>
           ))}
