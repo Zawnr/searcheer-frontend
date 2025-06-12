@@ -155,9 +155,12 @@ export default function AnalysisCard({ result }) {
       </div>
 
       <div className="mt-8 text-center">
-        <button className="text-blue-600 hover:underline font-semibold">
-          View all recommendations
-        </button>
+        <a
+          href="/jobs"
+          className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
+        >
+          View All Recomendation
+        </a>
       </div>
       <div className="mt-8">
         <h4 className="font-semibold mb-2 text-gray-800">Summary</h4>
