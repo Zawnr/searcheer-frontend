@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ChangePasswordForm from '../components/Profile/ChangePasswordForm';
+import { BASE_URL } from '../utils/api';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -15,7 +16,7 @@ export default function Profile() {
       return;
     }
     setLoading(true);
-    fetch('http://localhost:3000/users/me', {
+    fetch(`${BASE_URL}/users/me`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(async (res) => {

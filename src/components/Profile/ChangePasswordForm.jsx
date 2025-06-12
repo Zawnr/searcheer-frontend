@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BASE_URL } from '../../utils/api';
 
 export default function ChangePasswordForm() {
   const [newPassword, setNewPassword] = useState('');
@@ -41,7 +42,7 @@ export default function ChangePasswordForm() {
     }
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3000/users/me/password', {
+      const res = await fetch(`${BASE_URL}/users/me/password`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
