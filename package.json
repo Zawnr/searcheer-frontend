@@ -5,6 +5,7 @@
   "scripts": {
     "start-dev": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
+    "preview": "npm run build && serve -s dist",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "postcss": "^8.4.38",
     "postcss-loader": "^8.1.1",
     "prettier": "^3.5.3",
+    "serve": "^14.2.4",
     "style-loader": "^3.3.4",
     "tailwindcss": "^3.4.1",
     "terser-webpack-plugin": "^5.3.14",
