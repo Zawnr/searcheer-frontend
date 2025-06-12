@@ -40,8 +40,12 @@ export default function Register() {
     setNotification({ message: '', type: '' });
     const errors = validateForm();
     setFieldError(errors);
-    if (Object.keys(errors).length > 0) return;
+    if (Object.keys(errors).length > 0) {
+      console.log('Register validation errors:', errors);
+      return;
+    }
     try {
+      console.log('Register attempt:', { email, username });
       await register({ email, username, password });
       setNotification({
         message:
@@ -49,11 +53,13 @@ export default function Register() {
         type: 'success',
       });
       setRegisterSuccess(true);
+      console.log('Register success:', email);
     } catch (err) {
       setNotification({
         message: err.message || 'Registrasi gagal!',
         type: 'error',
       });
+      console.error('Register error:', err);
     }
   };
 

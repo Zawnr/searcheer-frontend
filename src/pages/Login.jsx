@@ -29,8 +29,12 @@ export default function Login() {
     setNotification({ message: '', type: '' });
     const errors = validateForm();
     setFieldError(errors);
-    if (Object.keys(errors).length > 0) return;
+    if (Object.keys(errors).length > 0) {
+      console.log('Login validation errors:', errors);
+      return;
+    }
     try {
+      console.log('Login attempt:', credential);
       const result = await login(credential, password);
       localStorage.setItem('token', result.token);
       setNotification({
@@ -40,11 +44,13 @@ export default function Login() {
       setTimeout(() => {
         navigate('/');
       }, 1500);
+      console.log('Login success:', result);
     } catch (err) {
       setNotification({
         message: err.message || 'Login gagal!',
         type: 'error',
       });
+      console.error('Login error:', err);
     }
   };
 
