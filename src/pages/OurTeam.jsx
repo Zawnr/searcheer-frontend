@@ -6,6 +6,7 @@ import FotoDeryl from '../assets/images/Team/Deryl.jpg';
 import FotoReiki from '../assets/images/Team/Reiki.jpg';
 import FotoRaisha from '../assets/images/Team/Raisha.JPG';
 import FotoRirie from '../assets/images/Team/Ririe.jpg';
+import FotoZawawi from '../assets/images/Team/Zawawi.jpg';
 import {
   MdOutlineEmail,
   MdOutlinePhone,
@@ -79,7 +80,7 @@ const teamMembers = [
   },
   {
     photo:
-      'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+       FotoZawawi,
     name: 'Nur Rochmat Zawawi',
     role: 'Universitas Brawijaya',
     description: 'Back-End Developer',
