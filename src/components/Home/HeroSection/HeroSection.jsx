@@ -71,6 +71,7 @@ export default function HeroSection() {
     try {
       const token = localStorage.getItem('token');
       const uploadRes = await uploadCV(selectedFile, token);
+      console.log('UploadCV response:', uploadRes);
 
       // ATS warning dari upload response
       if (
@@ -101,6 +102,7 @@ export default function HeroSection() {
         jobDescription,
         token,
       });
+      console.log('AnalyzeCV response:', analyzeRes);
 
       const resultId = analyzeRes.id || (analyzeRes.data && analyzeRes.data.id);
       if (!resultId)
@@ -111,6 +113,13 @@ export default function HeroSection() {
       localStorage.setItem('lastResultId', resultId);
       navigate('/analyzing');
     } catch (err) {
+      // Log semua kemungkinan error detail
+      if (err instanceof Error) {
+        console.error('Analyze error (Error object):', err.message, err.stack, err);
+      } else {
+        console.error('Analyze error (raw):', err);
+      }
+
       let errMsg = err.message || 'Analysis failed.';
       if (
         err.response &&

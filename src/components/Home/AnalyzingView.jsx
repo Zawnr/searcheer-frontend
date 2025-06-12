@@ -18,10 +18,13 @@ export default function AnalyzingView() {
   // Auto navigate to result
   useEffect(() => {
     const resultId = localStorage.getItem('lastResultId');
+    console.log('AnalyzingView: resultId from localStorage:', resultId);
     const timer = setTimeout(() => {
       if (resultId) {
+        console.log('Navigating to:', `/analysis-result/${resultId}`);
         navigate(`/analysis-result/${resultId}`);
       } else {
+        console.log('Navigating to home: /');
         navigate('/');
       }
     }, 3000);

@@ -80,7 +80,7 @@ export default function JobOverviewCard({ job }) {
       </ul>
       <div className="mt-10 mb-4 flex">
         <button className="bg-[#F2B600] hover:bg-[#FFD234] w-full text-white font-semibold text-lg py-3 rounded-xl transition-all duration-150">
-          Apply Job
+          Search for a Job
         </button>
       </div>
     </div>

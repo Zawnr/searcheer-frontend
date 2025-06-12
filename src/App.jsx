@@ -62,10 +62,8 @@ function AppContent() {
               <Route path="/analyzing" element={<AnalyzingView />} />
               <Route path="/analysis-result" element={<AnalysisResult />} />
               <Route path="/analysis-result/:id" element={<AnalysisResult />} />
-
-              {/* --- Tambahkan route Profile di sini --- */}
               <Route path="/profile" element={<Profile />} />
-              {/* -------------------------------------- */}
+
 
               <Route
                 path="/login"
