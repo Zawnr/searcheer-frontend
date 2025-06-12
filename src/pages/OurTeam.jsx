@@ -3,6 +3,8 @@ import TeamMemberCard from '../components/OurTeam/TeamMemberCard';
 import ContactInfo from '../components/OurTeam/ContactInfo';
 import FotoCindy from '../assets/images/Team/Cindy.jpg';
 import FotoDeryl from '../assets/images/Team/Deryl.jpg';
+import FotoReiki from '../assets/images/Team/Reiki.jpg';
+import FotoRaisha from '../assets/images/Team/Raisha.JPG';
 import {
   MdOutlineEmail,
   MdOutlinePhone,
@@ -37,7 +39,7 @@ const teamMembers = [
   },
   {
     photo:
-      'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      FotoRaisha,
     name: 'Raisha Isma Aulia',
     role: 'Universitas Brawijaya',
     description: 'Machine Learning Engineer',
@@ -50,7 +52,7 @@ const teamMembers = [
   },
   {
     photo:
-      'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+     FotoReiki,
     name: 'Reiki Syahmaulana Mirzha',
     role: 'Politeknik Negeri Banyuwangi',
     description: 'Front-End Developer',
