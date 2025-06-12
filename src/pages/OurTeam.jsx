@@ -5,6 +5,7 @@ import FotoCindy from '../assets/images/Team/Cindy.jpg';
 import FotoDeryl from '../assets/images/Team/Deryl.jpg';
 import FotoReiki from '../assets/images/Team/Reiki.jpg';
 import FotoRaisha from '../assets/images/Team/Raisha.JPG';
+import FotoRirie from '../assets/images/Team/Ririe.jpg';
 import {
   MdOutlineEmail,
   MdOutlinePhone,
@@ -65,7 +66,7 @@ const teamMembers = [
   },
   {
     photo:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+      FotoRirie,
     name: 'Nur Ramadhani Putri W',
     role: 'Politeknik Negeri Banyuwangi',
     description: 'Front-End Developer',
