@@ -156,30 +156,32 @@ export default function AnalysisCard({ result }) {
 
       <div className="mt-8 text-center">
         <a
-          href="/jobs"
+          href={result?.id ? `/recommendations/${result.id}` : '#'}
           className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
         >
           View All Recomendation
         </a>
       </div>
       <div className="mt-8">
-        <h4 className="font-semibold mb-2 text-gray-800">Summary</h4>
-        <div className="text-sm text-gray-600">
-          <div>
-            CV ATS Score:{' '}
-            <span className="font-semibold">
+        <h4 className="font-semibold mb-2 text-gray-800 text-center">Summary</h4>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm text-center">
+          <div className="flex flex-col items-center">
+            <span className="text-xs text-gray-500 mb-1">CV ATS Score</span>
+            <span className="font-bold text-lg text-blue-700">
               {cv_analysis?.ats_score ?? '-'}
             </span>
           </div>
-          <div>
-            CV Language:{' '}
-            <span className="font-semibold">
+          <div className="flex flex-col items-center">
+            <span className="text-xs text-gray-500 mb-1">CV Language</span>
+            <span className="font-bold text-lg text-green-700">
               {cv_analysis?.language_detected ?? '-'}
             </span>
           </div>
-          <div>
-            Job Title:{' '}
-            <span className="font-semibold">{job_analysis?.title ?? '-'}</span>
+          <div className="flex flex-col items-center">
+            <span className="text-xs text-gray-500 mb-1">Job Title</span>
+            <span className="font-bold text-lg text-yellow-700">
+              {job_analysis?.title ?? '-'}
+            </span>
           </div>
         </div>
       </div>

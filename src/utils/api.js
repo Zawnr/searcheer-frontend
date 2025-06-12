@@ -100,3 +100,19 @@ export async function getJobDetail(id) {
   if (!response.ok) throw new Error('Failed to fetch job detail');
   return await response.json();
 }
+
+// GET JOB RECOMMENDATIONS BY ANALYSIS RESULT ID
+export async function getJobRecommendations(resultId, token) {
+  const response = await fetch(
+    `${BASE_URL}/analysis-results/${resultId}/recommendations`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const data = await response.json();
+  if (!response.ok)
+    throw new Error(data.message || 'Failed to fetch job recommendations');
+  return data;
+}
