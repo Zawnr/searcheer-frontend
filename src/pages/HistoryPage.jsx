@@ -48,8 +48,17 @@ export default function HistoryPage() {
                 <td className="py-2 px-4 text-sm text-blue-900 font-medium break-all">{cv.original_name || (cv.file_path ? cv.file_path.split('/').pop() : '-')}</td>
                 <td className="py-2 px-4">
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${cv.status === 'completed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                    {cv.status === 'completed' ? <FiCheckCircle className="mr-1" /> : <FiClock className="mr-1" />}
-                    {cv.status || 'uploaded'}
+                    {cv.status === 'completed' ? (
+                      <>
+                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        Completed
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01" /></svg>
+                        inComplete
+                      </>
+                    )}
                   </span>
                 </td>
                 <td className="py-2 px-4 text-xs text-gray-500">{cv.created_at ? new Date(cv.created_at).toLocaleString() : '-'}</td>

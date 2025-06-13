@@ -126,66 +126,7 @@ export default function AnalysisCard({ result }) {
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
         Here's Your Career Match Report
       </h1>
-      <h2 className="text-lg font-bold mb-3">Analysis Result</h2>
-      <div className="flex justify-between items-center mb-3">
-        <span className="font-semibold text-base text-gray-900">
-          Overall Match Score
-        </span>
-        <span className="font-semibold text-base text-blue-600">
-          {overallMatchScore}%
-        </span>
-      </div>
-      <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-        <div
-          className={`${scoreColor} h-2 rounded-full transition-all duration-500 ease-in-out`}
-          style={{ width: `${overallMatchScore}%` }}
-        />
-      </div>
-      <div className="flex flex-col sm:flex-row gap-2 mb-4">
-        <button
-          onClick={() => setShowDetail((prev) => !prev)}
-          className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
-        >
-          {showDetail ? 'Sembunyikan Detail' : 'Lihat Detail'}
-        </button>
-        <button
-          onClick={() => setShowRecommendations((prev) => !prev)}
-          className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
-        >
-          View All Recomendation
-        </button>
-      </div>
-      {showDetail && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-          {detailMetrics.map((m) => (
-            <div
-              key={m.label}
-              className="bg-gray-50 border border-gray-200 rounded-lg p-4 flex flex-col items-start shadow-sm"
-            >
-              <span className="text-xs text-gray-500 mb-1">{m.label}</span>
-              <span className={`font-bold text-lg ${m.color}`}>
-                {m.value !== undefined ? m.value : '-'}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
-      <p className="text-gray-700 text-sm mb-6">
-        {tips.length > 0 ? (
-          tips.map((tip, i) => (
-            <span key={i} className="block mb-1">
-              {tip}
-            </span>
-          ))
-        ) : (
-          <>
-            Your CV has a good match with this job description. With some
-            improvements, you can increase your chances.
-          </>
-        )}
-      </p>
-
-      <h3 className="font-semibold text-gray-900 mb-4">Skill Analysis</h3>
+      <h2 className="text-lg font-bold mb-3">Skill Analysis</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-2">
         <div className="bg-green-50 border border-green-200 rounded p-4 min-h-[140px]">
           <h4 className="font-semibold mb-2 text-green-700 flex items-center gap-2">
@@ -242,35 +183,41 @@ export default function AnalysisCard({ result }) {
           )}
         </div>
       </div>
-
+      <div className="mb-4">
+        <button
+          onClick={() => setShowDetail((prev) => !prev)}
+          className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
+        >
+          {showDetail ? 'Sembunyikan Detail' : 'Lihat Detail'}
+        </button>
+      </div>
+      {showDetail && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          {detailMetrics.map((m) => (
+            <div
+              key={m.label}
+              className="bg-gray-50 border border-gray-200 rounded-lg p-4 flex flex-col items-start shadow-sm"
+            >
+              <span className="text-xs text-gray-500 mb-1">{m.label}</span>
+              <span className={`font-bold text-lg ${m.color}`}>
+                {m.value !== undefined ? m.value : '-'}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       {showRecommendations && (
         <div className="mt-10">
           <Recommendations analysisId={result?.id} />
         </div>
       )}
-
-      <div className="mt-8">
-        <h4 className="font-semibold mb-2 text-gray-800 text-center">Summary</h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm text-center">
-          <div className="flex flex-col items-center">
-            <span className="text-xs text-gray-500 mb-1">CV ATS Score</span>
-            <span className="font-bold text-lg text-blue-700">
-              {cv_analysis?.ats_score ?? '-'}
-            </span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-xs text-gray-500 mb-1">CV Language</span>
-            <span className="font-bold text-lg text-green-700">
-              {cv_analysis?.language_detected ?? '-'}
-            </span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-xs text-gray-500 mb-1">Job Title</span>
-            <span className="font-bold text-lg text-yellow-700">
-              {job_analysis?.title ?? '-'}
-            </span>
-          </div>
-        </div>
+      <div className="mt-4 text-center">
+        <button
+          onClick={() => setShowRecommendations((prev) => !prev)}
+          className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
+        >
+          View all recommendations
+        </button>
       </div>
     </div>
   );
