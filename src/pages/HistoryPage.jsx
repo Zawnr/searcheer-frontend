@@ -9,6 +9,9 @@ export default function HistoryPage() {
   const [error, setError] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterDate, setFilterDate] = useState('');
+  // Pagination logic
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     async function fetchData() {
@@ -43,6 +46,11 @@ export default function HistoryPage() {
         return statusMatch && dateMatch;
       })
     : [];
+
+  // Batasi hanya 10 data history terbaru
+  const limitedCVs = filteredCVs.slice(0, 10);
+  const paginatedCVs = filteredCVs.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const totalPages = Math.ceil(filteredCVs.length / itemsPerPage);
 
   if (loading) return <div className="text-center py-10">Loading...</div>;
   if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
@@ -105,7 +113,7 @@ export default function HistoryPage() {
             </tr>
           </thead>
           <tbody>
-            {filteredCVs.map((cv, idx) => (
+            {paginatedCVs.map((cv, idx) => (
               <motion.tr
                 key={cv.id}
                 className="border-t border-gray-100 hover:bg-blue-50/30 transition"
@@ -113,8 +121,8 @@ export default function HistoryPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 * idx }}
               >
-                <td className="py-2 px-4 text-sm text-gray-700 font-semibold">{idx + 1}</td>
-                <td className="py-2 px-4 text-sm text-blue-900 font-medium break-all">{cv.original_name || (cv.file_path ? cv.file_path.split('/').pop() : '-')}</td>
+                <td className="py-2 px-4 text-sm text-gray-700 font-semibold">{(currentPage - 1) * itemsPerPage + idx + 1}</td>
+                <td className="py-2 px-4 text-sm text-blue-900 font-medium break-all">{cv.original_name || (cv.file_path ? cv.file_path.split('/') .pop() : '-')}</td>
                 <td className="py-2 px-4">
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${cv.status === 'completed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
                     {cv.status === 'completed' ? (
@@ -136,6 +144,26 @@ export default function HistoryPage() {
           </tbody>
         </table>
       </motion.div>
+      {/* Pagination controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-end mt-4 gap-2">
+          <button
+            className="px-3 py-1 rounded border bg-blue-100 text-blue-900 font-semibold disabled:opacity-50"
+            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </button>
+          <span className="px-2 py-1 font-medium text-blue-900">Page {currentPage} of {totalPages}</span>
+          <button
+            className="px-3 py-1 rounded border bg-blue-100 text-blue-900 font-semibold disabled:opacity-50"
+            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </motion.div>
   );
 }
