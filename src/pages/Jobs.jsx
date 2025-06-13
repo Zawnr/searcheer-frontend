@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import JobSidebar from '../components/Jobs/JobSidebar';
 import JobList from '../components/Jobs/JobList';
-import JobPagination from '../components/Jobs/JobPagination';
 import JobSortSelect from '../components/Jobs/JobSortSelect';
 import { getJobs } from '../utils/api';
 
@@ -127,11 +126,6 @@ export default function Jobs() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
             >
-              <JobPagination
-                page={page}
-                totalPages={Math.ceil(total / limit)}
-                onChange={setPage}
-              />
             </motion.div>
           </motion.div>
         </div>

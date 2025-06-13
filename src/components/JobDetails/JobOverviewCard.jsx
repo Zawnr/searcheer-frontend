@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   MdPersonOutline,
   MdAccessTime,
@@ -10,6 +11,8 @@ import {
 } from 'react-icons/md';
 
 export default function JobOverviewCard({ job }) {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-[#FFF8EE] rounded-[28px] px-4 sm:px-7 pt-7 pb-2 flex flex-col shadow-sm min-w-0">
       <h3 className="font-bold text-xl mb-5">Job Overview</h3>
@@ -79,7 +82,10 @@ export default function JobOverviewCard({ job }) {
         </li>
       </ul>
       <div className="mt-10 mb-4 flex">
-        <button className="bg-[#F2B600] hover:bg-[#FFD234] w-full text-white font-semibold text-lg py-3 rounded-xl transition-all duration-150">
+        <button
+          onClick={() => navigate('/jobs')}
+          className="bg-[#F2B600] hover:bg-[#FFD234] w-full text-white font-semibold text-lg py-3 rounded-xl transition-all duration-150"
+        >
           Search for a Job
         </button>
       </div>
