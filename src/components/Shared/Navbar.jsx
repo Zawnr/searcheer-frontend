@@ -103,9 +103,15 @@ export default function Navbar() {
             </button>
             {showDropdown && (
               <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-xl py-2 z-50" style={{ minWidth: 140 }}>
-                <NavLink to="/profile" className="block px-5 py-2 text-gray-800 hover:bg-gray-100 font-medium" onClick={() => setShowDropdown(false)}>Account</NavLink>
-                <NavLink to="/history" className="block px-5 py-2 text-gray-800 hover:bg-gray-100 font-medium" onClick={() => setShowDropdown(false)}>History</NavLink>
-                <button onClick={handleLogout} className="block w-full text-left px-5 py-2 text-red-500 hover:bg-gray-100 font-medium">Logout</button>
+                <NavLink to="/profile" className="flex items-center gap-2 px-5 py-2 text-gray-800 hover:bg-gray-100 font-medium" onClick={() => setShowDropdown(false)}>
+                  <FiUser className="inline-block" /> Account
+                </NavLink>
+                <NavLink to="/history" className="flex items-center gap-2 px-5 py-2 text-gray-800 hover:bg-gray-100 font-medium" onClick={() => setShowDropdown(false)}>
+                  <svg className="w-5 h-5 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> History
+                </NavLink>
+                <button onClick={handleLogout} className="flex items-center gap-2 w-full text-left px-5 py-2 text-red-500 hover:bg-gray-100 font-medium">
+                  <svg className="w-5 h-5 inline-block" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" /></svg> Logout
+                </button>
               </div>
             )}
           </div>
