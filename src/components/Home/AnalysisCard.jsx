@@ -126,6 +126,36 @@ export default function AnalysisCard({ result }) {
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
         Here's Your Career Match Report
       </h1>
+      {/* Score & Analysis Result */}
+      <div className="mb-6">
+        <h2 className="text-lg font-bold mb-2">Analysis Result</h2>
+        <div className="flex justify-between items-center mb-2">
+          <span className="font-semibold text-base text-gray-900">
+            Overall Match Score
+          </span>
+          <span className="font-semibold text-base text-blue-600">
+            {overallMatchScore}%
+          </span>
+        </div>
+        <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+          <div
+            className={`${scoreColor} h-2 rounded-full transition-all duration-500 ease-in-out`}
+            style={{ width: `${overallMatchScore}%` }}
+          />
+        </div>
+        <p className="text-gray-700 text-sm">
+          {tips.length > 0 ? (
+            tips.map((tip, i) => (
+              <span key={i} className="block mb-1">
+                {tip}
+              </span>
+            ))
+          ) : (
+            <>Your CV has a good match with this job description. With some improvements, you can increase your chances.</>
+          )}
+        </p>
+      </div>
+      {/* Skill Analysis */}
       <h2 className="text-lg font-bold mb-3">Skill Analysis</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-2">
         <div className="bg-green-50 border border-green-200 rounded p-4 min-h-[140px]">
