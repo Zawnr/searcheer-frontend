@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUserCVs } from '../utils/api';
 import { FiCheckCircle, FiClock } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 
 export default function HistoryPage() {
   const [cvs, setCvs] = useState(null);
@@ -29,9 +30,29 @@ export default function HistoryPage() {
     return <div className="text-center py-10 text-gray-500">Belum ada riwayat upload CV.</div>;
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-2 sm:px-0">
-      <h1 className="text-3xl font-bold mb-8 text-center text-blue-900">CV Upload History</h1>
-      <div className="overflow-x-auto rounded-xl shadow">
+    <motion.div
+      className="max-w-3xl mx-auto py-10 px-2 sm:px-0"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7 }}
+    >
+      <motion.h1
+        className="text-3xl font-bold mb-8 text-center text-blue-900"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
+      >
+        CV Upload History
+      </motion.h1>
+      <motion.div
+        className="overflow-x-auto rounded-xl shadow"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+      >
         <table className="min-w-full bg-white border border-gray-200 rounded-xl">
           <thead className="bg-blue-50">
             <tr>
@@ -43,7 +64,14 @@ export default function HistoryPage() {
           </thead>
           <tbody>
             {cvs.map((cv, idx) => (
-              <tr key={cv.id} className="border-t border-gray-100 hover:bg-blue-50/30 transition">
+              <motion.tr
+                key={cv.id}
+                className="border-t border-gray-100 hover:bg-blue-50/30 transition"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.1 + idx * 0.1 }}
+              >
                 <td className="py-2 px-4 text-sm text-gray-700 font-semibold">{idx + 1}</td>
                 <td className="py-2 px-4 text-sm text-blue-900 font-medium break-all">{cv.original_name || (cv.file_path ? cv.file_path.split('/').pop() : '-')}</td>
                 <td className="py-2 px-4">
@@ -62,11 +90,11 @@ export default function HistoryPage() {
                   </span>
                 </td>
                 <td className="py-2 px-4 text-xs text-gray-500">{cv.created_at ? new Date(cv.created_at).toLocaleString() : '-'}</td>
-              </tr>
+              </motion.tr>
             ))}
           </tbody>
         </table>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
