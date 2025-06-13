@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FiUser } from 'react-icons/fi';
 import logo from '../../assets/images/Logo/logo.png';
+import { BASE_URL } from '../../utils/api';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const userMenuRef = useRef(null);
 
@@ -14,6 +16,18 @@ export default function Navbar() {
     setIsLoggedIn(!!localStorage.getItem('token'));
     const onStorage = () => setIsLoggedIn(!!localStorage.getItem('token'));
     window.addEventListener('storage', onStorage);
+    // Fetch user info if logged in
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetch(`${BASE_URL}/users/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => setUser(data))
+        .catch(() => setUser(null));
+    } else {
+      setUser(null);
+    }
     return () => window.removeEventListener('storage', onStorage);
   }, []);
 
@@ -186,7 +200,7 @@ export default function Navbar() {
               aria-label="User menu"
               tabIndex={0}
             >
-              <FiUser size={20} />
+              {user?.username ? user.username[0].toUpperCase() : <FiUser size={20} />}
             </button>
             {/* Dropdown menu */}
             {showDropdown && (
@@ -200,6 +214,13 @@ export default function Navbar() {
                   onClick={() => setShowDropdown(false)}
                 >
                   Account
+                </NavLink>
+                <NavLink
+                  to="/history"
+                  className="block px-5 py-2 text-gray-800 hover:bg-gray-100 font-medium"
+                  onClick={() => setShowDropdown(false)}
+                >
+                  History
                 </NavLink>
                 <button
                   onClick={handleLogout}

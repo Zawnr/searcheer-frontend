@@ -81,12 +81,6 @@ export default function Profile() {
                   {user.email}
                 </span>
               </div>
-              <a
-                href="/history"
-                className="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition-colors duration-200 border border-blue-700"
-              >
-               History View Upload CV
-              </a>
             </div>
           )}
           {!loading && !error && (
