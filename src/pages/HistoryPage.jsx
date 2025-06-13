@@ -7,6 +7,8 @@ export default function HistoryPage() {
   const [cvs, setCvs] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [filterDate, setFilterDate] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -23,6 +25,24 @@ export default function HistoryPage() {
     }
     fetchData();
   }, []);
+
+  // Filtered data
+  const filteredCVs = cvs
+    ? cvs.filter(cv => {
+        let statusMatch =
+          filterStatus === 'all' ||
+          (filterStatus === 'completed' && cv.status === 'completed') ||
+          (filterStatus === 'incomplete' && cv.status !== 'completed');
+        let dateMatch = true;
+        if (filterDate && cv.created_at) {
+          // Ambil tanggal lokal (bukan UTC) dari created_at
+          const cvDateObj = new Date(cv.created_at);
+          const cvDate = cvDateObj.getFullYear() + '-' + String(cvDateObj.getMonth() + 1).padStart(2, '0') + '-' + String(cvDateObj.getDate()).padStart(2, '0');
+          dateMatch = cvDate === filterDate;
+        }
+        return statusMatch && dateMatch;
+      })
+    : [];
 
   if (loading) return <div className="text-center py-10">Loading...</div>;
   if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
@@ -44,6 +64,31 @@ export default function HistoryPage() {
       >
         CV Upload History
       </motion.h1>
+      {/* Filter controls */}
+      <div className="flex flex-col sm:flex-row gap-4 mb-6 items-center justify-between px-2">
+        <div>
+          <label className="mr-2 font-medium text-blue-900">Status:</label>
+          <select
+            className={`border rounded px-2 py-1 text-sm transition focus:ring-2 focus:ring-blue-200 focus:border-blue-400 
+              ${filterStatus === 'completed' ? 'bg-green-100 text-green-700 border-green-300' : filterStatus === 'incomplete' ? 'bg-yellow-100 text-yellow-700 border-yellow-300' : 'bg-white text-blue-900 border-gray-300'}`}
+            value={filterStatus}
+            onChange={e => setFilterStatus(e.target.value)}
+          >
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="incomplete">inComplete</option>
+          </select>
+        </div>
+        <div>
+          <label className="mr-2 font-medium text-blue-900">Tanggal:</label>
+          <input
+            type="date"
+            className="border rounded px-2 py-1 text-sm focus:ring-2 focus:ring-blue-200 focus:border-blue-400"
+            value={filterDate}
+            onChange={e => setFilterDate(e.target.value)}
+          />
+        </div>
+      </div>
       <motion.div
         className="overflow-x-auto rounded-xl shadow"
         initial={{ opacity: 0, y: 30 }}
@@ -60,7 +105,7 @@ export default function HistoryPage() {
             </tr>
           </thead>
           <tbody>
-            {cvs.map((cv, idx) => (
+            {filteredCVs.map((cv, idx) => (
               <motion.tr
                 key={cv.id}
                 className="border-t border-gray-100 hover:bg-blue-50/30 transition"
