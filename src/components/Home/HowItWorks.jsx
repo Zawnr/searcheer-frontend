@@ -42,7 +42,7 @@ export default function HowItWorks() {
         How Searcheer work
       </motion.h2>
       <motion.div
-        className="flex flex-col items-center gap-8 md:flex-row md:justify-center md:items-start md:gap-12 max-w-6xl mx-auto"
+        className="flex flex-col items-center gap-8 sm:grid sm:grid-cols-2 lg:flex lg:flex-row lg:justify-center lg:items-start lg:gap-12 max-w-6xl mx-auto"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -53,8 +53,8 @@ export default function HowItWorks() {
             key={idx}
             className={
               step.highlight
-                ? 'flex flex-col items-center bg-white rounded-2xl shadow-lg px-5 py-7 md:px-12 md:py-9 min-w-[90vw] max-w-[98vw] md:min-w-[340px] md:max-w-[400px] z-10'
-                : 'flex flex-col items-center bg-transparent px-3 py-5 md:px-4 md:py-4 min-w-[80vw] max-w-[96vw] md:min-w-[220px] md:max-w-[300px]'
+                ? 'flex flex-col items-center bg-white rounded-2xl shadow-lg px-5 py-7 md:px-12 md:py-9 w-full max-w-[98vw] sm:max-w-[420px] lg:min-w-[340px] lg:max-w-[400px] z-10'
+                : 'flex flex-col items-center bg-transparent px-3 py-5 md:px-4 md:py-4 w-full max-w-[96vw] sm:max-w-[340px] lg:min-w-[220px] lg:max-w-[300px]'
             }
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -56,13 +56,13 @@ export default function Login() {
 
   return (
     <>
-      <h2 className="text-3xl font-bold mb-1 text-white leading-tight">
+      <h2 className="text-3xl font-bold mb-1 text-white leading-tight text-center sm:text-left">
         Welcome Back
       </h2>
-      <h3 className="text-lg font-semibold mb-3 text-white/80">
+      <h3 className="text-lg font-semibold mb-3 text-white/80 text-center sm:text-left">
         Login to your account
       </h3>
-      <p className="mb-8 text-white/80 text-base">
+      <p className="mb-8 text-white/80 text-base text-center sm:text-left">
         Discover the best job opportunities and continue your journey with
         Searcheers.
       </p>
@@ -114,7 +114,7 @@ export default function Login() {
             </div>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-center gap-2">
           <input
             id="remember"
             type="checkbox"

@@ -65,13 +65,13 @@ export default function Register() {
 
   return (
     <>
-      <h2 className="text-3xl font-bold mb-1 text-white leading-tight">
+      <h2 className="text-3xl font-bold mb-1 text-white leading-tight text-center sm:text-left">
         Grow your career with us
       </h2>
-      <h3 className="text-lg font-semibold mb-3 text-white/80">
+      <h3 className="text-lg font-semibold mb-3 text-white/80 text-center sm:text-left">
         Discover endless job opportunities
       </h3>
-      <p className="mb-8 text-white/80 text-base">
+      <p className="mb-8 text-white/80 text-base text-center sm:text-left">
         Find your dream job and take a new step toward a brighter future with
         Searcheers.
       </p>
@@ -90,15 +90,15 @@ export default function Register() {
           >
             Buka Gmail
           </a>
-          <p className="text-white/70 text-sm">
+          <p className="text-white/70 text-sm text-center">
             Klik tombol di atas untuk langsung membuka Gmail dan lakukan
             konfirmasi akun.
           </p>
-          <p className="text-white/70 text-xs mt-2">
+          <p className="text-white/70 text-xs mt-2 text-center">
             Jika tidak pakai Gmail, cek inbox/spam di provider email yang kamu
             gunakan.
           </p>
-          <p className="text-white/70 text-xs mt-2">
+          <p className="text-white/70 text-xs mt-2 text-center">
             Sudah konfirmasi?{' '}
             <Link to="/login" className="text-yellow-400 underline">
               Login di sini
@@ -144,7 +144,7 @@ export default function Register() {
             )}
           </div>
           {/* Passwords */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             {/* Password */}
             <div className="relative flex-1">
               <input
@@ -172,7 +172,7 @@ export default function Register() {
               )}
             </div>
             {/* Confirm password */}
-            <div className="relative flex-1">
+            <div className="relative flex-1 mt-4 sm:mt-0">
               <input
                 type={showConfirm ? 'text' : 'password'}
                 placeholder="Confirm password"
@@ -198,7 +198,7 @@ export default function Register() {
               )}
             </div>
           </div>
-          <p className="text-xs text-white/70 pl-1">
+          <p className="text-xs text-white/70 pl-1 text-center sm:text-left">
             Gunakan minimal 6 karakter dengan kombinasi huruf, angka & simbol
           </p>
           <button
