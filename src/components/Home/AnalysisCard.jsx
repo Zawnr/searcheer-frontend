@@ -42,6 +42,63 @@ export default function AnalysisCard({ result }) {
   else scoreColor = 'bg-green-600';
 
   const [showRecommendations, setShowRecommendations] = React.useState(false);
+  const [showDetail, setShowDetail] = React.useState(false);
+
+  // Ambil metrik detail dari compatibility_analysis
+  const detailMetrics = [
+    {
+      label: 'Skill Match',
+      value: compatibility_analysis?.skill_match,
+      color: 'text-blue-700',
+    },
+    {
+      label: 'Overall Score',
+      value: compatibility_analysis?.overall_score,
+      color: 'text-blue-700',
+    },
+    {
+      label: 'Industry Match',
+      value: compatibility_analysis?.industry_match,
+      color: 'text-purple-700',
+    },
+    {
+      label: 'Education Match',
+      value: compatibility_analysis?.education_match,
+      color: 'text-pink-700',
+    },
+    {
+      label: 'Experience Match',
+      value: compatibility_analysis?.experience_match,
+      color: 'text-orange-700',
+    },
+    {
+      label: 'Text Similarity',
+      value: compatibility_analysis?.text_similarity,
+      color: 'text-green-700',
+    },
+    {
+      label: 'Confidence Score',
+      value: compatibility_analysis?.confidence_score,
+      color: 'text-gray-700',
+    },
+    {
+      label: 'Recommendation Level',
+      value: compatibility_analysis?.recommendation_level,
+      color: 'text-indigo-700',
+    },
+    {
+      label: 'Fallback Mode',
+      value: compatibility_analysis?.analysis_metadata?.fallback_mode
+        ? 'Yes'
+        : 'No',
+      color: 'text-red-700',
+    },
+    {
+      label: 'Common Words Count',
+      value: compatibility_analysis?.analysis_metadata?.common_words_count,
+      color: 'text-gray-700',
+    },
+  ];
 
   return (
     <div className="max-w-3xl w-full mx-auto bg-white rounded-xl shadow-lg p-8 border-l-8 border-yellow-400 relative z-10 mt-6 mb-10">
@@ -84,6 +141,35 @@ export default function AnalysisCard({ result }) {
           style={{ width: `${overallMatchScore}%` }}
         />
       </div>
+      <div className="flex flex-col sm:flex-row gap-2 mb-4">
+        <button
+          onClick={() => setShowDetail((prev) => !prev)}
+          className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
+        >
+          {showDetail ? 'Sembunyikan Detail' : 'Lihat Detail'}
+        </button>
+        <button
+          onClick={() => setShowRecommendations((prev) => !prev)}
+          className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
+        >
+          View All Recomendation
+        </button>
+      </div>
+      {showDetail && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          {detailMetrics.map((m) => (
+            <div
+              key={m.label}
+              className="bg-gray-50 border border-gray-200 rounded-lg p-4 flex flex-col items-start shadow-sm"
+            >
+              <span className="text-xs text-gray-500 mb-1">{m.label}</span>
+              <span className={`font-bold text-lg ${m.color}`}>
+                {m.value !== undefined ? m.value : '-'}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       <p className="text-gray-700 text-sm mb-6">
         {tips.length > 0 ? (
           tips.map((tip, i) => (
@@ -157,14 +243,6 @@ export default function AnalysisCard({ result }) {
         </div>
       </div>
 
-      <div className="mt-8 text-center">
-        <button
-          onClick={() => setShowRecommendations((prev) => !prev)}
-          className="text-blue-600 hover:underline font-semibold border border-blue-300 rounded px-4 py-2 inline-block transition-colors duration-150"
-        >
-          View All Recomendation
-        </button>
-      </div>
       {showRecommendations && (
         <div className="mt-10">
           <Recommendations analysisId={result?.id} />
