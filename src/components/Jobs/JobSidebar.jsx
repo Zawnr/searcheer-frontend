@@ -89,10 +89,6 @@ export default function JobSidebar({ filters, setFilters }) {
             </label>
           ))}
         </div>
-        {/* (Show More button tetap, tidak perlu aksi dulu) */}
-        <button className="bg-[#FFCD38] w-full mt-2 rounded-lg py-1 text-sm font-bold">
-          Show More
-        </button>
       </div>
       {/* Job Type */}
       <div className="mb-5">
