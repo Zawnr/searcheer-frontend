@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://searcheer-api.duckdns.org';
+export const BASE_URL = 'https://searcheer-api.ddns.net';
 
 // LOGIN
 export async function login(credential, password) {
