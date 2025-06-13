@@ -37,19 +37,15 @@ Ini adalah proyek frontend untuk aplikasi pencarian dan analisis pekerjaan **Sea
 ## Scripts
 
 - **Build for Production**
-
   ```shell
   npm run build
   ```
-
   Menjalankan Webpack dalam mode production dan menghasilkan file build ke direktori `dist`.
 
 - **Start Development Server**
-
   ```shell
   npm run start-dev
   ```
-
   Menjalankan server pengembangan Webpack dengan live reload sesuai konfigurasi di `webpack.dev.js`.
 
 - **Serve Production Build**
@@ -83,9 +79,27 @@ searcheer-frontend/
 │   │       ├── Logo/        # Logo aplikasi
 │   │       └── Team/        # Foto tim
 │   ├── components/          # Komponen React (modular, reusable)
-│   ├── hooks/               # Custom React hooks
+│   │   ├── About/           # Komponen halaman About
+│   │   ├── Home/            # Komponen halaman Home (Hero, HowItWorks, dsb)
+│   │   ├── JobDetails/      # Komponen detail pekerjaan
+│   │   ├── Jobs/            # Komponen list pekerjaan
+│   │   ├── Notification/    # Komponen notifikasi
+│   │   ├── OurTeam/         # Komponen tim
+│   │   ├── Profile/         # Komponen profil user
+│   │   └── Shared/          # Komponen global (Navbar, Footer, dsb)
+│   ├── hooks/               # Custom React hooks (misal: useCVValidation.js)
 │   ├── pages/               # Halaman utama aplikasi (routing)
+│   │   ├── AboutUs.jsx      # Halaman About Us
+│   │   ├── HistoryPage.jsx  # Halaman riwayat CV
+│   │   ├── HomePage.jsx     # Halaman utama
+│   │   ├── JobDetails.jsx   # Halaman detail pekerjaan
+│   │   ├── Jobs.jsx         # Halaman list pekerjaan
+│   │   ├── Login.jsx        # Halaman login
+│   │   ├── OurTeam.jsx      # Halaman tim
+│   │   ├── Profile.jsx      # Halaman profil user
+│   │   └── Register.jsx     # Halaman register
 │   ├── utils/               # Utility/helper function (API, dsb)
+│   │   └── api.js           # API helper
 │   ├── App.jsx              # Root React component
 │   ├── App.css              # Style utama
 │   ├── index.jsx            # Entry point React
