@@ -14,13 +14,13 @@ export default function Login() {
 
   function validateForm() {
     const errors = {};
-    if (!credential) errors.credential = 'Email wajib diisi.';
+    if (!credential) errors.credential = 'Email is required.';
     else if (!/\S+@\S+\.\S+/.test(credential))
-      errors.credential = 'Format email tidak valid.';
+      errors.credential = 'Invalid email format.';
 
-    if (!password) errors.password = 'Password wajib diisi.';
+    if (!password) errors.password = 'Password is required.';
     else if (password.length < 6)
-      errors.password = 'Password minimal 6 karakter.';
+      errors.password = 'Password must be at least 6 characters.';
     return errors;
   }
 
@@ -38,7 +38,7 @@ export default function Login() {
       const result = await login(credential, password);
       localStorage.setItem('token', result.token);
       setNotification({
-        message: `Selamat datang, ${result.user?.username || credential || 'user'}!`,
+        message: `Welcome, ${result.user?.username || credential || 'user'}!`,
         type: 'success',
       });
       setTimeout(() => {
@@ -47,7 +47,7 @@ export default function Login() {
       console.log('Login success:', result);
     } catch (err) {
       setNotification({
-        message: err.message || 'Login gagal!',
+        message: err.message || 'Login failed!',
         type: 'error',
       });
       console.error('Login error:', err);

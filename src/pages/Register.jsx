@@ -16,21 +16,21 @@ export default function Register() {
 
   function validateForm() {
     const errors = {};
-    if (!email) errors.email = 'Email wajib diisi.';
+    if (!email) errors.email = 'Email is required.';
     else if (!/\S+@\S+\.\S+/.test(email))
-      errors.email = 'Format email tidak valid.';
+      errors.email = 'Invalid email format.';
 
-    if (!username) errors.username = 'Username wajib diisi.';
+    if (!username) errors.username = 'Username is required.';
     else if (username.length < 3)
-      errors.username = 'Username minimal 3 karakter.';
+      errors.username = 'Username must be at least 3 characters.';
 
-    if (!password) errors.password = 'Password wajib diisi.';
+    if (!password) errors.password = 'Password is required.';
     else if (password.length < 6)
-      errors.password = 'Password minimal 6 karakter.';
+      errors.password = 'Password must be at least 6 characters.';
 
-    if (!confirm) errors.confirm = 'Konfirmasi password wajib diisi.';
+    if (!confirm) errors.confirm = 'Password confirmation is required.';
     else if (password !== confirm)
-      errors.confirm = 'Password dan konfirmasi harus sama.';
+      errors.confirm = 'Password and confirmation must match.';
 
     return errors;
   }
@@ -49,14 +49,14 @@ export default function Register() {
       await register({ email, username, password });
       setNotification({
         message:
-          'Registrasi berhasil! Silakan cek email kamu untuk melakukan konfirmasi/aktivasi akun.',
+          'Registration successful! Please check your email to confirm/activate your account.',
         type: 'success',
       });
       setRegisterSuccess(true);
       console.log('Register success:', email);
     } catch (err) {
       setNotification({
-        message: err.message || 'Registrasi gagal!',
+        message: err.message || 'Registration failed!',
         type: 'error',
       });
       console.error('Register error:', err);
@@ -73,7 +73,7 @@ export default function Register() {
       </h3>
       <p className="mb-8 text-white/80 text-base text-center sm:text-left">
         Find your dream job and take a new step toward a brighter future with
-        Searcheers.
+        Searcheer.
       </p>
       <RegisterNotification
         message={notification.message}
@@ -88,20 +88,18 @@ export default function Register() {
             rel="noopener noreferrer"
             className="mb-3 px-5 py-2 bg-yellow-400 hover:bg-yellow-500 rounded-xl font-semibold text-[#232d3b] transition shadow text-base"
           >
-            Buka Gmail
+            Open Gmail
           </a>
           <p className="text-white/70 text-sm text-center">
-            Klik tombol di atas untuk langsung membuka Gmail dan lakukan
-            konfirmasi akun.
+            Click the button above to open Gmail and confirm your account.
           </p>
           <p className="text-white/70 text-xs mt-2 text-center">
-            Jika tidak pakai Gmail, cek inbox/spam di provider email yang kamu
-            gunakan.
+            If you don't use Gmail, check your inbox/spam in your email provider.
           </p>
           <p className="text-white/70 text-xs mt-2 text-center">
-            Sudah konfirmasi?{' '}
+            Already confirmed?{' '}
             <Link to="/login" className="text-yellow-400 underline">
-              Login di sini
+              Login here
             </Link>
           </p>
         </div>
@@ -199,7 +197,7 @@ export default function Register() {
             </div>
           </div>
           <p className="text-xs text-white/70 pl-1 text-center sm:text-left">
-            Gunakan minimal 6 karakter dengan kombinasi huruf, angka & simbol
+            Use at least 6 characters with a combination of letters, numbers & symbols
           </p>
           <button
             type="submit"
