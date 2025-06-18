@@ -6,6 +6,7 @@ export async function login(credential, password) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: credential, password }),
+    credentials: 'include',
   });
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || 'Login failed');
@@ -18,6 +19,7 @@ export async function register({ email, username, password }) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, username, password }),
+    credentials: 'include',
   });
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || 'Register failed');
@@ -35,6 +37,7 @@ export async function uploadCV(file, token) {
       Authorization: `Bearer ${token}`,
     },
     body: formData,
+    credentials: 'include',
   });
 
   const data = await response.json();
@@ -54,6 +57,7 @@ export async function analyzeCV({ cvId, jobTitle, jobDescription, token }) {
       job_title: jobTitle,
       job_description: jobDescription,
     }),
+    credentials: 'include',
   });
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || 'CV analysis failed');
@@ -66,6 +70,7 @@ export async function getAnalysisResult(resultId, token) {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    credentials: 'include',
   });
   const data = await response.json();
   if (!response.ok)
@@ -75,7 +80,6 @@ export async function getAnalysisResult(resultId, token) {
 
 // GET JOBS (INI PENTING)
 export async function getJobs(params = {}) {
-  // Build query string dari object params
   const queryString = Object.entries(params)
     .filter(([_, v]) => v !== undefined && v !== '' && v !== null)
     .map(([key, value]) =>
@@ -89,14 +93,16 @@ export async function getJobs(params = {}) {
   const url = queryString
     ? `${BASE_URL}/jobs?${queryString}`
     : `${BASE_URL}/jobs`;
-  const res = await fetch(url);
+  const res = await fetch(url, { credentials: 'include' });
   if (!res.ok) throw new Error('Failed to fetch jobs');
   return await res.json();
 }
 
 // GET JOB DETAIL BY ID
 export async function getJobDetail(id) {
-  const response = await fetch(`${BASE_URL}/jobs/${id}`);
+  const response = await fetch(`${BASE_URL}/jobs/${id}`, {
+    credentials: 'include',
+  });
   if (!response.ok) throw new Error('Failed to fetch job detail');
   return await response.json();
 }
@@ -109,6 +115,7 @@ export async function getJobRecommendations(resultId, token) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      credentials: 'include',
     }
   );
   const data = await response.json();
@@ -123,6 +130,7 @@ export async function getUserCVs(token) {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    credentials: 'include',
   });
   let data;
   const contentType = response.headers.get('content-type');
