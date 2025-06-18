@@ -16,8 +16,8 @@ function CapybaraProgressLoader() {
   ];
 
   useEffect(() => {
-    const totalDuration = 89 * 1000; 
-    const tick = 100; 
+    const totalDuration = 89 * 1000;
+    const tick = 100;
     const increment = 100 / (totalDuration / tick);
     let p = 0;
     const interval = setInterval(() => {
@@ -30,7 +30,7 @@ function CapybaraProgressLoader() {
 
   const numStages = messages.length - 1;
   let stage = Math.min(numStages - 1, Math.floor((progress / 100) * numStages));
-  if (progress >= 100) stage = numStages; 
+  if (progress >= 100) stage = numStages;
 
   const barWidth = 320;
   const capyPos = Math.min(progress, 100) / 100 * (barWidth - 54);
@@ -90,15 +90,15 @@ export default function Recommendations({ analysisId }) {
         } else if (Array.isArray(data?.data)) {
           setJobs(data.data);
         } else {
-  
-                    setJobs([]);
+          setJobs([]);
           if (process.env.NODE_ENV !== "production") {
             console.warn("Unexpected jobs API response:", data);
           }
         }
       } catch (err) {
-        setError("Gagal memuat rekomendasi. Coba refresh atau cek koneksi kamu.");
+        setError(err.message || "Gagal mengambil rekomendasi.");
         setJobs([]);
+        console.error(err); // Tambah log error sesuai permintaan
       } finally {
         setLoading(false);
       }
@@ -125,7 +125,7 @@ export default function Recommendations({ analysisId }) {
     );
   }
 
-  if (!jobs || jobs.length === 0) {
+  if (!Array.isArray(jobs) || jobs.length === 0) {
     return (
       <div className="w-full flex flex-col items-center justify-center py-16">
         <div className="text-3xl mb-4">🤷‍♂️</div>
@@ -135,49 +135,52 @@ export default function Recommendations({ analysisId }) {
     );
   }
 
-  // Card Rekomendasi Pekerjaan
-  return (
-    <div className="w-full max-w-3xl mx-auto grid grid-cols-1 gap-6 py-8 px-2">
-      {jobs.map((job, i) => (
+// Card Rekomendasi Pekerjaan
+return (
+  <div className="w-full max-w-5xl mx-auto py-10 px-2">
+    <h1 className="text-2xl font-bold mb-6 text-center">Job Recommendations</h1>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {jobs.map((job) => (
         <div
-          key={job.id || i}
-          className="bg-white/80 border border-yellow-300 rounded-2xl shadow-sm hover:shadow-md transition p-5 flex flex-col gap-2"
+          key={String(job.job_id)}
+          className="rounded-xl shadow-lg bg-white p-6 flex flex-col h-full border hover:shadow-2xl transition"
         >
-          <div className="flex items-center gap-3">
-            <FaBriefcase className="text-yellow-700 text-2xl" />
-            <span className="font-semibold text-lg text-yellow-800">{job.title || "Job Title"}</span>
+          <div className="flex-1">
+            <div className="font-bold text-lg mb-1">{job.title || "-"}</div>
+            <div className="text-sm text-gray-600 mb-3">
+              {job.industry || "-"}
+            </div>
+            <div className="flex flex-col gap-2 text-[15px] text-gray-700">
+              <div className="flex items-center gap-2">
+                <FaBuilding size={18} className="text-yellow-500" />
+                {job.industry || "-"}
+              </div>
+              <div className="flex items-center gap-2">
+                <FaBriefcase size={18} className="text-yellow-500" />
+                {job.employment_type || "-"}
+              </div>
+              <div className="flex items-center gap-2">
+                <FaMoneyBill size={18} className="text-yellow-500" />
+                {job.salary_range || "-"}
+              </div>
+              <div className="flex items-center gap-2">
+                <FaMapMarkerAlt size={18} className="text-yellow-500" />
+                {job.location || "-"}
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center gap-3 text-yellow-800 mt-1">
-            <span className="flex items-center gap-1"><FaBuilding /> {job.company || "-"}</span>
-            <span className="flex items-center gap-1"><FaMapMarkerAlt /> {job.location || "-"}</span>
-            {job.salary && (
-              <span className="flex items-center gap-1"><FaMoneyBill /> {job.salary}</span>
-            )}
-          </div>
-          <div className="mt-2 text-yellow-900 text-[15px]">
-            {job.summary || job.description || "Deskripsi tidak tersedia."}
-          </div>
-          <div className="flex flex-row gap-3 mt-4">
-            {job.url && (
-              <a
-                href={job.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-bold py-2 px-6 rounded-lg transition"
-              >
-                Lihat Detail
-              </a>
-            )}
+          <div className="mt-3">
             <button
-              onClick={() => navigate(`/jobs/${job.id || i}`)}
-              className="bg-yellow-200 hover:bg-yellow-300 text-yellow-900 py-2 px-6 rounded-lg border border-yellow-400"
+              className="w-full bg-yellow-400 hover:bg-yellow-500 transition text-white rounded-md font-semibold py-2 shadow"
+              onClick={() => navigate(`/jobs/${job.job_id}`)}
             >
-              Simpan
+              Job Details
             </button>
           </div>
         </div>
       ))}
     </div>
-  );
-}
+  </div>
+);
 
+}
