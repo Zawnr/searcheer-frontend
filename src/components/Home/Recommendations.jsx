@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getJobRecommendations } from "../../utils/api";
-import { FaHippo } from "react-icons/fa";
-import { FaBriefcase, FaMoneyBill, FaMapMarkerAlt, FaBuilding } from "react-icons/fa";
+import { FaHippo, FaBriefcase, FaMoneyBill, FaMapMarkerAlt, FaBuilding } from "react-icons/fa";
 
 function CapybaraProgressLoader() {
   const [progress, setProgress] = useState(0);
@@ -15,8 +14,7 @@ function CapybaraProgressLoader() {
     "Capybara is having a coffee break, but still working for you!",
     "Capybara: patience = best result!"
   ];
-  
-  // --- Progress Bar Animation ---
+
   useEffect(() => {
     const totalDuration = 89 * 1000; 
     const tick = 100; 
@@ -30,11 +28,9 @@ function CapybaraProgressLoader() {
     return () => clearInterval(interval);
   }, []);
 
-  // --- Message berdasarkan progress ---
   const numStages = messages.length - 1;
   let stage = Math.min(numStages - 1, Math.floor((progress / 100) * numStages));
-  if (progress >= 100) stage = numStages; // Terakhir
-  
+  if (progress >= 100) stage = numStages; 
 
   const barWidth = 320;
   const capyPos = Math.min(progress, 100) / 100 * (barWidth - 54);
@@ -74,7 +70,6 @@ function CapybaraProgressLoader() {
   );
 }
 
-
 export default function Recommendations({ analysisId }) {
   const [jobs, setJobs] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -89,79 +84,100 @@ export default function Recommendations({ analysisId }) {
       try {
         const token = localStorage.getItem("token");
         const data = await getJobRecommendations(analysisId, token);
-        setJobs(data);
+
+        if (Array.isArray(data)) {
+          setJobs(data);
+        } else if (Array.isArray(data?.data)) {
+          setJobs(data.data);
+        } else {
+  
+                    setJobs([]);
+          if (process.env.NODE_ENV !== "production") {
+            console.warn("Unexpected jobs API response:", data);
+          }
+        }
       } catch (err) {
-        setError(err.message || "Gagal mengambil rekomendasi.");
+        setError("Gagal memuat rekomendasi. Coba refresh atau cek koneksi kamu.");
+        setJobs([]);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     fetchData();
   }, [analysisId]);
 
-  if (loading)
+  if (loading) {
+    return <CapybaraProgressLoader />;
+  }
+
+  if (error) {
     return (
-      <div className="w-full max-w-5xl mx-auto py-10 px-2">
-        <h1 className="text-2xl font-bold mb-6 text-center">Job Recommendations</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <CapybaraProgressLoader />
-        </div>
+      <div className="w-full flex flex-col items-center justify-center py-16">
+        <div className="text-3xl mb-4">😢</div>
+        <div className="text-red-600 font-semibold mb-3">{error}</div>
+        <button
+          className="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 px-5 py-2 rounded-xl mt-2 transition"
+          onClick={() => window.location.reload()}
+        >
+          Coba Lagi
+        </button>
       </div>
     );
+  }
 
-  if (error)
-    return <div className="text-center py-10 text-red-500">{error}</div>;
-
-  if (!jobs || jobs.length === 0)
+  if (!jobs || jobs.length === 0) {
     return (
-      <div className="text-center py-10 text-gray-500">
-        There are no job recommendations for this analysis result.
+      <div className="w-full flex flex-col items-center justify-center py-16">
+        <div className="text-3xl mb-4">🤷‍♂️</div>
+        <div className="text-yellow-700 font-semibold mb-2">Belum ada rekomendasi yang cocok ditemukan.</div>
+        <div className="text-yellow-700">Coba perbarui CV kamu atau lakukan analisis ulang!</div>
       </div>
     );
+  }
 
+  // Card Rekomendasi Pekerjaan
   return (
-    <div className="w-full max-w-5xl mx-auto py-10 px-2">
-      <h1 className="text-2xl font-bold mb-6 text-center">Job Recommendations</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {jobs.map((job) => (
-          <div
-            key={String(job.job_id)}
-            className="rounded-xl shadow-lg bg-white p-6 flex flex-col h-full border hover:shadow-2xl transition"
-          >
-            <div className="flex-1">
-              <div className="font-bold text-lg mb-1">{job.title || "-"}</div>
-              <div className="text-sm text-gray-600 mb-3">
-                {job.industry || "-"}
-              </div>
-              <div className="flex flex-col gap-2 text-[15px] text-gray-700">
-                <div className="flex items-center gap-2">
-                  <FaBuilding size={18} className="text-yellow-500" />
-                  {job.industry || "-"}
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaBriefcase size={18} className="text-yellow-500" />
-                  {job.employment_type || "-"}
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaMoneyBill size={18} className="text-yellow-500" />
-                  {job.salary_range || "-"}
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaMapMarkerAlt size={18} className="text-yellow-500" />
-                  {job.location || "-"}
-                </div>
-              </div>
-            </div>
-            <div className="mt-3">
-              <button
-                className="w-full bg-yellow-400 hover:bg-yellow-500 transition text-white rounded-md font-semibold py-2 shadow"
-                onClick={() => navigate(`/jobs/${job.job_id}`)}
-              >
-                Job Details
-              </button>
-            </div>
+    <div className="w-full max-w-3xl mx-auto grid grid-cols-1 gap-6 py-8 px-2">
+      {jobs.map((job, i) => (
+        <div
+          key={job.id || i}
+          className="bg-white/80 border border-yellow-300 rounded-2xl shadow-sm hover:shadow-md transition p-5 flex flex-col gap-2"
+        >
+          <div className="flex items-center gap-3">
+            <FaBriefcase className="text-yellow-700 text-2xl" />
+            <span className="font-semibold text-lg text-yellow-800">{job.title || "Job Title"}</span>
           </div>
-        ))}
-      </div>
+          <div className="flex flex-wrap items-center gap-3 text-yellow-800 mt-1">
+            <span className="flex items-center gap-1"><FaBuilding /> {job.company || "-"}</span>
+            <span className="flex items-center gap-1"><FaMapMarkerAlt /> {job.location || "-"}</span>
+            {job.salary && (
+              <span className="flex items-center gap-1"><FaMoneyBill /> {job.salary}</span>
+            )}
+          </div>
+          <div className="mt-2 text-yellow-900 text-[15px]">
+            {job.summary || job.description || "Deskripsi tidak tersedia."}
+          </div>
+          <div className="flex flex-row gap-3 mt-4">
+            {job.url && (
+              <a
+                href={job.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-bold py-2 px-6 rounded-lg transition"
+              >
+                Lihat Detail
+              </a>
+            )}
+            <button
+              onClick={() => navigate(`/jobs/${job.id || i}`)}
+              className="bg-yellow-200 hover:bg-yellow-300 text-yellow-900 py-2 px-6 rounded-lg border border-yellow-400"
+            >
+              Simpan
+            </button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
+
